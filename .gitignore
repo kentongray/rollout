@@ -1,0 +1,27 @@
+# Specifies intentionally untracked files to ignore when using Git
+# http://git-scm.com/docs/gitignore
+
+node_modules/
+platforms/
+plugins/
+.idea/
+*.iml
+
+#android
+android
+*/bin
+*/gen
+*/target
+.settings
+.classpath
+.project
+*.keystore
+*.swp
+*.orig
+*.logc
+*.properties
+seed.txt
+map.txt
+
+#ignore output folder
+www
