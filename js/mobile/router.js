@@ -8,7 +8,7 @@ export function router($stateProvider, $urlRouterProvider) {
         })
 
         .state('remindme', {
-            url: '/remindme',
+            url: '/remindme?latitude&longitude',
             controller: 'RemindMeCtrl as remind',
             templateUrl: 'templates/remindme.html'
         })

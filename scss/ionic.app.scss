@@ -17,7 +17,7 @@ $dark:                            #444 !default;
 
 $positive: #3bbb68;
 // The path for our ionicons font files, relative to the built CSS in www/css
-$ionicons-font-path: "../lib/ionic/fonts" !default;
+$ionicons-font-path: "../lib/ionic/release/fonts" !default;
 $font-family-sans-serif: 'aleolight', georgia;
 
 @font-face {
@@ -80,7 +80,7 @@ $font-family-sans-serif: 'aleolight', georgia;
   color: $light;
 }
 
-.buttons {
+.action-buttons {
   height: 48px;
   background-color: #6dd131;
   .reminders {
@@ -250,7 +250,7 @@ $font-family-sans-serif: 'aleolight', georgia;
 }
 
 .remind-me {
-  padding-top: 50px;
+  padding-top: 40%;
   text-align: center;
   h2, h1, h3 {
     color: white !important;
@@ -274,41 +274,26 @@ $font-family-sans-serif: 'aleolight', georgia;
     margin-top: 5px;
     font-family: aleoregular;
   }
-
-}
-@-webkit-keyframes balance {
-  0% {
-    background-color: red !important;
-  }
-  50% {
-    color: red;
-    -webkit-transform: rotateX(90deg);
-    transform: rotateX(90deg);
-  }
-  100% {
-    opacity: 0;
-  }
 }
 
-.popover {
-  height: 50px;
+
+/* The starting CSS styles for the enter animation */
+.addressSearchResults {
+  position: absolute;
+  left: 0;
+  right: 0;
+}
+.addressSearchResults.ng-enter {
+  height: 0;
+  overflow:hidden;
+  transition:0.5s linear all;
+  opacity:0;
 }
 
-@-webkit-keyframes balance2 {
-  0% {
-    background-color: red !important;
-    -webkit-transform: rotateX(90deg);
-    transform: rotateX(90deg);
-  }
-  50% {
-    color: red;
-    -webkit-transform: rotateX(90deg);
-    transform: rotateX(90deg);
-  }
-  100% {
-    -webkit-transform: rotateX(0deg);
-    transform: rotateX(0deg);
-  }
+/* The finishing CSS styles for the enter animation */
+.addressSearchResults.ng-enter.ng-enter-active {
+  height: auto;
+  overflow: visible;
+  opacity:1;
 }
-
 

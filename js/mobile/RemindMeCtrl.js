@@ -1,21 +1,32 @@
 export class RemindMeCtrl {
-    constructor($scope, $ionicHistory, $ionicLoading, $ionicPlatform, $ionicPopover, localStorageService, SchedulerService) {
-        angular.extend(this, {$scope, $ionicHistory, $ionicLoading, $ionicPlatform, $ionicPopover, localStorageService, SchedulerService});
+    constructor($scope, $ionicHistory, $ionicLoading, $ionicPlatform, $ionicPopover,
+                localStorageService, SchedulerService, alert, $stateParams) {
+        angular.extend(this, {
+            $scope,
+            $ionicHistory,
+            $ionicLoading,
+            $ionicPlatform,
+            $ionicPopover,
+            localStorageService,
+            SchedulerService,
+            alert,
+            $stateParams
+        });
         this.notificationsEnabled = localStorageService.get('notificationsEnabled') == 'true';
         this.timeOfDay = 'morning';
-        this.wasteTypes = ['recycling', 'waste', 'junk'];
+        this.wasteTypes = ['recycling', 'waste', 'tree', 'junk'];
         this.recycling = true;
         this.waste = false;
         this.junk = false;
         this.hour = 6;
+        this.pos = {x: $stateParams.longitude, y: $stateParams.latitude};
         this.$inject = ['$scope', 'this.$ionicLoading', $ionicPopover];
 
         $scope.$watchGroup(this.wasteTypes.map((i)=> 'remind.' + i), () => {
             var whats = this.activeWasteCategories();
-            var description = this.makeDescriptionText(whats);
-            this.whatDescription = description;
+            this.whatDescription = this.makeDescriptionText(whats);
         });
-        // .fromTemplate() method
+
         var timeOfDayTemplate = `<ion-popover-view ><ul class="list">
             <li class="item" ng-click="remind.setTimeOfDay('morning')">
             Morning
@@ -49,7 +60,8 @@ export class RemindMeCtrl {
         var whatTemplate = `<ion-popover-view>
            <ion-toggle ng-model="remind.recycling" toggle-class="toggle-calm">Recycling</ion-toggle>
            <ion-toggle ng-model="remind.waste" toggle-class="toggle-calm">Trash & Yard</ion-toggle>
-           <ion-toggle ng-model="remind.junk" toggle-class="toggle-calm">Heavy/Tree Trash</ion-toggle>
+           <ion-toggle ng-model="remind.junk" toggle-class="toggle-calm">Junk</ion-toggle>
+           <ion-toggle ng-model="remind.tree" toggle-class="toggle-calm">Tree Trash</ion-toggle>
         </ion-popover-view>`;
 
         this.timeOfDayPopOver = $ionicPopover.fromTemplate(timeOfDayTemplate, {
@@ -75,50 +87,61 @@ export class RemindMeCtrl {
         this.hourPopOver.hide();
     }
 
+    safeApply(fn) {
+        if (!this.$scope.$$phase) {
+            this.$scope.$apply(fn);
+        } else {
+            fn();
+        }
+    }
+
     setupReminders() {
-        cordova.plugins.notification.local.clearAll(function () {
-            console.log('all notifications cleared');
-        }, this);
-        this.$ionicLoading.show({
-            template: 'Creating Your Reminders'
-        });
+        cordova.plugins.notification.local.clearAll(this.safeApply(() => {
+            //clear all notifications then start again
+            this.$ionicPlatform.ready(() => {
 
-        this.$ionicPlatform.ready(() => {
-            navigator.geolocation.getCurrentPosition((pos) => {
-                var scheduler = this.SchedulerService(pos, 365);
-
+                //todo: figure out where we are?
+                var scheduler = this.SchedulerService(this.pos, 365);
                 scheduler.whenLoaded.then(() => {
                     this.localStorageService.set('notificationsEnabled', true);
                     this.notificationsEnabled = true;
                     var notifications = _(scheduler.events).map((event) => {
+                        var isNight = this.timeOfDay == 'night';
+                        var date = event.day.clone()
+                            .add(isNight ? -1 : 0, 'day')
+                            .set('hour', isNight ? this.hour + 12 : this.hour)
+                            .startOf('hour')
+                            .set('minute', 0)
+                            .toDate();
+
                         var matches = _.intersection(event.categories, this.activeWasteCategories());
+
                         if (matches.length) {
                             return {
-                                text: "Don't Forget to Rollout your " + this.makeDescriptionText(matches),
-                                at: event.day.clone().set('hour', this.hour).startOf('hour').toDate()
+                                id: date.getTime(),
+                                text: "Don't forget to rollout your " + this.makeDescriptionText(matches),
+                                at: date.getTime()
                             };
                         }
-                    }).compact().take(64).value();
-                    console.log('creating notifications' , notifications);
+                    }).compact().value();
+                    console.log('creating notifications', notifications);
                     cordova.plugins.notification.local.schedule(notifications);
+
                     this.pickupDays = scheduler.pickupDays;
-                    console.log(this.events);
                     this.$ionicLoading.hide();
                     this.$ionicHistory.goBack();
                 }).catch(()=> {
                     console.log(arguments);
                     this.$ionicLoading.hide();
-                    navigator.notification.alert('Unable to Find Your Schedule. ' +
+                    this.alert('Unable to Find Your Schedule. ' +
                         'Make Sure You Are Connected to the Internet');
                 });
-                this.$scope.$apply();
-            },  (err) => {
-                console.log(arguments);
-                this.$ionicLoading.hide();
-                navigator.notification.alert('Unable to Locate You. ' +
-                    'You May Need To Change Your Privacy Settings');
             });
+        }), this);
+        this.$ionicLoading.show({
+            template: 'Creating Your Reminders'
         });
+
     }
 
     makeDescriptionText(categories) {
@@ -127,8 +150,8 @@ export class RemindMeCtrl {
             description = categories[0];
         else if (categories.length == 2)
             description = categories[0] + ' and ' + categories[1];
-        else if (categories.length == 3)
-            description = categories[0] + ', ' + categories[1] + ' and ' + categories[2];
+        else if (categories.length >= 3)
+            description = categories.splice(0, categories.length - 1).join(', ') + ' and ' + categories[categories.length - 1];
         return description;
     }
 

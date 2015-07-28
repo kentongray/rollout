@@ -12,6 +12,7 @@
   "devDependencies": {
     "bower": "^1.3.3",
     "gulp-babel": "^4.0.0",
+    "gulp-serve": "^1.0.0",
     "gulp-sourcemaps": "^1.5.1",
     "gulp-util": "^2.2.14",
     "shelljs": "^0.3.0"
@@ -20,9 +21,11 @@
     "com.ionic.keyboard",
     "cordova-plugin-geolocation",
     "cordova-plugin-whitelist",
+    "cordova-plugin-device",
+    "org.apache.cordova.splashscreen",
     {
-      "locator": "https://github.com/katzer/cordova-plugin-local-notifications",
-      "id": "de.appplant.cordova.plugin.local-notification"
+      "locator": "https://github.com/driftyco/ionic-plugins-deploy",
+      "id": "com.ionic.deploy"
     }
   ],
   "cordovaPlatforms": []

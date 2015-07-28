@@ -18,7 +18,13 @@ export class Scheduler {
         this.numberOfDays = numberOfDays;
         this.pickupDays = {};
 
-        this.pos = {y: pos.coords.latitude, x: pos.coords.longitude, spatialReference: {"wkid": 4326}};
+        if(pos.coords) {
+            this.pos = {y: pos.coords.latitude, x: pos.coords.longitude, spatialReference: {"wkid": 4326}};
+        }
+        else if(pos.x && pos.y) {
+            this.pos = {x: pos.x, y: pos.y, spatialReference: {"wkid": 4326}};
+        }
+
         var queryParams = {
             params: {
                 geometryType: 'esriGeometryPoint',
@@ -79,7 +85,8 @@ export class Scheduler {
         return day.day() == this.pickupDays.wasteDay;
     }
 
-    isJunkDay(day) {
+    //used for both trash/and junk days
+    isHeavyDay(day) {
         var dayInMonth = day.clone().startOf('month');
         var occurances = 0;
         while (occurances < this.pickupDays.junkWeekOfMonth) {
@@ -92,6 +99,16 @@ export class Scheduler {
         dayInMonth.add(-1, 'days');
         return dayInMonth.isSame(day, 'day');
     }
+    isTreeDay(day) {
+        return this.isEvenMonth(day) && this.isHeavyDay(day);
+    }
+    isJunkDay(day) {
+        return !this.isEvenMonth(day) && this.isHeavyDay(day);
+    }
+
+    isEvenMonth(day) {
+        return (day.month() + 1) % 2 == 0;
+    }
 
     isRecyclingDay(day) {
         //recycling schedule A occurs every other week (starting at second week)
@@ -101,8 +118,9 @@ export class Scheduler {
     }
 
     getCategoriesForDay(day) {
-        var days = {waste: this.isWasteDay(day), junk: this.isJunkDay(day), recycling: this.isRecyclingDay(day)};
-        return _.pairs(days).filter((category)=>category[1]).map((category)=>category[0]);
+        var eventsForDay = {waste: this.isWasteDay(day), junk: this.isJunkDay(day), tree: this.isTreeDay(day), recycling: this.isRecyclingDay(day)};
+        //group filter out empty days
+        return _.pairs(eventsForDay).filter((category)=>category[1]).map((category)=>category[0]);
     }
 
     buildEvents(numberOfDays) {
