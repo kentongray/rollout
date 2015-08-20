@@ -1,5 +1,5 @@
 export class AppCtrl {
-    constructor($scope, $mdSidenav, SchedulerService, $q, GeoLocation) {
+    constructor($scope, SchedulerService, $q, GeoLocation) {
         this.$q = $q;
         this.loadingSchedule = false;
         this.schedulerService = SchedulerService;
@@ -44,6 +44,7 @@ export class AppCtrl {
     selectAddress(suggestion) {
         if(!suggestion) {
             this.events = null;
+            this.searchText = null;
             return;
         }
         this.address = suggestion;
@@ -68,9 +69,6 @@ export class AppCtrl {
         else {
             return category.charAt(0).toUpperCase() + category.slice(1);
         }
-    }
-    selectedItemChange(item) {
-        console.log('seelcted', item);
     }
 
     static dateFilter(day) {

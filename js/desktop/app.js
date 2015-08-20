@@ -21,8 +21,7 @@ angular.module('StarterApp', ['ngMaterial']).config(function ($mdThemingProvider
     });
     $mdThemingProvider.theme('default')
         .primaryPalette('rollout');
-})
-    .controller("AppCtrl", AppCtrl)
+}).controller("AppCtrl", AppCtrl)
     .service("SchedulerService", Scheduler.service)
     .service("GeoLocation", GeoLocation)
     .filter('date', () => AppCtrl.dateFilter)
