@@ -1,0 +1,315 @@
+<html lang="en" ng-app="StarterApp">
+<head>
+    <!--
+                    y0 dawg, you like source?
+              https://github.com/kentongray/Rollout
+
+            ♡♡♡♡♡♡♡♡♡♡♡                ♡♡♡♡♡♡♡♡♡♡♡
+         ♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡          ♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡
+      ♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡      ♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡
+     ♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡    ♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡
+    ♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡  ♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡
+    ♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡
+    ♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡
+     ♡♡♡♡♡♡♡♡♡♡♡♡♡                          ♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡
+     ♡♡♡♡♡♡♡♡♡♡♡♡♡   twitter.com/kentonue   ♡♡♡♡♡♡♡♡♡♡♡♡♡♡
+       ♡♡♡♡♡♡♡♡♡♡♡                          ♡♡♡♡♡♡♡♡♡♡♡♡♡
+         ♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡
+           ♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡
+             ♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡
+               ♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡
+                 ♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡
+                   ♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡
+                      ♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡♡
+                          ♡♡♡♡♡♡♡♡♡♡♡♡
+                               ♡♡
+
+    -->
+    <title>Rollout!</title>
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/0.9.4/angular-material.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=RobotoDraft:300,400,500,700,400italic">
+    <meta name="viewport" content="initial-scale=1"/>
+
+    <style type="text/css">
+
+        @font-face {
+            font-family: 'aleoregular';
+            src: url('font/aleo-regular-webfont.eot');
+            src: url('font/aleo-regular-webfont.eot?#iefix') format('embedded-opentype'),
+            url('font/aleo-regular-webfont.woff2') format('woff2'),
+            url('font/aleo-regular-webfont.woff') format('woff'),
+            url('font/aleo-regular-webfont.ttf') format('truetype'),
+            url('font/aleo-regular-webfont.svg#aleoregular') format('svg');
+            font-weight: normal;
+            font-style: normal;
+
+        }
+
+        @font-face {
+            font-family: 'aleolight';
+            src: url('font/aleo-light-webfont.eot');
+            src: url('font/aleo-light-webfont.eot?#iefix') format('embedded-opentype'),
+            url('font/aleo-light-webfont.woff2') format('woff2'),
+            url('font/aleo-light-webfont.woff') format('woff'),
+            url('font/aleo-light-webfont.ttf') format('truetype'),
+            url('font/aleo-light-webfont.svg#aleolight') format('svg');
+            font-weight: normal;
+            font-style: normal;
+
+        }
+
+        @font-face {
+            font-family: 'aleolightitalic';
+            src: url('font/aleo-lightitalic-webfont.eot');
+            src: url('font/aleo-lightitalic-webfont.eot?#iefix') format('embedded-opentype'),
+            url('font/aleo-lightitalic-webfont.woff2') format('woff2'),
+            url('font/aleo-lightitalic-webfont.woff') format('woff'),
+            url('font/aleo-lightitalic-webfont.ttf') format('truetype'),
+            url('font/aleo-lightitalic-webfont.svg#aleolightitalic') format('svg');
+            font-weight: normal;
+            font-style: normal;
+
+        }
+
+    /*
+       @font-face {
+            font-family: 'aleoitalic';
+            src: url('font/aleo-italic-webfont.eot');
+            src: url('font/aleo-italic-webfont.eot?#iefix') format('embedded-opentype'),
+            url('font/aleo-italic-webfont.woff2') format('woff2'),
+            url('font/aleo-italic-webfont.woff') format('woff'),
+            url('font/aleo-italic-webfont.ttf') format('truetype'),
+            url('font/aleo-italic-webfont.svg#aleoitalic') format('svg');
+            font-weight: normal;
+            font-style: normal;
+
+        }
+*/
+        body {
+            background-color: white;
+            font-family: Helvetica, sans-serif;
+        }
+
+        .card {
+
+        }
+
+        md-content.md-default-theme, .content {
+            min-height: 50vh;
+            background-color: #e4e4e4;
+            padding-top: 50px;
+        }
+
+        header, header.small, header .logo, header md-autocomplete{
+            font-family: aleolightitalic;
+        }
+        header {
+            background-color: #36b06a;
+            width: 100%;
+            vertical-align: middle;
+        }
+
+        header.small md-autocomplete {
+            margin-bottom: 1%;
+        }
+
+        header.small .logo {
+            height: 40px;
+            margin-top: 1%;
+            margin-bottom: 1%;
+        }
+
+        .card {
+            background-color: white;
+            margin-bottom: 50px;
+            width: 500px;
+            background-color: rgba(255, 255, 255, .8);
+            color: gray;
+            border-radius: 2px;
+            box-shadow: 0 3px 1px -2px rgba(0, 0, 0, .2), 0 2px 2px 0 rgba(0, 0, 0, .14), 0 1px 5px 0 rgba(0, 0, 0, .12);
+            padding-bottom: 20px;
+
+        }
+
+        .card .card-content {
+            padding: 20px;
+        }
+        .card h2 {
+            font-size: 30px;
+            text-shadow: 0px 1px 2px #1a4332;
+            margin-left: -10px;
+            margin-right: -10px;
+            box-shadow: 0px 2px 5px #cfcfcf;
+            background-color: #36b06a;
+            color: white;
+            text-align: center;
+            font-family: aleoregular;
+            padding: 20px;
+            border: solid 1px #328c61;
+        }
+
+        .card h2::before, .card h2::after {
+            content: '';
+            display: block;
+            width: 0;
+            height: 0;
+            position: absolute;
+            bottom: -23px;
+            z-index: -10;
+            border: 10px solid;
+            border-color: #175106 transparent transparent transparent;
+        }
+
+        md-autocomplete {
+            border-radius: 10px;
+            width: 50%;
+            margin-bottom: 5%;
+        }
+
+        .logo {
+            background-image: url("img/logo.png");
+            background-repeat: no-repeat;
+            background-size: contain;
+            background-position: center;
+            width: 30%;
+            height: 80px;
+            margin-top: 5%;
+            margin-bottom: 5%;
+        }
+
+        .category-icon {
+            min-height: 120px;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: contain;
+        }
+
+        .category-label {
+            margin-top: 20px;
+            color: gray;
+            font-family: aleoregular;
+            text-align: center;
+        }
+        .category-label .category {
+            font-size: 24px;
+        }
+
+        .splash {
+            vertical-align: middle;
+            width: 800px;
+            font-size: 18px;
+            color: gray;
+        }
+
+        .splash h1 {
+            text-shadow: 1px 1px 10px silver;
+            font-family: aleolightitalic;
+            font-size: 90px;
+        }
+
+        .splash h2 {
+            font-family: aleolightitalic;
+            font-size: 20px;
+        }
+
+        .splash .welcome-message {
+            line-height: 30px;
+            max-width: 500px;
+        }
+        .splash .more-info {
+            clear:both;
+            margin-top: 100px;
+        }
+        .more-info h1 {
+            text-align: center;
+            color: white;
+            font-family: aleolightitalic;
+            font-size: 40px;
+            text-shadow: 1px 1px 1px silver;
+        }
+
+
+        footer {
+            background-color: #dedede;
+        }
+
+        .lookup-message {
+            font-family: aleolightitalic;
+            color: gray;
+        }
+    </style>
+</head>
+<body ng-controller="AppCtrl as app" >
+<header layout-align="center center" flex layout="column" ng-class="{small: app.events}">
+    <div class="logo"></div>
+    <md-autocomplete
+            md-item-text="item.text"
+            md-selected-item-change="app.selectAddress(item)"
+            md-search-text="app.searchText"
+            md-items="item in app.queryAddress(app.searchText)"
+            placeholder="Type Your Address (e.g. 1234 Main St)">
+        <span md-highlight-text="searchText">{{item.text}}</span>
+    </md-autocomplete>
+</header>
+<md-content ng-cloak class="content" layout="column" layout-align="center center">
+        <div class="splash" ng-if="app.events == null" layout="row" layout-align="center center" flex="33">
+            <h1 flex="33">Hi!</h1>
+            <div class="welcome-message" flex="66">
+            Rollout! is the easy way to find your trash and recycling schedules in Houston.
+            <br>
+            <i>Enter your address above to get started</i>!
+                <br>
+             <h2>On Your Phone? Get the App!</h2>
+                <md-button class="md-raised" href="https://itunes.apple.com/us/app/rollout!-houston/id1011036124?mt=8">Apple iPhone </md-button>
+                <md-button class="md-raised" href="https://play.google.com/store/apps/details?id=com.kentonue.rollout">Android </md-button>
+            </div>
+        </div>
+
+    <md-progress-circular ng-if="app.loadingSchedule" md-mode="indeterminate"></md-progress-circular>
+    <div ng-if="app.loadingSchedule" class="lookup-message">
+        <h1>Looking Up Your Schedule</h1>
+    </div>
+    <div ng-if="app.events && app.events.length == 0" class="lookup-message">
+        <h1>Could Not Find Your Schedule</h1>
+    </div>
+    <div class="lookup-message" ng-if="app.events.length > 0">
+        <h1>Your Upcoming Schedule</h1>
+    </div>
+    <div class="card" ng-repeat="event in app.events">
+        <h2 class="md-title">{{event.day | date}}</h2>
+        <div layout="row" layout-align="center center">
+            <div ng-repeat="category in event.categories" flex>
+                <div class="category-icon" ng-style="{'background-image': app.getCategoryImage(category)}"></div>
+
+                <div class="category-label">
+                    <div class="category">{{app.niceCategoryName(category)}}</div>
+                    <div class="when">{{app.getCategorySchedule(category)}}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</md-content>
+<footer class="more-info" flex layout="column">
+    <h1>Want More?</h1>
+    <div flex layout="row" layout-align="center center">
+        <md-button class="md-primary" target="_blank" href="http://www.recyclebycity.com/houston/guide">What To Recycle</md-button>
+        <md-button class="md-primary" target="_blank" href="http://www.houstontx.gov/solidwaste/servicesshare-swmd-holiday-schedule" >Holiday Schedule</md-button>
+        <md-button class="md-primary" target="_blank" href="http://www.houstontx.gov/solidwaste/garbage-collection-tips">Helpful Tips</md-button>
+        <md-button class="md-primary" target="_blank" href="http://www.houstontx.gov/solidwaste/neighborhood-depositoriesrecycling-centers">Drop-off Locations</md-button>
+        <md-button class="md-primary" target="_blank" href="http://www.houstontx.gov/solidwaste/electronics-recycling-0" >Electronic Waste</md-button>
+        <md-button class="md-primary" target="_blank" href="mailto:info@rollouthouston.com" >Give Us Some Feedback</md-button>
+    </div>
+
+</footer>
+<script src="lib/babel-polyfill/browser-polyfill.js"></script>
+<script src="lib/moment/moment.js"></script>
+<script src="lib/lodash/lodash.min.js"></script>
+<script src="lib/curl/dist/curl/curl.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular-animate.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular-aria.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angular_material/0.10.1/angular-material.min.js"></script>
+<script src="js/all.js"></script>
+</body>
+
+</html>
