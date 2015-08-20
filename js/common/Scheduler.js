@@ -100,10 +100,10 @@ export class Scheduler {
         return dayInMonth.isSame(day, 'day');
     }
     isTreeDay(day) {
-        return this.isEvenMonth(day) && this.isHeavyDay(day);
+        return !this.isEvenMonth(day) && this.isHeavyDay(day);
     }
     isJunkDay(day) {
-        return !this.isEvenMonth(day) && this.isHeavyDay(day);
+        return this.isEvenMonth(day) && this.isHeavyDay(day);
     }
 
     isEvenMonth(day) {
