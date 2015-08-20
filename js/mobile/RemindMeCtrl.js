@@ -104,6 +104,11 @@ export class RemindMeCtrl {
                 var scheduler = this.SchedulerService(this.pos, 365);
                 scheduler.whenLoaded.then(() => {
                     this.localStorageService.set('notificationsEnabled', true);
+                    this.localStorageService.set('notificationsData', {
+                        timeOfDay: this.timeOfDay,
+                        categories: this.activeWasteCategories(),
+                        hour: this.hour
+                    });
                     this.notificationsEnabled = true;
                     var notifications = _(scheduler.events).map((event) => {
                         var isNight = this.timeOfDay == 'night';

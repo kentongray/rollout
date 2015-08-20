@@ -20,7 +20,6 @@ angular.module('starter', ['ionic', 'ionic.service.core',
         });
     }])
     .config(router)
-
     .config(($ionicFilterBarConfigProvider) => {
         $ionicFilterBarConfigProvider.placeholder('Your Address');
     })

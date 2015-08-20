@@ -25,7 +25,7 @@ export class HomeCtrl {
             $timeout,
             GeoLocation
         });
-        this.$ionicPlatform.ready(this.checkForUpdates.bind(this));
+        ionic.Platform.ready(this.checkForUpdates.bind(this));
         this.$scope.moment = moment;
         this.$scope.filterItems = function () {
             console.log('heard filter', arguments);
@@ -115,7 +115,8 @@ export class HomeCtrl {
             template: 'Finding Your Location'
         });
 
-        this.$ionicPlatform.ready(() => {
+        ionic.Platform.ready(() => {
+            console.log(cordova);
             this.$ionicLoading.show({
                 template: 'Looking Up Your Schedule'
             });
@@ -124,8 +125,7 @@ export class HomeCtrl {
             }, (err) => {
                 console.error(arguments);
                 this.$ionicLoading.hide();
-                this.alert('Unable to Locate You. ' +
-                    'You May Need To Change Your Privacy Settings');
+                this.showFilterBar();
             });
         });
     }
