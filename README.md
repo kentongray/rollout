@@ -1,6 +1,6 @@
 # Rollout!
-
-A mobile app built using (ionic/cordova) for tracking pickup schedules in the City of Houston.
+http://rollouthouston.com
+A mobile and web app built using (ionic/cordova) for tracking pickup schedules in the City of Houston.
 
 Winner of the [Houston Hackathon](http://houstonhackathon.com). Rep Houston tech scene and participate next year!
 
@@ -10,5 +10,5 @@ Info:
 * [Swamplot](http://swamplot.com/new-iphone-app-bugs-you-when-its-time-to-take-out-the-trash-but-refuses-to-do-it-for-you/2015-07-06/)
 
 TODO: 
-* Web version coming soon
+
 * Interested in adding more data if anyone has any good data sources.
