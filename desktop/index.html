@@ -313,13 +313,13 @@
         <h1>Your Upcoming Schedule</h1>
     </div>
     <div class="card" ng-repeat="event in app.events">
-        <h2 class="md-title">{{event.day | date}}</h2>
+        <h2 class="md-title">{{::event.day | date}}</h2>
         <div layout="row" layout-align="center center">
-            <div ng-repeat="category in event.categories" flex>
-                <div class="category-icon" ng-style="{'background-image': app.getCategoryImage(category)}"></div>
+            <div ng-repeat="category in ::event.categories" flex>
+                <div class="category-icon" ng-style="{'background-image': ::app.getCategoryImage(category)}"></div>
                 <div class="category-label">
-                    <div class="category">{{app.niceCategoryName(category)}}</div>
-                    <div class="when">{{app.getCategorySchedule(category)}}</div>
+                    <div class="category">{{::app.niceCategoryName(category)}}</div>
+                    <div class="when">{{::app.getCategorySchedule(category)}}</div>
                 </div>
             </div>
         </div>
