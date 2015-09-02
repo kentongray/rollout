@@ -1,13 +1,14 @@
 {
-  "name": "android",
+  "name": "Rollout!",
   "version": "1.0.0",
-  "description": "android: An Ionic project",
+  "description": "Houston Recycling App",
   "dependencies": {
     "gulp": "^3.5.6",
-    "gulp-sass": "^1.3.3",
     "gulp-concat": "^2.2.0",
     "gulp-minify-css": "^0.3.0",
-    "gulp-rename": "^1.2.0"
+    "gulp-rename": "^1.2.0",
+    "gulp-sass": "^1.3.3",
+    "node-sass": "^3.3.2"
   },
   "devDependencies": {
     "bower": "^1.3.3",
@@ -15,18 +16,25 @@
     "gulp-serve": "^1.0.0",
     "gulp-sourcemaps": "^1.5.1",
     "gulp-util": "^2.2.14",
+    "ios-deploy": "^1.7.0",
     "shelljs": "^0.3.0"
   },
   "cordovaPlugins": [
-    "com.ionic.keyboard",
-    "cordova-plugin-geolocation",
-    "cordova-plugin-whitelist",
-    "cordova-plugin-device",
-    "org.apache.cordova.splashscreen",
     {
       "locator": "https://github.com/driftyco/ionic-plugins-deploy",
       "id": "com.ionic.deploy"
+    },
+    "com.ionic.keyboard",
+    "cordova-plugin-whitelist",
+    "cordova-plugin-device",
+    "org.apache.cordova.splashscreen",
+    "cordova-plugin-geolocation",
+    {
+      "locator": "https://github.com/Telerik-Verified-Plugins/LocalNotification",
+      "id": "de.appplant.cordova.plugin.local-notification"
     }
   ],
-  "cordovaPlatforms": []
+  "cordovaPlatforms": [
+    "android"
+  ]
 }

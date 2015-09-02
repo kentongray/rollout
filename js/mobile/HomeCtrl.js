@@ -13,12 +13,11 @@ export class HomeCtrl {
         return moment().day(day).format("dddd");
     }
 
-    constructor($scope, $ionicPlatform, $ionicLoading, $ionicDeploy, alert, $ionicFilterBar, $timeout, GeoLocation, SchedulerService, localStorageService) {
+    constructor($scope, $ionicPlatform, $ionicLoading, alert, $ionicFilterBar, $timeout, GeoLocation, SchedulerService, localStorageService) {
         angular.extend(this, {
             $scope,
             $ionicPlatform,
             $ionicLoading,
-            $ionicDeploy,
             SchedulerService,
             alert,
             $ionicFilterBar,
@@ -34,7 +33,7 @@ export class HomeCtrl {
     }
 
     checkForUpdates() {
-        // Check for updates
+        /*
         this.$ionicDeploy.check().then((response) => {
                 console.log('checking for updates', response);
                 // response will be true/false
@@ -64,7 +63,7 @@ export class HomeCtrl {
             },
             (error)=> {
                 console.log('error checking for updates', error);
-            })
+            })*/
     }
 
     showFilterBar() {
@@ -93,8 +92,17 @@ export class HomeCtrl {
     }
 
     loadEventsForPosition(pos) {
+        //data format from arcgis is all over the place, need to standardize this to prevent headaches :-/
+        if(pos.x && !pos.coords) {
+            pos.coords = {
+                latitude: pos.y,
+                longitude: pos.x
+            };
+
+            console.log('fixing coords', pos)
+        }
         this.coords = pos.coords;
-        console.log(pos);
+
         var scheduler = this.SchedulerService(pos, 90);
         scheduler.whenLoaded.then(() => {
             this.events = scheduler.events;
@@ -107,7 +115,6 @@ export class HomeCtrl {
             this.alert('Unable to Find Your Schedule. ' +
                 'Make Sure You Are Connected to the Internet, and are in Houston');
         });
-        this.$scope.$apply();
     }
 
     loadEvents() {

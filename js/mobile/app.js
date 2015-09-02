@@ -9,7 +9,9 @@ import {Scheduler} from 'Scheduler'
 import {GeoLocation} from 'GeoLocation'
 
 angular.module('starter', ['ionic', 'ionic.service.core',
-    'ionic.service.deploy', 'starter.controllers', 'starter.services'])
+    'starter.controllers', 'starter.services'])
+    /*
+    //need to add 'ionic.service.deploy' back on
     .config(['$ionicAppProvider', function($ionicAppProvider) {
         // Identify app
         $ionicAppProvider.identify({
@@ -18,7 +20,7 @@ angular.module('starter', ['ionic', 'ionic.service.core',
             // The public API key all services will use for this app
             api_key: 'da2dc0730f64b198e30cc64677fd15bbbea27266d824bf2d'
         });
-    }])
+    }])*/
     .config(router)
     .config(($ionicFilterBarConfigProvider) => {
         $ionicFilterBarConfigProvider.placeholder('Your Address');

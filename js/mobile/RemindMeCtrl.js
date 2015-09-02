@@ -19,6 +19,7 @@ export class RemindMeCtrl {
         this.waste = false;
         this.junk = false;
         this.hour = 6;
+        console.log($stateParams, 'sp');
         this.pos = {x: $stateParams.longitude, y: $stateParams.latitude};
         this.$inject = ['$scope', 'this.$ionicLoading', $ionicPopover];
 
@@ -150,6 +151,8 @@ export class RemindMeCtrl {
     }
 
     makeDescriptionText(categories) {
+        //FIXME: lazy hack because i want it to say trash instead of waste on the reminder but don't want to rewrite all the reminder code
+        categories = categories.map(c => c == 'waste' ? 'trash' : c);
         var description = "nothing";
         if (categories.length == 1)
             description = categories[0];
