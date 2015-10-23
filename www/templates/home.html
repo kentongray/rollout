@@ -1,0 +1,71 @@
+<ion-view view-title="Home">
+    <ion-nav-title>
+        <img src="img/rollout_logo.png" style="margin-top:5px;" height="30" width="143">
+    </ion-nav-title>
+    <ion-nav-buttons side="secondary">
+        <button class="button button-icon icon ion-ios-location-outline" ng-click="home.showFilterBar()"></button>
+    </ion-nav-buttons>
+    <ion-content>
+        <div ng-if="home.addresses" class="addressSearchResults">
+            <ion-list>
+                <ion-item ng-repeat="address in home.addresses" ng-click="home.selectAddress(address)">
+                    {{address.text}}
+                </ion-item>
+            </ion-list>
+        </div>
+
+        <div class="home">
+            <div class="no-schedule" ng-if="home.events.length == 0">
+                <h1>No Schedule Found</h1>
+                Rollout! is only available for Houston.
+                Try again when you are in the city
+                or in an area with trash pickup!
+
+                <!-- because we care -->
+                <a ng-click="home.showFilterBar()">Click the <i class="icon ion-ios-location-outline"></i> to Change Your Location</a>
+            </div>
+            <div class="schedule">
+                <div ng-repeat="event in home.events" class="upcoming-event">
+                    <h2>{{::event.day | date}}</h2>
+                    <ul class="waste-types">
+                        <li ng-repeat="category in ::event.categories" class="waste-type">
+                            <div ng-if="category == 'waste'">
+                                <i class="ion-ios-trash"></i>
+                                <label>Trash & Lawn</label>
+                                <div class="when">Every {{::home.pickupDays.wasteDay | dayOfWeek}}</div>
+                            </div>
+                            <div ng-if="category == 'recycling'">
+                                <i class="fa fa-recycle"></i>
+                                <label>Recycling</label>
+                                <div class="when">Every Other {{::home.pickupDays.recyclingDay | dayOfWeek}}</div>
+                            </div>
+                            <div ng-if="category == 'junk'">
+                                <!-- Weight icon by Icons8 -->
+                                <img class="icon icons8-Weight"
+                                     src="img/Weight-100.png"
+                                     width="75" height="75">
+                                <label>Junk</label>
+                                <div class="when">{{::moment().date(home.pickupDays.junkWeekOfMonth).format("Do")}} {{::home.pickupDays.junkDay | dayOfWeek}} (Even Months)</div>
+                            </div>
+
+                            <div ng-if="category == 'tree'">
+                                <i class="fa fa-tree"></i>
+                                <label>Tree Waste</label>
+                                <div class="when">{{::moment().date(home.pickupDays.junkWeekOfMonth).format("Do")}} {{::home.pickupDays.junkDay | dayOfWeek}} (Odd Months)</div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </ion-content>
+    <ion-footer-bar class="bar bar-footer action-buttons" ng-hide="home.events.length == 0">
+        <div class="reminders" ui-sref="remindme({latitude:home.coords.latitude, longitude:home.coords.longitude})">
+            <i class="ion-ios-bell"></i>Remind Me
+        </div>
+        <!--<div class="drop-off" ui-sref="locations">
+            <i class="ion-map"></i> Drop-off Locations
+        </div>-->
+    </ion-footer-bar>
+
+</ion-view>

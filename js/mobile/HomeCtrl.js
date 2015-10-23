@@ -123,7 +123,6 @@ export class HomeCtrl {
         });
 
         ionic.Platform.ready(() => {
-            console.log(cordova);
             this.$ionicLoading.show({
                 template: 'Looking Up Your Schedule'
             });

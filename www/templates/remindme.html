@@ -1,0 +1,28 @@
+<ion-view>
+    <ion-nav-title>
+        <img src="img/rollout_logo.png" style="margin-top:5px;" height="30" width="143">
+    </ion-nav-title>
+    <ion-content class="padding remind-me">
+
+
+        <h2>Remind me <u ng-click="remind.timeOfDayPopOver.show($event)" ng-bind="remind.timeOfDay == 'morning' ? 'in the morning' : 'at night'">in the morning</u></h2>
+
+        <h1>at <u ng-click="remind.hourPopOver.show($event)" ng-bind="remind.hour">6</u></h1>
+
+        <h2>to <em>roll out</em> my</h2>
+
+        <h2><u ng-click="remind.whatPopOver.show($event)" ng-bind="remind.whatDescription">recycling and trash</u></h2>
+
+    </ion-content>
+
+    <ion-footer-bar class="remind-me-action bar bar-footer">
+        <div ng-if="notifications" class="button-assertive buttons-assertive"  ng-click="remind.cancelReminders()">
+            Cancel Notifications
+        </div>
+        <div class="buttons" ng-click="remind.setupReminders()">
+            Let's Roll!
+        </div>
+
+    </ion-footer-bar>
+
+</ion-view>

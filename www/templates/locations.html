@@ -1,0 +1,21 @@
+<ion-view view-title="Drop-off Locations">
+    <ion-nav-title>
+        <img src="img/rollout_logo.png" style="margin-top:5px;" height="30" width="143">
+    </ion-nav-title>
+
+    <ion-content>
+        <div><label class="item item-input item-select">
+            <div class="input-label">
+                Type
+            </div>
+            <select ng-model="mapType" ng-options="item.code as item.name for item in types"></select>
+
+        </label>
+        </div>
+        <iframe  width="100%" height="600px" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"
+                ng-src="{{maps[mapType]}}">
+        </iframe>
+
+
+    </ion-content>
+</ion-view>
