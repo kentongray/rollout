@@ -24,4 +24,5 @@ seed.txt
 map.txt
 
 #ignore output folder
-www
+www/js
+www/lib
