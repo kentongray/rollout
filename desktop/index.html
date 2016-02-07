@@ -310,7 +310,7 @@
     <div class="logo" ng-click="app.selectAddress(null)"></div>
     <md-autocomplete
             md-item-text="item.text"
-            md-selected-item-change="app.selectAddress(item)"
+            md-selected-item-change="item.placeholder ? null : app.selectAddress(item)"
             md-search-text="app.searchText"
             md-items="item in app.queryAddress(app.searchText)"
             placeholder="Type Your Address (e.g. 1234 Main St)">
