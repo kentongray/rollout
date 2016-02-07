@@ -7,14 +7,16 @@ export class AppCtrl {
     }
 
     queryAddress(address) {
+    
         if(address == "") {
             this.events = null; //clear out data
         }
         if (address.split([' ']).length == 1) {
-            return this.$q.when([]);
+            return this.$q.when([{placeholder: true, text: 'Keep typing your address to see results...'}]);
         }
 
         return this.geoLocation.lookupAddress(address).then((r)=> {
+        console.log('results',r);
             return r;
         });
     }
@@ -48,10 +50,8 @@ export class AppCtrl {
             return;
         }
         this.address = suggestion;
-        console.log('address selected', suggestion);
         this.loadingSchedule = true;
         this.geoLocation.lookupCoordinates(suggestion).then((coords) => {
-            console.log('got coordinates', coords);
             var scheduler = this.schedulerService(coords, 60);
             scheduler.whenLoaded.then(()=> {
                 this.pickupDays = scheduler.pickupDays;
