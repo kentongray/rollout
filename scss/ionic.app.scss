@@ -82,7 +82,7 @@ $font-family-sans-serif: 'aleolight', georgia;
 
 .action-buttons {
   height: 48px;
-  background-color: #6dd131;
+  background-color: #378a5b;
   .reminders {
     margin-left: auto;
     margin-right: auto;
@@ -114,6 +114,23 @@ $font-family-sans-serif: 'aleolight', georgia;
 }
 
 .home {
+  .possible-holiday {
+    font-family:sans-serif;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 350px;
+    i {
+      font-size:40px;
+      display: block;
+      float: left;
+    }
+
+    a:link, a:visited, a:active {
+      color: white;
+    }
+  }
   .no-schedule {
     h1 {
       color: white;
@@ -147,7 +164,7 @@ $font-family-sans-serif: 'aleolight', georgia;
       }
     }
     .upcoming-event:nth-child(2n) {
-      background-color: lighten(#38c37d, 10%);
+      background-color: lighten(#19a76e, 10%);
     }
     .upcoming-event {
       -webkit-perspective: 500;
@@ -265,9 +282,9 @@ $font-family-sans-serif: 'aleolight', georgia;
 }
 
 .remind-me-action {
-  background-color: #6dd131;
+  background-color: #378a5b;
   .buttons {
-    display:block;
+    display: block;
     width: 100%;
     text-align: center;
     font-size: 2em;
@@ -276,24 +293,28 @@ $font-family-sans-serif: 'aleolight', georgia;
   }
 }
 
-
 /* The starting CSS styles for the enter animation */
 .addressSearchResults {
   position: absolute;
   left: 0;
   right: 0;
 }
+
 .addressSearchResults.ng-enter {
   height: 0;
-  overflow:hidden;
-  transition:0.5s linear all;
-  opacity:0;
+  overflow: hidden;
+  transition: 0.5s linear all;
+  opacity: 0;
 }
 
 /* The finishing CSS styles for the enter animation */
 .addressSearchResults.ng-enter.ng-enter-active {
   height: auto;
   overflow: visible;
-  opacity:1;
+  opacity: 1;
 }
 
+.platform-android .filter-bar .filter-bar-positive .item-input-wrapper {
+  background-color: transparent !important;
+  border-bottom-color: white !important;
+}
