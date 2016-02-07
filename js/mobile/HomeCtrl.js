@@ -32,6 +32,15 @@ export class HomeCtrl {
         this.loadEvents();
     }
 
+    openHolidaySchedule() {
+        var url = 'http://www.houstontx.gov/solidwaste/servicesshare-swmd-holiday-schedule';
+        if(window.cordova) {
+            cordova.InAppBrowser.open(url, '_system');
+        } else {
+            window.open(url, '_blank');
+        }
+    }
+
     checkForUpdates() {
         /*
         this.$ionicDeploy.check().then((response) => {

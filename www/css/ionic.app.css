@@ -7727,7 +7727,7 @@ a.button {
 
 .action-buttons {
   height: 48px;
-  background-color: #6dd131;
+  background-color: #378a5b;
   /* disabling drop-off
   .reminders, .drop-off {
     margin-top: 8px;
@@ -7755,6 +7755,19 @@ a.button {
       margin-left: 10px;
       font-size: 1em; }
 
+.home .possible-holiday {
+  font-family: sans-serif;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 350px; }
+  .home .possible-holiday i {
+    font-size: 40px;
+    display: block;
+    float: left; }
+  .home .possible-holiday a:link, .home .possible-holiday a:visited, .home .possible-holiday a:active {
+    color: white; }
 .home .no-schedule {
   text-align: center;
   margin: 20px;
@@ -7777,7 +7790,7 @@ a.button {
     -webkit-animation: balance2 .5s ease 110ms 1 alternate;
     animation: balance2 .5s ease 110ms 1 alternate; }
 .home .schedule .upcoming-event:nth-child(2n) {
-  background-color: #5dd197; }
+  background-color: #20d38b; }
 .home .schedule .upcoming-event {
   -webkit-perspective: 500;
   -moz-perspective: 500;
@@ -7861,7 +7874,7 @@ a.button {
     color: #d7ffb8; }
 
 .remind-me-action {
-  background-color: #6dd131; }
+  background-color: #378a5b; }
   .remind-me-action .buttons {
     display: block;
     width: 100%;

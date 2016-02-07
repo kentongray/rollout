@@ -106,6 +106,7 @@ export class RemindMeCtrl {
                 scheduler.whenLoaded.then(() => {
                     this.localStorageService.set('notificationsEnabled', true);
                     this.localStorageService.set('notificationsData', {
+                        position: this.pos,
                         timeOfDay: this.timeOfDay,
                         categories: this.activeWasteCategories(),
                         hour: this.hour

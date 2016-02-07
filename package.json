@@ -32,7 +32,8 @@
     {
       "locator": "https://github.com/Telerik-Verified-Plugins/LocalNotification",
       "id": "de.appplant.cordova.plugin.local-notification"
-    }
+    },
+    "cordova-plugin-inappbrowser"
   ],
   "cordovaPlatforms": [
     "android"

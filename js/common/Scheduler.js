@@ -17,11 +17,15 @@ export class Scheduler {
 
         this.numberOfDays = numberOfDays;
         this.pickupDays = {};
+        //an array of moment dates that may have disrupted schedules
+        this.holidays = ['2015-11-11', '2015-11-12', '2015-11-27', '2015-11-28',
+            '2015-12-24', '2015-12-25', '2015-12-26',
+            '2015-1-1', '2015-1-2'].map((d)=>moment(d));
 
-        if(pos.coords) {
+        if (pos.coords) {
             this.pos = {y: pos.coords.latitude, x: pos.coords.longitude, spatialReference: {"wkid": 4326}};
         }
-        else if(pos.x && pos.y) {
+        else if (pos.x && pos.y) {
             this.pos = {x: pos.x, y: pos.y, spatialReference: {"wkid": 4326}};
         }
 
@@ -99,9 +103,11 @@ export class Scheduler {
         dayInMonth.add(-1, 'days');
         return dayInMonth.isSame(day, 'day');
     }
+
     isTreeDay(day) {
         return !this.isEvenMonth(day) && this.isHeavyDay(day);
     }
+
     isJunkDay(day) {
         return this.isEvenMonth(day) && this.isHeavyDay(day);
     }
@@ -117,8 +123,17 @@ export class Scheduler {
         return isThisWeek && day.day() == this.pickupDays.recyclingDay;
     }
 
+    isPossibleHoliday(day) {
+        return _.some(this.holidays, (d) => d.isSame(day, 'day'))
+    }
+
     getCategoriesForDay(day) {
-        var eventsForDay = {waste: this.isWasteDay(day), junk: this.isJunkDay(day), tree: this.isTreeDay(day), recycling: this.isRecyclingDay(day)};
+        var eventsForDay = {
+            waste: this.isWasteDay(day),
+            junk: this.isJunkDay(day),
+            tree: this.isTreeDay(day),
+            recycling: this.isRecyclingDay(day)
+        };
         //group filter out empty days
         return _.pairs(eventsForDay).filter((category)=>category[1]).map((category)=>category[0]);
     }
@@ -127,7 +142,7 @@ export class Scheduler {
         var day = moment().startOf('day');
         var groupEvents = (day)=> {
             return {
-                day: day, categories: this.getCategoriesForDay(day)
+                day: day, categories: this.getCategoriesForDay(day), possibleHoliday: this.isPossibleHoliday(day)
             }
         };
         this.events = _.range(0, numberOfDays).map((i)=>day.clone().add(i, 'days')).map(groupEvents)
