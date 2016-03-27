@@ -9,6 +9,7 @@ export function onReady($ionicPlatform) {
             // org.apache.cordova.statusbar required
             StatusBar.styleDefault();
         }
+        
         if(navigator.splashscreen) {
             navigator.splashscreen.hide();
         }
