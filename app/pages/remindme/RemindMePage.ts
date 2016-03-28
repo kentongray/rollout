@@ -1,12 +1,12 @@
-import {Page, Platform} from "ionic-framework/ionic";
+import {Page, Platform, NavParams, NavController, Alert} from "ionic-framework/ionic";
 import * as moment from "moment";
-import {NavParams} from "ionic-angular/index";
 import {getPlugin} from "ionic-native/dist/plugins/plugin";
 import {Scheduler} from "../../common/Scheduler";
-import {LocalStorage} from "angular2-localstorage/LocalStorage";
+import * as _ from "lodash";
+
 
 @Page({
-  templateUrl: 'build/pages/remindme/RemindMe.html',
+  templateUrl: 'build/pages/remindme/RemindMePage.html',
   providers: [Scheduler],
 })
 export class RemindMePage {
@@ -19,67 +19,86 @@ export class RemindMePage {
   private junk = false;
   private hour = 6;
   private pos:any;
-  constructor(private navParams: NavParams, private schedulerService:Scheduler) {
-    console.log(this.navParams, 'sp');
-    this.notificationsEnabled =  localStorage.get('notificationsEnabled') == 'true';
-    this.notificationsData =  JSON.parse(localStorage.get('notificationsData') || "{}");
-    this.pos = {x: navParams.get('longitude'), y: navParams.get('latitude')};a
-/*
-    $scope.$watchGroup(this.wasteTypes.map((i)=> 'remind.' + i), () => {
-      var whats = this.activeWasteCategories();
-      this.whatDescription = this.makeDescriptionText(whats);
-    });*/
+  private whatDescription:String;
 
-    var timeOfDayTemplate = `<ion-popover-view ><ul class="list">
-            <li class="item" ng-click="remind.setTimeOfDay('morning')">
-            Morning
-            </li>
-            <li class="item" ng-click="remind.setTimeOfDay('night')">
-            Night
-            </li>
-        </ul></ion-popover-view>`;
-
-    var hourTemplate = `<ion-popover-view ><ul class="list">
-            <li class="item" ng-click="remind.setHour(5)">
-            5
-            </li>
-            <li class="item" ng-click="remind.setHour(6)">
-            6
-            </li>
-            <li class="item" ng-click="remind.setHour(7)">
-            7
-            </li>
-            <li class="item" ng-click="remind.setHour(8)">
-            8
-            </li>
-            <li class="item" ng-click="remind.setHour(9)">
-            9
-            </li>
-            <li class="item" ng-click="remind.setHour(10)">
-            10
-            </li>
-        </ul></ion-popover-view>`;
-
-    var whatTemplate = `<ion-popover-view>
-           <ion-toggle ng-model="remind.recycling" toggle-class="toggle-calm">Recycling</ion-toggle>
-           <ion-toggle ng-model="remind.waste" toggle-class="toggle-calm">Trash & Yard</ion-toggle>
-           <ion-toggle ng-model="remind.junk" toggle-class="toggle-calm">Junk</ion-toggle>
-           <ion-toggle ng-model="remind.tree" toggle-class="toggle-calm">Tree Trash</ion-toggle>
-        </ion-popover-view>`;
-/*
-    this.timeOfDayPopOver = $ionicPopover.fromTemplate(timeOfDayTemplate, {
-      scope: $scope
-    });
-    this.hourPopOver = $ionicPopover.fromTemplate(hourTemplate, {
-      scope: $scope
-    });
-    this.whatPopOver = $ionicPopover.fromTemplate(whatTemplate, {
-      scope: $scope
-    });*/
-
-
+  constructor(private nav:NavController, private navParams: NavParams, private schedulerService:Scheduler) {
+    this.notificationsEnabled =  window.localStorage.getItem('notificationsEnabled') == 'true';
+    this.notificationsData =  JSON.parse(window.localStorage.getItem('notificationsData') || "{}");
+    this.pos = {x: navParams.get('longitude'), y: navParams.get('latitude')};
+    this.whatDescription = this.makeDescriptionText(this.activeWasteCategories);
   }
 
+  openTimeOfDay() {
+    let confirm = Alert.create({
+      title: 'When Should I Alert You?',
+      message: 'Are you a night owl or a early riser?',
+      buttons: [
+        {
+          text: 'In the Morning (AM)',
+          handler: () => {
+            this.timeOfDay = 'morning'
+          }
+        },
+        {
+          text: 'At Night (PM)',
+          handler: () => {
+            this.timeOfDay = 'night'
+          }
+        }
+      ]
+    });
+    this.nav.present(confirm);
+  }
+  openHours() {
+    let alert = Alert.create({
+      title: 'What Time?'
+    });
+
+    this.wasteTypes.forEach((num) => {
+      alert.addInput({
+        type: 'radio',
+        label: num,
+        value: num,
+        checked: this.hour == num
+      });
+    });
+    alert.addButton('Cancel');
+    alert.addButton({
+      text: 'Ok',
+      handler: data => {
+        console.log('selected hour', data);
+        this.setHour(data);
+      }
+    });
+    this.nav.present(alert);
+  }
+
+  openWhat() {
+    let alert = Alert.create({
+      title: 'What Types?'
+    });
+
+    var active = this.activeWasteCategories;
+    this.wasteTypes.map(c => c == 'waste' ? 'Trash & Yard' : c)
+      .map(c => c.charAt(0).toUpperCase() + c.slice(1)) //cap first letter
+      .forEach((type, i) => {
+      alert.addInput({
+        type: 'checkbox',
+        label: type,
+        value: this.wasteTypes[i],
+        checked: active.indexOf(this.wasteTypes[i]) >= 0
+      });
+    });
+    alert.addButton('Cancel');
+    alert.addButton({
+      text: 'Ok',
+      handler: data => {
+        console.log('selected hour', data);
+        this.setHour(data);
+      }
+    });
+    this.nav.present(alert);
+  }
   setTimeOfDay(time) {
     this.timeOfDay = time;
    // this.timeOfDayPopOver.hide();
@@ -90,14 +109,6 @@ export class RemindMePage {
    // this.hourPopOver.hide();
   }
 
-  safeApply(fn) {
-   /* if (!this.$scope.$$phase) {
-      this.$scope.$apply(fn);
-    } else {
-      fn();
-    }*/
-  }
-
   setupReminders() {
     getPlugin('notification').local.clearAll(() => {
       //clear all notifications then start again
@@ -105,14 +116,14 @@ export class RemindMePage {
       this.schedulerService.init(this.pos, 365);
       this.schedulerService.whenLoaded.then(() => {
         this.notificationsEnabled = true;
-        localStorage.setItem('notificationsEnabled', 'true');
+        window.localStorage.setItem('notificationsEnabled', 'true');
         this.notificationsData = {
           position: this.pos,
           timeOfDay: this.timeOfDay,
-          categories: this.activeWasteCategories(),
+          categories: this.activeWasteCategories,
           hour: this.hour
         };
-        localStorage.setItem('notificationsData', JSON.stringify(this.notificationsData));
+        window.localStorage.setItem('notificationsData', JSON.stringify(this.notificationsData));
 
         var notifications = _(this.schedulerService.events).map((event) => {
           var isNight = this.timeOfDay == 'night';
@@ -123,7 +134,7 @@ export class RemindMePage {
             .set('minute', 0)
             .toDate();
 
-          var matches = _.intersection(event.categories, this.activeWasteCategories());
+          var matches = _.intersection(event.categories, this.activeWasteCategories);
 
           if (matches.length) {
             return {
@@ -167,7 +178,7 @@ export class RemindMePage {
     return description;
   }
 
-  activeWasteCategories() {
+  get activeWasteCategories() {
     return _(this.wasteTypes).map((i)=> {
         return this[i] ? i : null
       }).compact().value();
