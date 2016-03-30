@@ -33,7 +33,7 @@ export class HomeCtrl {
     }
 
     openHolidaySchedule() {
-        var url = 'http://www.houstontx.gov/solidwaste/servicesshare-swmd-holiday-schedule';
+        var url = 'http://www.houstontx.gov/solidwaste/holiday.html';
         if(window.cordova) {
             cordova.InAppBrowser.open(url, '_system');
         } else {
