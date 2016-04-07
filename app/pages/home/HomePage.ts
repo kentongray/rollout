@@ -1,4 +1,4 @@
-import {Page, Platform, NavController} from "ionic-framework/ionic";
+import {Page, Platform, NavController} from "ionic-angular";
 import {AddressLookup} from "../../common/AddressLookup";
 import {Scheduler} from "../../common/Scheduler";
 import {Geolocation} from "ionic-native";

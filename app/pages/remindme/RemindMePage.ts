@@ -1,4 +1,4 @@
-import {Page, Platform, NavParams, NavController, Alert} from "ionic-framework/ionic";
+import {Page, Platform, NavParams, NavController, Alert} from "ionic-angular";
 import * as moment from "moment";
 import {getPlugin} from "ionic-native/dist/plugins/plugin";
 import {Scheduler} from "../../common/Scheduler";

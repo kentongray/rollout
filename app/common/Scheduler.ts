@@ -22,10 +22,11 @@ moment.locale(locale);
  http://mycity.houstontx.gov/ArcGIS10/rest/services/wm/MyCityMapData_wm/MapServer/113/query?geometryType=esriGeometryPoint&f=json&outSR=102100&outFields=SERVICE%5FDAY%2CQUAD&geometry=%7B%22x%22%3A%2D10617688%2E9548%2C%22y%22%3A3467985%2E443099998%7D&spatialRel=esriSpatialRelIntersects&returnGeometry=false
 
  **/
+
 @Injectable()
 export class Scheduler {
   http:Http;
-  numberOfDays:number;
+  numberOfDays:number;  
   pickupDays;
   holidays;
   events:Array<any>;
