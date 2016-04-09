@@ -9,7 +9,7 @@ import HomePage from "./pages/home/HomePage";
   template: '<ion-nav [root]="rootPage"></ion-nav>',
   config: {} // http://ionicframework.com/docs/v2/api/config/Config/
 })
-export class MyApp {
+export class Rollout {
   rootPage: Type = HomePage;
 
   constructor(platform: Platform) {
