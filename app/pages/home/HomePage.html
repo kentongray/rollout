@@ -1,16 +1,19 @@
 <ion-navbar *navbar primary>
-    <ion-searchbar *ngIf="searching" autofocus [(ngModel)]="searchQuery" (input)="searchAddress(searchQuery)" placeholder="Enter Your Address"></ion-searchbar>
+    <ion-searchbar *ngIf="searching" autofocus [(ngModel)]="searchQuery" (input)="searchAddress(searchQuery)"
+                   placeholder="Enter Your Address"></ion-searchbar>
     <ion-title *ngIf="!searching">
         <img src="img/rollout_logo.png" style="margin-top:5px;" height="30" width="143">
     </ion-title>
-    <ion-nav-buttons side="secondary" *ngIf="!searching">
-        <div><ion-icon white name="pin"  (click)="showFilterBar()"></ion-icon></div>
-    </ion-nav-buttons>
+    <ion-buttons end *ngIf="!searching" >
+        <button side="secondary" (click)="showFilterBar()">
+            <ion-icon white name="pin"></ion-icon>
+        </button>
+    </ion-buttons>
 </ion-navbar>
 <ion-content class="home">
     <div *ngIf="addresses" class="address-search-results">
         <ion-list>
-            <ion-item *ngFor="#address of addresses"  (click)="selectAddress(address)">
+            <ion-item *ngFor="#address of addresses" (click)="selectAddress(address)">
                 {{address.text}}
             </ion-item>
         </ion-list>
@@ -25,7 +28,8 @@
         or in an area with trash pickup!
 
         <!-- because we care -->
-        <a (click)="showFilterBar()">Click the <i class="icon ion-icon ion-ios-location-outline"></i> to Change Your Location</a>
+        <a (click)="showFilterBar()">Click the <i class="icon ion-icon ion-ios-location-outline"></i> to Change Your
+            Location</a>
     </div>
     <div class="schedule">
         <div *ngFor="#event of events" class="upcoming-event">
@@ -52,13 +56,17 @@
                              src="img/Weight-100.png"
                              width="75" height="75">
                         <label>Junk</label>
-                        <div class="when">{{moment().date(pickupDays.junkWeekOfMonth).format("Do")}} {{pickupDays.junkDay | dayOfWeek}} (Even Months)</div>
+                        <div class="when">{{moment().date(pickupDays.junkWeekOfMonth).format("Do")}}
+                            {{pickupDays.junkDay | dayOfWeek}} (Even Months)
+                        </div>
                     </div>
 
                     <div *ngIf="category == 'tree'">
                         <i class="fa fa-tree"></i>
                         <label>Tree Waste</label>
-                        <div class="when">{{moment().date(pickupDays.junkWeekOfMonth).format("Do")}} {{pickupDays.junkDay}} (Odd Months)</div>
+                        <div class="when">{{moment().date(pickupDays.junkWeekOfMonth).format("Do")}}
+                            {{pickupDays.junkDay}} (Odd Months)
+                        </div>
                     </div>
                 </li>
             </ul>
@@ -67,6 +75,7 @@
 </ion-content>
 <ion-footer-bar class="bar bar-footer action-buttons" ng-hide="events.length == 0">
     <div class="reminders" (click)="goToRemindMe()">
-        <ion-icon name="notifications"></ion-icon>Remind Me
+        <ion-icon name="notifications"></ion-icon>
+        Remind Me
     </div>
 </ion-footer-bar>
