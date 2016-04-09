@@ -21,14 +21,16 @@
     <div class="error-message" *ngIf="errorMessage">
         {{errorMessage}}
     </div>
-    <div class="no-schedule" *ngIf="events.length == 0">
+    <div class="no-schedule" *ngIf="!loading && events.length == 0">
         <h1>No Schedule Found</h1>
         Rollout! is only available for the City of Houston.
-        Try again when you are in the city
-        or in an area with trash pickup!
+        <br>
+        Try again when you are in the city or in an area with trash pickup!
+        <br>
+        <br>
 
         <!-- because we care -->
-        <a (click)="showFilterBar()">Click the <i class="icon ion-icon ion-ios-location-outline"></i> to Change Your
+        <a white (click)="showFilterBar()">Click the <ion-icon name="pin"></ion-icon> to Change Your
             Location</a>
     </div>
     <div class="schedule">
