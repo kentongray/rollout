@@ -1,19 +1,21 @@
 # [Rollout!](www.rollouthouston.com)
 
+
 Download the app for [iPhone/iPad](https://itunes.apple.com/us/app/rollout!-houston/id1011036124?mt=8) and [Android](https://play.google.com/store/apps/details?id=com.kentonue.rollout)
 ##
 A mobile (ionic/cordova) and web (angular-material) app built using for tracking pickup schedules in the City of Houston.
 
 Winner of the [Houston Hackathon](http://houstonhackathon.com). Rep Houston tech scene and participate next year!
 ##Getting Started
-Make sure you have ionic installed globally (`npm install ionic -g`)
-`npm install && bower install`
+Make sure you have ionic installed globally (`npm install ionic@beta -g`)
+`npm install`
 
 Normal ionic commands apply (e.g. `ionic serve` `ionic run ios`)
 
-To run the desktop
-Run `gulp && gulp serve`
-`gulp watch` is available to auto reload.
+Desktop support still in the works for the new version
+--To run the desktop
+--Run `gulp && gulp serve`
+--`gulp watch` is available to auto reload.
 
 Hit me up with questions and! Would love to have some volunteers.
 
