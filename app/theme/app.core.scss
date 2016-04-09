@@ -10,6 +10,7 @@
 
 
 @import "../pages/home/HomePage";
+@import "../pages/remindme/RemindMePage";
 @import "font-awesome";
 @font-face {
 	font-family: 'aleoregular';
@@ -61,4 +62,8 @@
 	font-weight: normal;
 	font-style: normal;
 
+}
+
+a, a:link, a:visited {
+	color: white;
 }
