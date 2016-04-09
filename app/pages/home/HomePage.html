@@ -73,9 +73,9 @@
         </div>
     </div>
 </ion-content>
-<ion-footer-bar class="bar bar-footer action-buttons" ng-hide="events.length == 0">
-    <div class="reminders" (click)="goToRemindMe()">
+<ion-toolbar position="bottom" primary ng-hide="events.length == 0">
+    <button class="reminders" (click)="goToRemindMe()" style="width: 100%">
         <ion-icon name="notifications"></ion-icon>
         Remind Me
-    </div>
-</ion-footer-bar>
+    </button>
+</ion-toolbar>
