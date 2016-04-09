@@ -8,9 +8,6 @@
     </ion-nav-buttons>
 </ion-navbar>
 <ion-content class="home">
-    <div class="loader" *ngIf="loadingMessage">
-        {{loadingMessage}}
-    </div>
     <div *ngIf="addresses" class="address-search-results">
         <ion-list>
             <ion-item *ngFor="#address of addresses"  (click)="selectAddress(address)">

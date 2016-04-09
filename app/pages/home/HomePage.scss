@@ -6,21 +6,6 @@
 	color: map-get($colors, light);
 }
 
-
-.loader {
-	border: solid 1px map-get($colors, light);
-	font-family: aleoregular;
-	color: map-get($colors, primary);
-	text-align: center;
-	position: absolute;
-	left: 20%;
-	right: 20%;
-	top: 40%;
-	padding: 30px;
-	background-color: white;
-	border-radius: 5px;
-	vertical-align: middle;
-}
 .action-buttons {
 	height: 48px;
 	background-color: #378a5b;

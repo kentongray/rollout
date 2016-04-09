@@ -1,4 +1,4 @@
-import {Page, Platform, NavController} from "ionic-angular";
+import {Page, Platform, NavController, Loading} from "ionic-angular";
 import {AddressLookup} from "../../common/AddressLookup";
 import {Scheduler} from "../../common/Scheduler";
 import {Geolocation} from "ionic-native";
@@ -25,6 +25,8 @@ export default class HomePage {
   private addressLookup;
   private loadingMessage:String;
   private errorMessage:String;
+  private loadingContent:Loading;
+  private loading:boolean;
 
   constructor(private platform:Platform, private nav: NavController, private SchedulerService:Scheduler, addressLookup:AddressLookup ) {
     this.moment = moment;
@@ -75,11 +77,21 @@ export default class HomePage {
   }
 
   showLoader(str = 'One Sec!') {
-    this.loadingMessage = str;
+    if(!this.loadingContent) {
+      this.loadingContent = Loading.create({content:str});
+    }
+
+    //hack see: https://github.com/driftyco/ionic/issues/6103
+    this.loadingContent.data.content = str;
+    if(!this.loading) {
+      this.nav.present(this.loadingContent);
+      this.loading = true;
+    }
   }
 
   hideLoader() {
-    this.loadingMessage = null;
+    this.loading = false;
+    this.loadingContent.dismiss();
   }
   loadEvents() {
     this.showLoader('Starting Up!');
@@ -125,7 +137,7 @@ export default class HomePage {
       this.events = this.SchedulerService.events;
       this.pickupDays = this.SchedulerService.pickupDays;
       return this.events;
-      //this.$ionicLoading.hide();
+      this.hideLoader();
     });
   }
 }
