@@ -16,12 +16,12 @@
 
 </ion-content>
 
-<ion-footer-bar class="remind-me-action bar bar-footer">
+<ion-tool-bar position="bottom" class="remind-me-action bar bar-footer">
     <div *ngIf="notifications" class="button-assertive buttons-assertive" (click)="cancelReminders()">
         Cancel Notifications
     </div>
-    <div class="buttons" (click)="setupReminders()">
+    <button class="buttons" (click)="setupReminders()">
         Let's Roll!
-    </div>
+    </button>
 
-</ion-footer-bar>
+</ion-tool-bar>

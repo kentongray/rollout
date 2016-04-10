@@ -1,8 +1,11 @@
 .home {
+	font-family: aleoregular;
 	background-color: map-get($colors, primary);
+	h1 {
+		font-family: aleolight;
+	}
 }
 .pane {
-	background-color: map-get($colors, primary);
 	color: map-get($colors, light);
 }
 
@@ -13,7 +16,6 @@
 		margin-left: auto;
 		margin-right: auto;
 		margin-top: 8px;
-		font-family: aleoregular;
 		vertical-align: top;
 		font-size: 1.5em;
 		i {
@@ -77,8 +79,6 @@
 		.upcoming-event:nth-child(2) {
 
 			z-index: 500;
-			background-color: #38c37d;
-
 			&.animate {
 				display: block;
 				background-color: orange;
@@ -90,7 +90,7 @@
 			}
 		}
 		.upcoming-event:nth-child(2n) {
-			background-color: lighten(#19a76e, 10%);
+			background-color: lighten(map-get($colors, primary), 3%);
 		}
 		.upcoming-event {
 			font-family: aleolight;
@@ -117,12 +117,10 @@
 
 			padding-top: 10px;
 			text-align: center;
-			background-color: #3bbb68;
 			min-height: 250px;
 		}
 		.upcoming-event:nth-child(even) {
 			z-index: 400;
-			background-color: #38c37d;
 		}
 	}
 
