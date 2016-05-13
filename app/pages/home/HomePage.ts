@@ -6,6 +6,11 @@ import * as moment from "moment";
 import {DayOfWeekPipe, RelativeDatePipe} from "../../common/Pipes";
 import {RemindMePage} from "../remindme/RemindMePage";
 
+
+
+import {WasteDescriptionPage} from "../wastedescription/WasteDescriptionPage";
+
+
 @Page({
   providers: [Scheduler, AddressLookup],
   pipes: [DayOfWeekPipe, RelativeDatePipe],
@@ -62,6 +67,12 @@ export default class HomePage {
       y: this.coords.longitude,
     });
   }
+
+  goToWasteDescription() {
+    this.nav.push(WasteDescriptionPage);
+  }
+
+
   static dateFilter(day) {
     if (moment().isSame(day, 'day')) {
       return 'Today ' + day.format('MMM Do');
