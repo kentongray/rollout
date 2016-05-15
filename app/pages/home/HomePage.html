@@ -1,6 +1,6 @@
 <ion-navbar *navbar primary>
-    <ion-searchbar *ngIf="searching" autofocus [(ngModel)]="searchQuery" (input)="searchAddress(searchQuery)"
-                   placeholder="Enter Your Address"></ion-searchbar>
+    <ion-searchbar *ngIf="searching" [(ngModel)]="searchQuery" (input)="searchAddress(searchQuery)"
+                   [focuser] placeholder="Enter Your Address"></ion-searchbar>
     <ion-title *ngIf="!searching">
         <img src="img/rollout_logo.png" style="margin-top:5px;" height="30" width="143">
     </ion-title>
@@ -13,6 +13,9 @@
 <ion-content class="home">
     <div *ngIf="addresses" class="address-search-results">
         <ion-list>
+            <ion-item *ngIf="!addresses.length">
+                Address Not Found :(
+            </ion-item>
             <ion-item *ngFor="#address of addresses" (click)="selectAddress(address)">
                 {{address.text}}
             </ion-item>
@@ -69,7 +72,7 @@
                         <i class="fa fa-tree"></i>
                         <label>Tree Waste</label>
                         <div class="when">{{moment().date(pickupDays.junkWeekOfMonth).format("Do")}}
-                            {{pickupDays.junkDay}} (Odd Months)
+                            {{pickupDays.junkDay | dayOfWeek}} (Odd Months)
                         </div>
                     </div>
                 </li>
@@ -77,7 +80,7 @@
         </div>
     </div>
 </ion-content>
-<ion-toolbar position="bottom" primary ng-hide="events.length == 0">
+<ion-toolbar class="bottom-toolbar" position="bottom" primary *ngIf="events.length > 0">
     <button class="reminders" (click)="goToRemindMe()" style="width: 100%">
         <ion-icon name="notifications"></ion-icon>
         Remind Me

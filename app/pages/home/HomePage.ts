@@ -5,9 +5,11 @@ import {Geolocation} from "ionic-native";
 import * as moment from "moment";
 import {DayOfWeekPipe, RelativeDatePipe} from "../../common/Pipes";
 import {RemindMePage} from "../remindme/RemindMePage";
+import Focuser from "../../common/Focuser";
 
 @Page({
   providers: [Scheduler, AddressLookup],
+  directives: [Focuser],
   pipes: [DayOfWeekPipe, RelativeDatePipe],
   templateUrl: 'build/pages/home/HomePage.html'
 })

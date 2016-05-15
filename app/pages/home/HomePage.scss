@@ -1,3 +1,7 @@
+.searchbar-input,  .searchbar-input::-webkit-input-placeholder{
+	color: white;
+}
+
 .home {
 	font-family: aleoregular;
 	background-color: map-get($colors, primary);
@@ -5,6 +9,7 @@
 		font-family: aleolight;
 	}
 }
+
 .pane {
 	color: map-get($colors, light);
 }
@@ -125,7 +130,6 @@
 	}
 
 	.waste-types {
-
 		padding: 0;
 		margin: 0;
 		list-style: none;
@@ -194,8 +198,10 @@
 /* The starting CSS styles for the enter animation */
 .address-search-results {
 	position: absolute;
-	left: 0;
-	right: 0;
+	left: 5px;
+	right: 5px;
+	background-color: lighten(map-get($colors, primary), 50%);
+
 }
 
 .error-message {
@@ -221,4 +227,8 @@
 .platform-android .filter-bar .filter-bar-positive .item-input-wrapper {
 	background-color: transparent !important;
 	border-bottom-color: white !important;
+}
+
+.bottom-toolbar .toolbar-background {
+	border-top: solid 1px color($colors, dark);
 }
