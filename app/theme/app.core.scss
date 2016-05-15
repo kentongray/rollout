@@ -69,6 +69,8 @@ a, a:link, a:visited {
 
 ion-fixed.bottom-actions {
 	bottom:0;
+	left: 0;
+	right: 0;
 	background-color: map-get($colors, primary);
 	border-top: solid 1px #43a06f;
 	button {
