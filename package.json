@@ -6,7 +6,7 @@
     "angular2": "^2.0.0-beta.14",
     "es6-promise": "3.0.2",
     "es6-shim": "^0.33.13",
-    "ionic-angular": "^2.0.0-beta.4",
+    "ionic-angular": "^2.0.0-beta.6",
     "ionic-native": "^1.1.0",
     "ionicons": "3.0.0-alpha.3",
     "lodash": "^4.9.0",
@@ -26,5 +26,13 @@
     "ionic-gulp-html-copy": "^1.0.0",
     "ionic-gulp-sass-build": "^1.0.0",
     "ionic-gulp-webpack-build": "^1.0.0"
-  }
+  },
+  "cordovaPlugins": [
+    {
+      "locator": "https://github.com/katzer/cordova-plugin-local-notifications",
+      "id": "de.appplant.cordova.plugin.local-notification"
+    },
+    "cordova-plugin-code-push@latest"
+  ],
+  "cordovaPlatforms": []
 }

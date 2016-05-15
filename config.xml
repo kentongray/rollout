@@ -1,34 +1,36 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<widget id="com.kentonue.rollout" version="1.1.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-  <name>Rollout!</name>
-  <description>
-        An app that helps you with your trash schedule
-    </description>
-  <author email="kentongray@gmail.com" href="http://kentonue.com/">
-      Kenton Gray
-    </author>
-    <content src="index.html" />
-    <access origin="*" />
-    <preference name="BackgroundColor" value="0x3bbb68"/>
-    <allow-intent href="http://*/*" />
-    <allow-intent href="https://*/*" />
-    <allow-intent href="tel:*" />
-    <allow-intent href="sms:*" />
-    <allow-intent href="mailto:*" />
-    <allow-intent href="geo:*" />
-    <platform name="android">
-        <allow-intent href="market:*" />
-    </platform>
-    <platform name="ios">
-        <allow-intent href="itms:*" />
-        <allow-intent href="itms-apps:*" />
-    </platform>
-    <preference name="webviewbounce" value="false" />
-    <preference name="UIWebViewBounce" value="false" />
-    <preference name="DisallowOverscroll" value="true" />
-    <preference name="android-minSdkVersion" value="16" />
-    <preference name="BackupWebStorage" value="none" />
-    <feature name="StatusBar">
-        <param name="ios-package" onload="true" value="CDVStatusBar" />
-    </feature>
+<widget id="com.kentonue.rollout" version="1.1.1" xmlns="http://www.w3.org/ns/widgets">
+	<name>Rollout!</name>
+	<description>
+		An app that helps you with your trash schedule
+	</description>
+	<author email="kentongray@gmail.com" href="http://kentonue.com/">
+		Kenton Gray
+	</author>
+	<content src="index.html"/>
+	<access origin="*"/>
+	<preference name="BackgroundColor" value="0x3bbb68"/>
+	<allow-intent href="http://*/*"/>
+	<allow-intent href="https://*/*"/>
+	<allow-intent href="tel:*"/>
+	<allow-intent href="sms:*"/>
+	<allow-intent href="mailto:*"/>
+	<allow-intent href="geo:*"/>
+	<platform name="android">
+		<allow-intent href="market:*"/>
+		<preference name="CodePushDeploymentKey" value="JF9VCxX3CjF0m4FNRfabZvHLG6174y4LDqmyZ"/>
+	</platform>
+	<platform name="ios">
+		<preference name="CodePushDeploymentKey" value="JF9VCxX3CjF0m4FNRfabZvHLG6174y4LDqmyZ"/>
+		<allow-intent href="itms:*"/>
+		<allow-intent href="itms-apps:*"/>
+	</platform>
+	<preference name="webviewbounce" value="false"/>
+	<preference name="UIWebViewBounce" value="false"/>
+	<preference name="DisallowOverscroll" value="true"/>
+	<preference name="android-minSdkVersion" value="16"/>
+	<preference name="BackupWebStorage" value="none"/>
+	<feature name="StatusBar">
+		<param name="ios-package" onload="true" value="CDVStatusBar"/>
+	</feature>
 </widget>
