@@ -8,7 +8,6 @@
 // App Shared Sass variables belong in app.variables.scss.
 
 
-
 @import "../pages/home/HomePage";
 @import "../pages/remindme/RemindMePage";
 @import "font-awesome";
@@ -66,4 +65,14 @@
 
 a, a:link, a:visited {
 	color: white;
+}
+
+ion-fixed.bottom-actions {
+	bottom:0;
+	background-color: map-get($colors, primary);
+	border-top: solid 1px #43a06f;
+	button {
+		width: 100%;
+
+	}
 }

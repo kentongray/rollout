@@ -13,15 +13,12 @@
     <h2>to <em>roll out</em> my</h2>
 
     <h2><u (click)="openWhat()">{{whatDescription}}</u></h2>
-
+    <ion-fixed class="bottom-actions">
+        <div *ngIf="notifications" class="button-assertive buttons-assertive" (click)="cancelReminders()">
+            Cancel Notifications
+        </div>
+        <button class="buttons" (click)="setupReminders()">
+            Let's Roll!
+        </button>
+    </ion-fixed>
 </ion-content>
-
-<ion-tool-bar position="bottom" class="remind-me-action bar bar-footer">
-    <div *ngIf="notifications" class="button-assertive buttons-assertive" (click)="cancelReminders()">
-        Cancel Notifications
-    </div>
-    <button class="buttons" (click)="setupReminders()">
-        Let's Roll!
-    </button>
-
-</ion-tool-bar>

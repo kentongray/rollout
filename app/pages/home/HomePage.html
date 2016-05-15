@@ -4,7 +4,7 @@
     <ion-title *ngIf="!searching">
         <img src="img/rollout_logo.png" style="margin-top:5px;" height="30" width="143">
     </ion-title>
-    <ion-buttons end *ngIf="!searching" >
+    <ion-buttons end *ngIf="!searching">
         <button side="secondary" (click)="showFilterBar()">
             <ion-icon white name="pin"></ion-icon>
         </button>
@@ -31,11 +31,13 @@
         Try again when you are in the city or in an area with trash pickup!
         <br>
         <br>
-        Think this is a mistake?  <a href="mailto:info@rollouthouston.com">Let us know</a>
+        Think this is a mistake? <a href="mailto:info@rollouthouston.com">Let us know</a>
         <br>
         <br>
         <!-- because we care -->
-        <a white (click)="showFilterBar()">Click the <ion-icon name="pin"></ion-icon> to change your
+        <a white (click)="showFilterBar()">Click the
+            <ion-icon name="pin"></ion-icon>
+            to change your
             location</a>
     </div>
     <div class="schedule">
@@ -79,10 +81,10 @@
             </ul>
         </div>
     </div>
+    <ion-fixed class="bottom-actions">
+        <button (click)="goToRemindMe()">
+            <ion-icon name="notifications"></ion-icon>
+            Remind Me
+        </button>
+    </ion-fixed>
 </ion-content>
-<ion-toolbar class="bottom-toolbar" position="bottom" primary *ngIf="events.length > 0">
-    <button class="reminders" (click)="goToRemindMe()" style="width: 100%">
-        <ion-icon name="notifications"></ion-icon>
-        Remind Me
-    </button>
-</ion-toolbar>
