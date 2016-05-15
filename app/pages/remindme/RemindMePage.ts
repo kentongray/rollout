@@ -1,4 +1,4 @@
-import {Page, Platform, NavParams, NavController, Alert} from "ionic-angular";
+import {Page, Platform, NavParams, NavController, Alert, AlertInputOptions} from "ionic-angular";
 import * as moment from "moment";
 import {getPlugin} from "ionic-native/dist/plugins/plugin";
 import {Scheduler} from "../../common/Scheduler";
@@ -14,6 +14,7 @@ export class RemindMePage {
   public notificationsData:any = false;
   private timeOfDay = 'morning';
   private wasteTypes = ['recycling', 'waste', 'tree', 'junk'];
+  private selectedWasteTypes = ['recycling', 'waste'];
   private recycling = true;
   private waste = true;
   private junk = false;
@@ -25,13 +26,13 @@ export class RemindMePage {
     this.notificationsEnabled =  window.localStorage.getItem('notificationsEnabled') == 'true';
     this.notificationsData =  JSON.parse(window.localStorage.getItem('notificationsData') || "{}");
     this.pos = {x: navParams.get('longitude'), y: navParams.get('latitude')};
-    this.whatDescription = this.makeDescriptionText(this.activeWasteCategories);
+    this.whatDescription = this.makeDescriptionText(this.selectedWasteTypes);
   }
 
   openTimeOfDay() {
     let confirm = Alert.create({
-      title: 'When Should I Alert You?',
-      message: 'Are you a night owl or a early riser?',
+      title: 'When?',
+      message: 'When Should Rollout! Alert You?',
       buttons: [
         {
           text: 'In the Morning (AM)',
@@ -54,12 +55,12 @@ export class RemindMePage {
       title: 'What Time?'
     });
 
-    this.wasteTypes.forEach((num) => {
+    _.range(5,11).forEach((num) => {
       alert.addInput({
         type: 'radio',
-        label: num,
-        value: num,
-        checked: this.hour == num
+        label: num.toString(),
+        checked: this.hour === num,
+        value: this.hour.toString()
       });
     });
     alert.addButton('Cancel');
@@ -67,7 +68,7 @@ export class RemindMePage {
       text: 'Ok',
       handler: data => {
         console.log('selected hour', data);
-        this.setHour(data);
+        this.hour = parseInt(data);
       }
     });
     this.nav.present(alert);
@@ -78,7 +79,7 @@ export class RemindMePage {
       title: 'What Types?'
     });
 
-    var active = this.activeWasteCategories;
+    var active = this.selectedWasteTypes;
     this.wasteTypes.map(c => c == 'waste' ? 'Trash & Yard' : c)
       .map(c => c.charAt(0).toUpperCase() + c.slice(1)) //cap first letter
       .forEach((type, i) => {
@@ -93,20 +94,11 @@ export class RemindMePage {
     alert.addButton({
       text: 'Ok',
       handler: data => {
-        console.log('selected hour', data);
-        this.setHour(data);
+        this.selectedWasteTypes = data;
+        this.whatDescription = this.makeDescriptionText(data);
       }
     });
     this.nav.present(alert);
-  }
-  setTimeOfDay(time) {
-    this.timeOfDay = time;
-   // this.timeOfDayPopOver.hide();
-  }
-
-  setHour(hour) {
-    this.hour = hour;
-   // this.hourPopOver.hide();
   }
 
   setupReminders() {
@@ -120,7 +112,7 @@ export class RemindMePage {
         this.notificationsData = {
           position: this.pos,
           timeOfDay: this.timeOfDay,
-          categories: this.activeWasteCategories,
+          categories: this.selectedWasteTypes,
           hour: this.hour
         };
         window.localStorage.setItem('notificationsData', JSON.stringify(this.notificationsData));
@@ -134,7 +126,7 @@ export class RemindMePage {
             .set('minute', 0)
             .toDate();
 
-          var matches = _.intersection(event.categories, this.activeWasteCategories);
+          var matches = _.intersection(event.categories, this.selectedWasteTypes);
 
           if (matches.length) {
             return {
@@ -176,11 +168,5 @@ export class RemindMePage {
     else if (categories.length >= 3)
       description = categories.splice(0, categories.length - 1).join(', ') + ' and ' + categories[categories.length - 1];
     return description;
-  }
-
-  get activeWasteCategories() {
-    return _(this.wasteTypes).map((i)=> {
-        return this[i] ? i : null
-      }).compact().value();
   }
 }
