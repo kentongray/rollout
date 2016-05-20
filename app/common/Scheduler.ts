@@ -23,18 +23,20 @@ moment.locale(locale);
 
  **/
 
+interface PickupDay {wasteDay:number; junkWeekOfMonth:number; junkDay:number; recyclingDay:number; recyclingScheduleA:boolean}
+
 @Injectable()
 export class Scheduler {
   http:Http;
-  numberOfDays:number;  
-  pickupDays;
+  numberOfDays:number;
+  pickupDays:PickupDay;
   holidays;
   events:Array<any>;
   whenLoaded:Promise<any>;
   private pos;
 
-  constructor($http:Http) {
-    this.http = $http;
+  constructor(http:Http) {
+    this.http = http;
   }
 
   /**
@@ -42,9 +44,8 @@ export class Scheduler {
    * @param pos
    * @param numberOfDays
    */
-  init(pos: {x:number,y:number} | {coords:{latitude:any,longitude:any}}, numberOfDays:number = 60) {
+  init(pos:{x:number,y:number} | {coords:{latitude:any,longitude:any}}, numberOfDays:number = 60) {
     this.numberOfDays = numberOfDays;
-    this.pickupDays = {};
     //an array of moment dates that may have disrupted schedules
     this.holidays = ['2015-11-11', '2015-11-12', '2015-11-27', '2015-11-28',
       '2015-12-24', '2015-12-25', '2015-12-26',
@@ -78,7 +79,7 @@ export class Scheduler {
       reqOptions).map(res => res.json()).toPromise();
 
     this.whenLoaded = Promise.all<any>([wastePromise, junkPromise, recyclingPromise]).then((allResults)=> {
-      let [wasteData, junkData, recyclingData] = allResults;
+      const [wasteData, junkData, recyclingData] = allResults;
       this.configure(wasteData, junkData, recyclingData);
     });
   }

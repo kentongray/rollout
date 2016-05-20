@@ -3,17 +3,18 @@
   "version": "2.0.0",
   "description": "Houston Recycling & Trash Schedules",
   "dependencies": {
-    "angular2": "^2.0.0-beta.14",
+    "angular2": "2.0.0-beta.16",
+    "cordova-ios": "^4.1.1",
     "es6-promise": "3.0.2",
     "es6-shim": "^0.33.13",
     "ionic-angular": "^2.0.0-beta.24",
-    "ionic-native": "^1.1.0",
+    "ionic-native": "^1.2.1",
     "ionicons": "3.0.0-alpha.3",
     "lodash": "^4.9.0",
     "moment": "^2.12.0",
     "reflect-metadata": "0.1.2",
-    "rxjs": "^5.0.0-beta.7",
-    "zone.js": "^0.6.10"
+    "rxjs": "5.0.0-beta.7",
+    "zone.js": "0.6.10"
   },
   "devDependencies": {
     "awesome-typescript-loader": "0.15.10",
@@ -28,11 +29,12 @@
     "ionic-gulp-webpack-build": "^1.0.0"
   },
   "cordovaPlugins": [
-    {
-      "locator": "https://github.com/katzer/cordova-plugin-local-notifications",
-      "id": "de.appplant.cordova.plugin.local-notification"
-    },
-    "cordova-plugin-code-push@latest"
+    "cordova-plugin-code-push@latest",
+    "ionic-plugin-keyboard",
+    "cordova-plugin-inappbrowser",
+    "cordova-plugin-geolocation"
   ],
-  "cordovaPlatforms": []
+  "cordovaPlatforms": [
+    "ios"
+  ]
 }

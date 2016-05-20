@@ -6,6 +6,7 @@ import * as moment from "moment";
 import {DayOfWeekPipe, RelativeDatePipe} from "../../common/Pipes";
 import {RemindMePage} from "../remindme/RemindMePage";
 import Focuser from "../../common/Focuser";
+import {Http, HTTP_PROVIDERS, URLSearchParams, RequestOptions} from "angular2/http";
 
 @Page({
   providers: [Scheduler, AddressLookup],
@@ -30,7 +31,7 @@ export default class HomePage {
   private loadingContent:Loading;
   private loading:boolean;
 
-  constructor(private platform:Platform, private nav: NavController, private SchedulerService:Scheduler, addressLookup:AddressLookup ) {
+  constructor(private platform:Platform, private nav: NavController, private SchedulerService:Scheduler, addressLookup:AddressLookup) {
     this.moment = moment;
     this.geolocation = Geolocation;
     this.addressLookup = addressLookup;

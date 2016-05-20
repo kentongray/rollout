@@ -1,7 +1,6 @@
 .remind-me {
 	background-color: map-get($colors, primary);
 	font-family: aleoregular;
-	padding-top: 40%;
 	text-align: center;
 	h2, h1, h3 {
 		color: white !important;
@@ -12,5 +11,9 @@
 	}
 	u {
 		color: #d7ffb8;
+	}
+
+	h2:first-child {
+		margin-top: 20%;
 	}
 }

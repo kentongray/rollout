@@ -1,6 +1,4 @@
-import {Page, Platform, NavParams, NavController, Alert, AlertInputOptions} from "ionic-angular";
-import * as moment from "moment";
-import {getPlugin} from "ionic-native/dist/plugins/plugin";
+import {Page, NavParams, NavController, Alert, Loading} from "ionic-angular";
 import {Scheduler} from "../../common/Scheduler";
 import * as _ from "lodash";
 
@@ -21,12 +19,15 @@ export class RemindMePage {
   private hour = 6;
   private pos:any;
   private whatDescription:String;
+  private loadingContent:Loading;
+  private pickupDays;
 
-  constructor(private nav:NavController, private navParams: NavParams, private schedulerService:Scheduler) {
-    this.notificationsEnabled =  window.localStorage.getItem('notificationsEnabled') == 'true';
-    this.notificationsData =  JSON.parse(window.localStorage.getItem('notificationsData') || "{}");
+  constructor(private nav:NavController, private navParams:NavParams, private schedulerService:Scheduler) {
+    this.notificationsEnabled = window.localStorage.getItem('notificationsEnabled') == 'true';
+    this.notificationsData = JSON.parse(window.localStorage.getItem('notificationsData') || "{}");
     this.pos = {x: navParams.get('longitude'), y: navParams.get('latitude')};
     this.whatDescription = this.makeDescriptionText(this.selectedWasteTypes);
+    this.loadingContent = Loading.create({content: "Creating Reminders"});
   }
 
   openTimeOfDay() {
@@ -50,17 +51,18 @@ export class RemindMePage {
     });
     this.nav.present(confirm);
   }
+
   openHours() {
     let alert = Alert.create({
       title: 'What Time?'
     });
 
-    _.range(5,11).forEach((num) => {
+    _.range(5, 11).forEach((num) => {
       alert.addInput({
         type: 'radio',
         label: num.toString(),
         checked: this.hour === num,
-        value: this.hour.toString()
+        value: num.toString()
       });
     });
     alert.addButton('Cancel');
@@ -83,13 +85,13 @@ export class RemindMePage {
     this.wasteTypes.map(c => c == 'waste' ? 'Trash & Yard' : c)
       .map(c => c.charAt(0).toUpperCase() + c.slice(1)) //cap first letter
       .forEach((type, i) => {
-      alert.addInput({
-        type: 'checkbox',
-        label: type,
-        value: this.wasteTypes[i],
-        checked: active.indexOf(this.wasteTypes[i]) >= 0
+        alert.addInput({
+          type: 'checkbox',
+          label: type,
+          value: this.wasteTypes[i],
+          checked: active.indexOf(this.wasteTypes[i]) >= 0
+        });
       });
-    });
     alert.addButton('Cancel');
     alert.addButton({
       text: 'Ok',
@@ -102,11 +104,14 @@ export class RemindMePage {
   }
 
   setupReminders() {
-    getPlugin('notification').local.clearAll(() => {
+    const notificationPlugin:any = cordova.plugins.notification.local;
+    notificationPlugin.clearAll(() => {
+      console.log('all notifications cleared');
       //clear all notifications then start again
 
       this.schedulerService.init(this.pos, 365);
       this.schedulerService.whenLoaded.then(() => {
+        this.nav.present(this.loadingContent)
         this.notificationsEnabled = true;
         window.localStorage.setItem('notificationsEnabled', 'true');
         this.notificationsData = {
@@ -137,22 +142,22 @@ export class RemindMePage {
           }
         }).compact().value();
         console.log('creating notifications', notifications);
-        getPlugin('notification').schedule(notifications);
+        notificationPlugin.schedule(notifications);
 
         this.pickupDays = this.schedulerService.pickupDays;
-       // this.$ionicLoading.hide();
-       // this.$ionicHistory.goBack();
+        this.loadingContent.dismiss();
+        this.nav.pop();
       }).catch(()=> {
         console.log(arguments);
-       // this.$ionicLoading.hide();
-/*
-        this.alert('Unable to Find Your Schedule. ' +
-          'Make Sure You Are Connected to the Internet');
-*/
+        // this.$ionicLoading.hide();
+        /*
+         this.alert('Unable to Find Your Schedule. ' +
+         'Make Sure You Are Connected to the Internet');
+         */
       });
-     /* this.$ionicLoading.show({
-        template: 'Creating Your Reminders'
-      });*/
+      /* this.$ionicLoading.show({
+       template: 'Creating Your Reminders'
+       });*/
 
     })
   }

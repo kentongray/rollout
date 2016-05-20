@@ -5,7 +5,6 @@
 </ion-navbar>
 <ion-content class="padding remind-me">
 
-
     <h2>Remind me <u (click)="openTimeOfDay()">{{timeOfDay == 'morning' ? 'in the morning' : 'at night'}}</u></h2>
 
     <h1>at <u (click)="openHours()">{{hour}}</u></h1>
@@ -13,6 +12,7 @@
     <h2>to <em>roll out</em> my</h2>
 
     <h2><u (click)="openWhat()">{{whatDescription}}</u></h2>
+
     <ion-fixed class="bottom-actions">
         <div *ngIf="notifications" class="button-assertive buttons-assertive" (click)="cancelReminders()">
             Cancel Notifications
