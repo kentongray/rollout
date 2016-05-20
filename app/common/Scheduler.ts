@@ -71,12 +71,13 @@ export class Scheduler {
       searchParams.set(param, params[param]);
     }
     const reqOptions = new RequestOptions({search: searchParams});
-    let wastePromise = this.http.get('http://crossorigin.me/http://mycity.houstontx.gov/ArcGIS10/rest/services/wm/MyCityMapData_wm/MapServer/111/query',
+    let wastePromise = this.http.get('http://mycity.houstontx.gov/ArcGIS10/rest/services/wm/MyCityMapData_wm/MapServer/111/query',
       reqOptions).map(res => res.json()).toPromise();
-    let junkPromise = this.http.get('http://crossorigin.me/http://mycity.houstontx.gov/ArcGIS10/rest/services/wm/MyCityMapData_wm/MapServer/112/query',
+    let junkPromise = this.http.get('http://mycity.houstontx.gov/ArcGIS10/rest/services/wm/MyCityMapData_wm/MapServer/112/query',
       reqOptions).map(res => res.json()).toPromise();
-    let recyclingPromise = this.http.get('http://crossorigin.me/http://mycity.houstontx.gov/ArcGIS10/rest/services/wm/MyCityMapData_wm/MapServer/113/query',
+    let recyclingPromise = this.http.get('http://mycity.houstontx.gov/ArcGIS10/rest/services/wm/MyCityMapData_wm/MapServer/113/query',
       reqOptions).map(res => res.json()).toPromise();
+
 
     this.whenLoaded = Promise.all<any>([wastePromise, junkPromise, recyclingPromise]).then((allResults)=> {
       const [wasteData, junkData, recyclingData] = allResults;

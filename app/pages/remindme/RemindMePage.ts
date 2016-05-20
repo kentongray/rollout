@@ -104,6 +104,11 @@ export class RemindMePage {
   }
 
   setupReminders() {
+    if(!cordova) {
+      console.log('cordova is not found, maybe you are running in browser?. Going back.')
+      this.nav.pop();
+      return;
+    }
     const notificationPlugin:any = cordova.plugins.notification.local;
     notificationPlugin.clearAll(() => {
       console.log('all notifications cleared');
