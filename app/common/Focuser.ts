@@ -9,7 +9,7 @@ export default class Focuser {
     const searchInput = this.elementRef.nativeElement.querySelector('input');
     setTimeout(() => {
       //delay required or ionic styling gets finicky
-      this.renderer.invokeElementMethod(searchInput, 'focus', []);
+      this.renderer.invokeElementMethod(searchInput, 'click', []);
     }, 150);
   }
 }

@@ -11,6 +11,10 @@
 @import "../pages/home/HomePage";
 @import "../pages/remindme/RemindMePage";
 @import "font-awesome";
+
+html, body {
+	background-color: map-get($colors, primary);
+}
 @font-face {
 	font-family: 'aleoregular';
 	src: url('../../fonts/aleo-regular-webfont.eot');

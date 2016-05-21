@@ -1,6 +1,6 @@
 <ion-navbar *navbar primary>
     <ion-searchbar *ngIf="searching" [(ngModel)]="searchQuery" (input)="searchAddress(searchQuery)"
-                   [focuser] placeholder="Enter Your Address"></ion-searchbar>
+                   placeholder="Enter Your Address" (cancel)="searching = false"></ion-searchbar>
     <ion-title *ngIf="!searching">
         <img src="img/rollout_logo.png" style="margin-top:5px;" height="30" width="143">
     </ion-title>

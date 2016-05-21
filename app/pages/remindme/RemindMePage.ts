@@ -104,6 +104,7 @@ export class RemindMePage {
   }
 
   setupReminders() {
+    this.nav.present(this.loadingContent);
     if(!cordova) {
       console.log('cordova is not found, maybe you are running in browser?. Going back.')
       this.nav.pop();
@@ -113,10 +114,8 @@ export class RemindMePage {
     notificationPlugin.clearAll(() => {
       console.log('all notifications cleared');
       //clear all notifications then start again
-
       this.schedulerService.init(this.pos, 365);
       this.schedulerService.whenLoaded.then(() => {
-        this.nav.present(this.loadingContent)
         this.notificationsEnabled = true;
         window.localStorage.setItem('notificationsEnabled', 'true');
         this.notificationsData = {

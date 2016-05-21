@@ -94,23 +94,91 @@ export default class HomePage {
 
   hideLoader() {
     this.loading = false;
-    this.loadingContent.dismiss();
+    if(this.loadingContent) {
+      this.loadingContent.dismiss();
+    }
+  }
+
+  codePushStatusUpdate(completeCallback, errorCallback) {
+
+    let syncStatusCallback = (syncStatus) => {
+      switch (syncStatus) {
+        // Result (final) statuses
+        case SyncStatus.UPDATE_INSTALLED:
+
+          alertFn('The update was installed successfully.', null, 'Success!');
+
+          // force clean slate after codepush update
+          // completelyDestroyEverything();
+
+          break;
+        case SyncStatus.UP_TO_DATE:
+
+          // alertFn('The application is up to date.');
+          break;
+        case SyncStatus.UPDATE_IGNORED:
+
+          // alertFn('The user decided not to install the optional update.');
+          break;
+        case SyncStatus.ERROR:
+          $ionicLoading.hide();
+          alertFn('An error occured while checking for updates', null, 'Error');
+          break;
+
+        // Intermediate (non final) statuses
+        case SyncStatus.CHECKING_FOR_UPDATE:
+          console.log('Checking for update.');
+          break;
+        case SyncStatus.AWAITING_USER_ACTION:
+          console.log('Alerting user.');
+          break;
+        case SyncStatus.DOWNLOADING_PACKAGE:
+
+          $ionicLoading.show({
+            template:`Downloading...<br />
+              <progress id="update-app-progress" max="1" value="0"></progress>`
+          });
+          console.log('Downloading package.');
+          break;
+        case SyncStatus.INSTALLING_UPDATE:
+          $ionicLoading.hide();
+          $ionicLoading.show({
+            template:`Installing...`
+          });
+          console.log('Installing update');
+          break;
+      }
+    };
   }
   loadEvents() {
     this.showLoader('Starting Up!');
     this.platform.ready().then(() => {
-      /* this.$ionicLoading.show({
-       template: 'Looking Up Your Schedule'
-       });*/
-      this.showLoader('Finding Your Location');
-      return this.geolocation.getCurrentPosition()
+
+      let updatePromise;
+      if(window.codePush) {
+        this.showLoader('Checking For Updates');
+        //updatePromise = window.codePush.sync(null, {updateDialog: true});
+        updatePromise = Promise.resolve();
+        console.log('code push complete');
+      } else {
+        updatePromise = Promise.resolve();
+      }
+      return updatePromise
+        .then(() => this.showLoader('Finding Your Location'))
+        .then(() => this.geolocation.getCurrentPosition())
         .then(pos =>  {
           this.showLoader('Looking Up Your Schedule!');
           return pos;
         }, this.errorFindingPosition.bind(this))
+        .catch(err => {
+          console.error(err);
+          this.hideLoader();
+          this.showError('Whoops! We couldn\'t look up your location.');
+        })
         .then(this.loadEventsForPosition.bind(this))
         .catch(pos => {
-          this.showError('Problem Loading Your Schedule');
+          this.hideLoader();
+          this.showError('Ak! We Had a Problem Loading Your Schedule!');
         });
     }).then(this.hideLoader.bind(this), this.hideLoader.bind(this));
   }

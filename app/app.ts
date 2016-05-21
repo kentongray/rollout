@@ -12,10 +12,7 @@ export class Rollout {
 
   constructor(platform: Platform) {
     platform.ready().then(() => {
-      StatuBar.styleLightContent();
-      if(window.codePush) {
-       window.codePush.sync();
-      }
+      StatusBar.styleLightContent();
     });
   }
 }

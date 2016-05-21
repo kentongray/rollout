@@ -193,7 +193,8 @@
 	position: absolute;
 	left: 5px;
 	right: 5px;
-	background-color: rgba(255,255,255,.9);
+	backdrop-filter: blur(10px);
+	background-color: rgba(255,255,255,.6);
 	.item {
 		background-color: transparent;
 		color: #333333;
