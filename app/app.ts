@@ -1,6 +1,5 @@
 import {App, Platform} from 'ionic-angular';
-// https://angular.io/docs/ts/latest/api/core/Type-interface.html
-import {Type} from 'angular2/core';
+import {Type} from '@angular/core';
 import HomePage from "./pages/home/HomePage";
 import {StatusBar} from 'ionic-native';
 /// <reference path="../node_modules/typescript/lib/lib.es6.d.ts" />

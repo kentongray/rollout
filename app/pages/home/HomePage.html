@@ -16,7 +16,7 @@
             <ion-item *ngIf="!addresses.length">
                 Address Not Found :(
             </ion-item>
-            <ion-item *ngFor="#address of addresses" (click)="selectAddress(address)">
+            <ion-item *ngFor="let address of addresses" (click)="selectAddress(address)">
                 {{address.text}}
             </ion-item>
         </ion-list>
@@ -41,7 +41,7 @@
             location</a>
     </div>
     <div class="schedule">
-        <div *ngFor="#event of events" class="upcoming-event">
+        <div *ngFor="let event of events" class="upcoming-event">
             <h2>{{event.day | relativeDate}}</h2>
             <div *ngIf="event.possibleHoliday" class="possible-holiday">
                 <i class="ion-android-warning"></i>
@@ -49,7 +49,7 @@
                 Check our <a ng-click="openHolidaySchedule()" href="#">holiday schedule</a> to make sure.
             </div>
             <ul class="waste-types">
-                <li *ngFor="#category of event.categories" class="waste-type">
+                <li *ngFor="let category of event.categories" class="waste-type">
                     <div *ngIf="category == 'waste'">
                         <ion-icon name="trash"></ion-icon>
                         <label>Trash & Lawn</label>

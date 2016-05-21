@@ -1,9 +1,9 @@
-import {Injectable} from "angular2/core";
-import {Http, URLSearchParams, RequestOptions} from "angular2/http";
-import * as moment from "moment";
-import * as _ from "lodash";
-import "rxjs/add/operator/map";
-import "rxjs/add/operator/toPromise";
+import {Injectable} from '@angular/core';
+import {Http, URLSearchParams, RequestOptions} from '@angular/http';
+import * as moment from 'moment';
+import * as _ from 'lodash';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/toPromise';
 
 let locale = window.navigator.userLanguage || window.navigator.language;
 moment.locale(locale);

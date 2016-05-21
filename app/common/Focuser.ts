@@ -1,4 +1,4 @@
-import {Directive, Renderer, ElementRef} from "angular2/core";
+import {Directive, Renderer, ElementRef} from '@angular/core';
 @Directive({
   selector : '[focuser]'
 })
@@ -10,6 +10,6 @@ export default class Focuser {
     setTimeout(() => {
       //delay required or ionic styling gets finicky
       this.renderer.invokeElementMethod(searchInput, 'focus', []);
-    }, 0);
+    }, 150);
   }
 }

@@ -6,7 +6,7 @@ import * as moment from "moment";
 import {DayOfWeekPipe, RelativeDatePipe} from "../../common/Pipes";
 import {RemindMePage} from "../remindme/RemindMePage";
 import Focuser from "../../common/Focuser";
-import {Http, HTTP_PROVIDERS, URLSearchParams, RequestOptions} from "angular2/http";
+import {Http, HTTP_PROVIDERS, URLSearchParams, RequestOptions} from '@angular/http';
 
 @Page({
   providers: [Scheduler, AddressLookup],
