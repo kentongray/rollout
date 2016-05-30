@@ -51,19 +51,20 @@
             <ul class="waste-types">
                 <li *ngFor="let category of event.categories" class="waste-type">
                     <div *ngIf="category == 'waste'">
-                        <ion-icon name="trash"></ion-icon>
+                        <ion-icon name="trash" (click)="goToWasteDescription()"></ion-icon>
                         <label>Trash & Lawn</label>
                         <div class="when">Every {{pickupDays.wasteDay | dayOfWeek}}</div>
                     </div>
                     <div *ngIf="category == 'recycling'">
-                        <i class="fa fa-recycle"></i>
+                        <i class="fa fa-recycle" (click)="goToWasteDescription()"></i>
                         <label>Recycling</label>
                         <div class="when">Every Other {{pickupDays.recyclingDay | dayOfWeek}}</div>
                     </div>
                     <div *ngIf="category == 'junk'">
                         <img class="icon icons8-Weight"
                              src="img/Weight-100.png"
-                             width="75" height="75">
+                             width="75" height="75"
+                             (click)="goToWasteDescription()">
                         <label>Junk</label>
                         <div class="when">{{moment().date(pickupDays.junkWeekOfMonth).format("Do")}}
                             {{pickupDays.junkDay | dayOfWeek}} (Even Months)
@@ -71,7 +72,7 @@
                     </div>
 
                     <div *ngIf="category == 'tree'">
-                        <i class="fa fa-tree"></i>
+                        <i class="fa fa-tree" (click)="goToWasteDescription()"></i>
                         <label>Tree Waste</label>
                         <div class="when">{{moment().date(pickupDays.junkWeekOfMonth).format("Do")}}
                             {{pickupDays.junkDay | dayOfWeek}} (Odd Months)

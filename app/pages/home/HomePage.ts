@@ -8,6 +8,11 @@ import {RemindMePage} from "../remindme/RemindMePage";
 import Focuser from "../../common/Focuser";
 import {Http, HTTP_PROVIDERS, URLSearchParams, RequestOptions} from '@angular/http';
 
+
+
+import {WasteDescriptionPage} from "../wastedescription/WasteDescriptionPage";
+
+
 @Page({
   providers: [Scheduler, AddressLookup],
   directives: [Focuser],
@@ -65,6 +70,12 @@ export default class HomePage {
       y: this.coords.longitude,
     });
   }
+
+  goToWasteDescription() {
+    this.nav.push(WasteDescriptionPage);
+  }
+
+
   static dateFilter(day) {
     if (moment().isSame(day, 'day')) {
       return 'Today ' + day.format('MMM Do');
