@@ -28,7 +28,7 @@ moment.locale(locale);
 
  **/
 
-interface PickupDay {wasteDay:number; junkWeekOfMonth:number; junkDay:number; recyclingDay:number; recyclingScheduleA:boolean}
+export interface PickupDay {wasteDay:number; junkWeekOfMonth:number; junkDay:number; recyclingDay:number; recyclingScheduleA:boolean}
 
 @Injectable()
 export class Scheduler {

@@ -1,6 +1,6 @@
 import {Platform, NavController, Loading, LoadingController} from "ionic-angular";
 import {AddressLookup} from "../../common/AddressLookup";
-import {Scheduler} from "../../common/Scheduler";
+import {Scheduler, PickupDay} from "../../common/Scheduler";
 import {Geolocation} from "ionic-native";
 import * as moment from "moment";
 import {DayOfWeekPipe, RelativeDatePipe} from "../../common/Pipes";
@@ -23,7 +23,7 @@ export default class HomePage {
   events = [];
   private coords;
   private geolocation:Geolocation;
-  private pickupDays:Array<any>;
+  private pickupDays:PickupDay;
   private moment;
   private addressLookup;
   private loadingMessage:String;
