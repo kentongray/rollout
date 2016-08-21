@@ -1,8 +1,10 @@
-<ion-navbar *navbar primary>
-    <ion-title>
-        <img src="img/rollout_logo.png" style="margin-top:5px;" height="30" width="143">
-    </ion-title>
-</ion-navbar>
+<ion-header>
+    <ion-navbar primary>
+        <ion-title>
+            <img src="img/rollout_logo.png" style="margin-top:5px;" height="30" width="143">
+        </ion-title>
+    </ion-navbar>
+</ion-header>
 <ion-content class="padding remind-me">
 
     <h2>Remind me <u (tap)="openTimeOfDay()">{{timeOfDay == 'morning' ? 'in the morning' : 'at night'}}</u></h2>

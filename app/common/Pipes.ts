@@ -1,6 +1,9 @@
 import {Pipe, PipeTransform} from '@angular/core';
 import * as moment from 'moment';
 
+/**
+ * Switches a moment compatible date object into a relative date (like Tomorrow)
+ */
 @Pipe({
   name: 'relativeDate'
 })
@@ -14,17 +17,7 @@ export class RelativeDatePipe implements PipeTransform {
     } else {
       return value.format('dddd MMM Do');
     }
-    return undefined;
   }
- /* transform(value: number, args: any[]) {
-    if(value && !isNaN(value) && args[0] === 'celsius') {
-      var temp = (value - 32) * 5/9;
-      var places = args[1];
-      return temp.toFixed(places) + ' C';
-    }
-
-    return;
-  }*/
 }
 
 @Pipe({

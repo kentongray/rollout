@@ -5,6 +5,11 @@ import * as _ from 'lodash';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/toPromise';
 
+interface PosXY {x:number,y:number};
+interface PosCoords {coords: {latitude:number,longitude:number}};
+interface PosArcGis {x:number,y:number, spatialReference: any};
+type Position = PosXY | PosCoords;
+
 let locale = window.navigator.userLanguage || window.navigator.language;
 moment.locale(locale);
 
@@ -33,7 +38,7 @@ export class Scheduler {
   holidays;
   events:Array<any>;
   whenLoaded:Promise<any>;
-  private pos;
+  private pos:PosArcGis;
 
   constructor(http:Http) {
     this.http = http;
@@ -44,20 +49,20 @@ export class Scheduler {
    * @param pos
    * @param numberOfDays
    */
-  init(pos:{x:number,y:number} | {coords:{latitude:any,longitude:any}}, numberOfDays:number = 60) {
+  init(pos:Position, numberOfDays:number = 60) {
     this.numberOfDays = numberOfDays;
     //an array of moment dates that may have disrupted schedules
     this.holidays = ['2015-11-11', '2015-11-12', '2015-11-27', '2015-11-28',
       '2015-12-24', '2015-12-25', '2015-12-26',
       '2015-1-1', '2015-1-2'].map((d)=>moment(d));
 
-    if (pos.coords) {
-      this.pos = {y: pos.coords.latitude, x: pos.coords.longitude, spatialReference: {"wkid": 4326}};
+    if ((<PosCoords> pos).coords) {
+      this.pos = {y: (<PosCoords> pos).coords.latitude, x: (<PosCoords> pos).coords.longitude, spatialReference: {"wkid": 4326}};
     }
-    else if (pos.x && pos.y) {
-      this.pos = {x: pos.x, y: pos.y, spatialReference: {"wkid": 4326}};
+    else  {
+      this.pos = {x: (<PosXY> pos).x, y:(<PosXY> pos).y, spatialReference: {"wkid": 4326}};
     }
-
+    
 
     let params = {
       geometryType: 'esriGeometryPoint',

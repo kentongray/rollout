@@ -1,9 +1,10 @@
-import {Page, NavParams, NavController, Alert, Loading} from "ionic-angular";
+import {NavParams, NavController, Alert, Loading, AlertController, LoadingController} from "ionic-angular";
 import {Scheduler} from "../../common/Scheduler";
 import * as _ from "lodash";
+import {Component} from "@angular/core";
 
 
-@Page({
+@Component({
   templateUrl: 'build/pages/remindme/RemindMePage.html',
   providers: [Scheduler],
 })
@@ -22,16 +23,16 @@ export class RemindMePage {
   private loadingContent:Loading;
   private pickupDays;
 
-  constructor(private nav:NavController, private navParams:NavParams, private schedulerService:Scheduler) {
+  constructor(private loadingController:LoadingController, private alertController:AlertController, private nav:NavController, private navParams:NavParams, private schedulerService:Scheduler) {
     this.notificationsEnabled = window.localStorage.getItem('notificationsEnabled') == 'true';
     this.notificationsData = JSON.parse(window.localStorage.getItem('notificationsData') || "{}");
     this.pos = {x: navParams.get('longitude'), y: navParams.get('latitude')};
     this.whatDescription = this.makeDescriptionText(this.selectedWasteTypes);
-    this.loadingContent = Loading.create({content: "Creating Reminders"});
+    this.loadingContent = this.loadingController.create({content: "Creating Reminders"});
   }
 
   openTimeOfDay() {
-    let confirm = Alert.create({
+    let confirm = this.alertController.create({
       title: 'When?',
       message: 'When Should Rollout! Alert You?',
       buttons: [
@@ -49,11 +50,11 @@ export class RemindMePage {
         }
       ]
     });
-    this.nav.present(confirm);
+    confirm.present();
   }
 
   openHours() {
-    let alert = Alert.create({
+    let alert:Alert = this.alertController.create({
       title: 'What Time?'
     });
 
@@ -73,11 +74,11 @@ export class RemindMePage {
         this.hour = parseInt(data);
       }
     });
-    this.nav.present(alert);
+    alert.present();
   }
 
   openWhat() {
-    let alert = Alert.create({
+    let alert = this.alertController.create({
       title: 'What Types?'
     });
 
@@ -100,11 +101,11 @@ export class RemindMePage {
         this.whatDescription = this.makeDescriptionText(data);
       }
     });
-    this.nav.present(alert);
+    alert.present();
   }
 
   setupReminders() {
-    this.nav.present(this.loadingContent);
+    this.loadingContent.present();
     if(!cordova) {
       console.log('cordova is not found, maybe you are running in browser?. Going back.')
       this.nav.pop();

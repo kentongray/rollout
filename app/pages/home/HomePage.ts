@@ -1,4 +1,4 @@
-import {Page, Platform, NavController, Loading} from "ionic-angular";
+import {Platform, NavController, Loading, LoadingController} from "ionic-angular";
 import {AddressLookup} from "../../common/AddressLookup";
 import {Scheduler} from "../../common/Scheduler";
 import {Geolocation} from "ionic-native";
@@ -7,8 +7,9 @@ import {DayOfWeekPipe, RelativeDatePipe} from "../../common/Pipes";
 import {RemindMePage} from "../remindme/RemindMePage";
 import Focuser from "../../common/Focuser";
 import {Http, HTTP_PROVIDERS, URLSearchParams, RequestOptions} from '@angular/http';
+import {Component} from "@angular/core";
 
-@Page({
+@Component({
   providers: [Scheduler, AddressLookup],
   directives: [Focuser],
   pipes: [DayOfWeekPipe, RelativeDatePipe],
@@ -20,7 +21,6 @@ export default class HomePage {
   private searching:Boolean;
 
   events = [];
-  private SchedulerService:Scheduler;
   private coords;
   private geolocation:Geolocation;
   private pickupDays:Array<any>;
@@ -31,7 +31,7 @@ export default class HomePage {
   private loadingContent:Loading;
   private loading:boolean;
 
-  constructor(private platform:Platform, private nav: NavController, private SchedulerService:Scheduler, addressLookup:AddressLookup) {
+  constructor(private loadingController: LoadingController, private platform:Platform, private nav: NavController, private SchedulerService:Scheduler, addressLookup:AddressLookup) {
     this.moment = moment;
     this.geolocation = Geolocation;
     this.addressLookup = addressLookup;
@@ -81,13 +81,13 @@ export default class HomePage {
 
   showLoader(str = 'One Sec!') {
     if(!this.loadingContent) {
-      this.loadingContent = Loading.create({content:str});
+      this.loadingContent = this.loadingController.create({content:str});
     }
 
     //hack see: https://github.com/driftyco/ionic/issues/6103
     this.loadingContent.data.content = str;
     if(!this.loading) {
-      this.nav.present(this.loadingContent);
+      this.loadingContent.present();
       this.loading = true;
     }
   }

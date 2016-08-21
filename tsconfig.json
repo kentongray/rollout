@@ -12,9 +12,9 @@
     "inlineSources": false
   },
   "files": [
+    "typings/index.d.ts",
     "app/app.ts",
-    "typings/**",
-    "node_modules/angular2/typings/browser.d.ts"
+    "typings/**"
   ],
   "exclude": [
     "node_modules"
