@@ -15,7 +15,7 @@
 <ion-content class="home">
     <div *ngIf="searching" class="address-search-results">
         <ion-list>
-            <ion-item (click)="loadEvents()">
+            <ion-item (click)="lookupCurrentLocation()">
                 <ion-icon black name="pin"></ion-icon>
                 Use Current Location
             </ion-item>

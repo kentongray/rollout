@@ -51,8 +51,6 @@ export class Scheduler {
     }
     //http://api.rollouthouston.com/upcoming?latitude=29.7982722&longitude=-95.3736702
 
-    console.log(pos, this.pos);
-
     let params = {
       latitude: this.pos.y,
       longitude: this.pos.x,

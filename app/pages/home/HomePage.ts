@@ -42,6 +42,12 @@ export default class HomePage {
     this.searching = true;
   }
 
+  lookupCurrentLocation() {
+    this.searching = false;
+    this.addresses = null;
+    this.loadEvents();
+  }
+
   selectAddress(suggestion) {
     this.searching = false;
     this.addresses = null;
