@@ -1,6 +1,6 @@
 <ion-header>
     <ion-navbar primary>
-        <ion-searchbar *ngIf="searching" [(ngModel)]="searchQuery" (input)="searchAddress(searchQuery)"
+        <ion-searchbar *ngIf="searching" [(ngModel)]="searchQuery" (keyup)="searchAddress($event.target.value)"
                        placeholder="Enter Your Address" (cancel)="searching = false"></ion-searchbar>
         <ion-title *ngIf="!searching">
             <img src="img/rollout_logo.png" style="margin-top:5px;" height="30" width="143">
@@ -13,18 +13,31 @@
     </ion-navbar>
 </ion-header>
 <ion-content class="home">
-    <div *ngIf="addresses" class="address-search-results">
+    <div *ngIf="searching" class="address-search-results">
         <ion-list>
-            <ion-item *ngIf="!addresses.length">
-                Address Not Found :(
+            <ion-item (click)="loadEvents()">
+                <ion-icon black name="pin"></ion-icon>
+                Use Current Location
             </ion-item>
-            <ion-item *ngFor="let address of addresses" (click)="selectAddress(address)">
-                {{address.text}}
-            </ion-item>
+            <div *ngIf="addresses">
+                <ion-item *ngIf="!addresses.length">
+                    Address Not Found :(
+                </ion-item>
+                <ion-item *ngFor="let address of addresses" (click)="selectAddress(address)">
+                    {{address.text}}
+                </ion-item>
+            </div>
         </ion-list>
     </div>
     <div class="error-message" *ngIf="errorMessage">
         {{errorMessage}}
+        <br>
+        <a white (click)="retry()">Try Again?
+            <ion-icon name="refresh"></ion-icon>
+        </a>
+        <br>
+        <a href="mailto:info@rollouthouston.com">Need Help?</a>
+        <br>
     </div>
     <div class="no-schedule" *ngIf="!loading && events.length == 0">
         <h1>No Schedule Found</h1>
@@ -41,6 +54,12 @@
             <ion-icon name="pin"></ion-icon>
             to change your
             location</a>
+
+        <br>
+        <br>
+        Or <a white (click)="retry()">Try Again?
+        <ion-icon name="refresh"></ion-icon>
+    </a>
     </div>
     <div class="schedule">
         <div *ngFor="let event of events" class="upcoming-event">
@@ -48,7 +67,7 @@
             <div *ngIf="event.possibleHoliday" class="possible-holiday">
                 <i class="ion-android-warning"></i>
                 Hey! This might be a holiday. <br>
-                Check our <a ng-click="openHolidaySchedule()" href="#">holiday schedule</a> to make sure.
+                Check the <a ng-click="openHolidaySchedule()" href="#">holiday schedule</a> to make sure.
             </div>
             <ul class="waste-types">
                 <li *ngFor="let category of event.categories" class="waste-type">
@@ -83,7 +102,7 @@
             </ul>
         </div>
     </div>
-    <ion-fixed class="bottom-actions">
+    <ion-fixed class="bottom-actions" *ngIf="!(loading || errorMessage || events.length == 0)">
         <button (click)="goToRemindMe()">
             <ion-icon name="notifications"></ion-icon>
             Remind Me

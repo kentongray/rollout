@@ -63,7 +63,7 @@ export class Scheduler {
       searchParams.set(param, params[param]);
     }
     const reqOptions = new RequestOptions({search: searchParams});
-    let schedulePromise = this.http.get('http://localhost/upcoming',
+    let schedulePromise = this.http.get('http://api.rollouthouston.com/upcoming',
       reqOptions).map(res => res.json()).toPromise();
     this.whenLoaded = schedulePromise.then((r)=> {
       //convet days to moment objects for great justice

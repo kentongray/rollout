@@ -44,6 +44,7 @@
 
 .home {
 	.possible-holiday {
+		color: white;
 		font-family:sans-serif;
 		margin-top: 20px;
 		margin-bottom: 20px;
@@ -60,7 +61,7 @@
 			color: white;
 		}
 	}
-	.no-schedule {
+	.no-schedule, .error-message {
 		h1 {
 			color: white;
 			text-align: center;
@@ -189,12 +190,13 @@
 
 /* The starting CSS styles for the enter animation */
 .address-search-results {
+	font-family: sans-serif;
 	z-index: 1;
 	position: absolute;
 	left: 5px;
 	right: 5px;
 	backdrop-filter: blur(10px);
-	background-color: rgba(255,255,255,.6);
+	background-color: rgba(255,255,255,.8);
 	.item {
 		background-color: transparent;
 		color: #333333;

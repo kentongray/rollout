@@ -6,7 +6,6 @@ import * as moment from "moment";
 import {DayOfWeekPipe, RelativeDatePipe} from "../../common/Pipes";
 import {RemindMePage} from "../remindme/RemindMePage";
 import Focuser from "../../common/Focuser";
-import {Http, HTTP_PROVIDERS, URLSearchParams, RequestOptions} from '@angular/http';
 import {Component} from "@angular/core";
 
 @Component({
@@ -30,8 +29,9 @@ export default class HomePage {
   private errorMessage:String;
   private loadingContent:Loading;
   private loading:boolean;
+  private currentSearch:String;
 
-  constructor(private loadingController: LoadingController, private platform:Platform, private nav: NavController, private SchedulerService:Scheduler, addressLookup:AddressLookup) {
+  constructor(private loadingController:LoadingController, private platform:Platform, private nav:NavController, private SchedulerService:Scheduler, addressLookup:AddressLookup) {
     this.moment = moment;
     this.geolocation = Geolocation;
     this.addressLookup = addressLookup;
@@ -45,17 +45,37 @@ export default class HomePage {
   selectAddress(suggestion) {
     this.searching = false;
     this.addresses = null;
-    this.addressLookup.lookupCoordinates(suggestion).then(this.loadEventsForPosition.bind(this));
+    this.showLoader('Looking up Coordinates');
+    this.addressLookup.lookupCoordinates(suggestion)
+      .then(r => {
+        this.showLoader('Looking up Schedule');
+        return this.loadEventsForPosition(r);
+      })
+      .then(r => {
+        this.hideLoader();
+        return r;
+      })
+      .catch(e => {
+        this.showError("Error Looking Up Address");
+      });
   }
 
   searchAddress(str) {
-    if (str.length <= 3) {
+    console.log('searching for ', str);
+    if (str.length <= 2) {
       this.addresses = null;
       return;
     }
+    this.currentSearch = str;
     this.addressLookup.lookupAddress(str).then((results) => {
-      console.log('address results', results);
-      this.addresses = results;
+      //deal with variable loading times, we create a token to make sure we are only showing the latest results
+      if (str === this.currentSearch) {
+        console.log('address results', results, str, this.currentSearch);
+        this.addresses = results;
+      }
+      else {
+        console.log('ignoring slow result', str, this.currentSearch);
+      }
     });
   }
 
@@ -65,6 +85,7 @@ export default class HomePage {
       y: this.coords.longitude,
     });
   }
+
   static dateFilter(day) {
     if (moment().isSame(day, 'day')) {
       return 'Today ' + day.format('MMM Do');
@@ -80,13 +101,13 @@ export default class HomePage {
   }
 
   showLoader(str = 'One Sec!') {
-    if(!this.loadingContent) {
-      this.loadingContent = this.loadingController.create({content:str});
+    if (!this.loadingContent) {
+      this.loadingContent = this.loadingController.create({content: str});
     }
 
     //hack see: https://github.com/driftyco/ionic/issues/6103
     this.loadingContent.data.content = str;
-    if(!this.loading) {
+    if (!this.loading) {
       this.loadingContent.present();
       this.loading = true;
     }
@@ -94,8 +115,9 @@ export default class HomePage {
 
   hideLoader() {
     this.loading = false;
-    if(this.loadingContent) {
+    if (this.loadingContent) {
       this.loadingContent.dismiss();
+      this.loadingContent = null;
     }
   }
 
@@ -135,7 +157,7 @@ export default class HomePage {
         case SyncStatus.DOWNLOADING_PACKAGE:
 
           $ionicLoading.show({
-            template:`Downloading...<br />
+            template: `Downloading...<br />
               <progress id="update-app-progress" max="1" value="0"></progress>`
           });
           console.log('Downloading package.');
@@ -143,19 +165,20 @@ export default class HomePage {
         case SyncStatus.INSTALLING_UPDATE:
           $ionicLoading.hide();
           $ionicLoading.show({
-            template:`Installing...`
+            template: `Installing...`
           });
           console.log('Installing update');
           break;
       }
     };
   }
+
   loadEvents() {
     this.showLoader('Starting Up!');
     this.platform.ready().then(() => {
 
       let updatePromise;
-      if(window.codePush) {
+      if (window.codePush) {
         this.showLoader('Checking For Updates');
         //updatePromise = window.codePush.sync(null, {updateDialog: true});
         updatePromise = Promise.resolve();
@@ -166,7 +189,7 @@ export default class HomePage {
       return updatePromise
         .then(() => this.showLoader('Finding Your Location'))
         .then(() => this.geolocation.getCurrentPosition())
-        .then(pos =>  {
+        .then(pos => {
           this.showLoader('Looking Up Your Schedule!');
           return pos;
         }, this.errorFindingPosition.bind(this))
@@ -178,7 +201,7 @@ export default class HomePage {
         .then(this.loadEventsForPosition.bind(this))
         .catch(pos => {
           this.hideLoader();
-          this.showError('Ak! We Had a Problem Loading Your Schedule!');
+          this.showError('Ak! We Had a Problem Loading Your Schedule. \nThe City of Houston servers may be down :(');
         });
     }).then(this.hideLoader.bind(this), this.hideLoader.bind(this));
   }
@@ -192,6 +215,22 @@ export default class HomePage {
     this.hideLoader();
     this.errorMessage = errorMessage;
   }
+
+  clearError():void {
+    this.hideLoader();
+    delete this.errorMessage;
+  }
+
+  retry():Promise<Array<any>> {
+    this.showLoader('Trying again');
+    this.clearError();
+    console.log('reloading');
+    return this.loadEventsForPosition({coords: this.coords}).then(r => {
+      this.hideLoader();
+      return r
+    });
+  }
+
   loadEventsForPosition(pos):Promise<Array<any>> {
     //data format from arcgis is all over the place, need to standardize this to prevent headaches :-/
     if (pos.x && !pos.coords) {
