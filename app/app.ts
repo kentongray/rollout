@@ -10,9 +10,7 @@ export class Rollout {
   rootPage: Type = HomePage;
 
   constructor(platform: Platform) {
-    platform.ready().then(() => {
-      StatusBar.styleLightContent();
-    });
+    //insert init code here
   }
 }
 // Pass the main app component as the first argument

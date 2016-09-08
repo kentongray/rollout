@@ -7,9 +7,10 @@
 </ion-header>
 <ion-content class="padding remind-me">
 
-    <h2>Remind me <u (tap)="openTimeOfDay()">{{timeOfDay == 'morning' ? 'in the morning' : 'at night'}}</u></h2>
+    <h1>Remind me at <u (tap)="openHours()">{{hour}}</u></h1>
 
-    <h1>at <u (tap)="openHours()">{{hour}}</u></h1>
+    <h1><u (tap)="openTimeOfDay()">{{timeOfDay == 'morning' ? 'in the morning' : 'at night'}}</u></h1>
+
 
     <h2>to <em>roll out</em> my</h2>
 

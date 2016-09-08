@@ -87,8 +87,8 @@ export default class HomePage {
 
   goToRemindMe() {
     this.nav.push(RemindMePage, {
-      x: this.coords.latitude,
-      y: this.coords.longitude,
+      latitude: this.coords.latitude,
+      longitude: this.coords.longitude,
     });
   }
 

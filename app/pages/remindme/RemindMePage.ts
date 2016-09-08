@@ -28,7 +28,7 @@ export class RemindMePage {
     this.notificationsData = JSON.parse(window.localStorage.getItem('notificationsData') || "{}");
     this.pos = {x: navParams.get('longitude'), y: navParams.get('latitude')};
     this.whatDescription = this.makeDescriptionText(this.selectedWasteTypes);
-    this.loadingContent = this.loadingController.create({content: "Creating Reminders"});
+
   }
 
   openTimeOfDay() {
@@ -105,6 +105,7 @@ export class RemindMePage {
   }
 
   setupReminders() {
+    this.loadingContent = this.loadingController.create({content: "Creating Reminders"});
     this.loadingContent.present();
     if(!cordova) {
       console.log('cordova is not found, maybe you are running in browser?. Going back.')
@@ -115,6 +116,7 @@ export class RemindMePage {
     notificationPlugin.clearAll(() => {
       console.log('all notifications cleared');
       //clear all notifications then start again
+      console.log(this.pos, 'current pos');
       this.schedulerService.init(this.pos, 365);
       this.schedulerService.whenLoaded.then(() => {
         this.notificationsEnabled = true;
@@ -128,6 +130,7 @@ export class RemindMePage {
         window.localStorage.setItem('notificationsData', JSON.stringify(this.notificationsData));
 
         var notifications = _(this.schedulerService.events).map((event) => {
+          console.log(event);
           var isNight = this.timeOfDay == 'night';
           var date = event.day.clone()
             .add(isNight ? -1 : 0, 'day')
@@ -150,20 +153,13 @@ export class RemindMePage {
         notificationPlugin.schedule(notifications);
 
         this.pickupDays = this.schedulerService.pickupDays;
-        this.loadingContent.dismiss();
-        this.nav.pop();
-      }).catch(()=> {
+        this.loadingContent.dismiss().then(() => {
+          this.nav.pop();
+        });
+      }).catch(function() {
+        alert('Sorry there was a problem setting up your reminders');
         console.log(arguments);
-        // this.$ionicLoading.hide();
-        /*
-         this.alert('Unable to Find Your Schedule. ' +
-         'Make Sure You Are Connected to the Internet');
-         */
       });
-      /* this.$ionicLoading.show({
-       template: 'Creating Your Reminders'
-       });*/
-
     })
   }
 

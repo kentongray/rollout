@@ -1,14 +1,26 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr" style="background-color:#5bbb88">
 <head>
-  <meta charset="UTF-8">
-  <title>Rollout!</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <meta name="format-detection" content="telephone=no">
-  <meta name="msapplication-tap-highlight" content="no">
-  <!--<meta http-equiv="Content-Security-Policy" content="default-src https://codepush.azurewebsites.net 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *" />-->
-  <link ios-href="build/css/app.ios.css" rel="stylesheet">
-  <link md-href="build/css/app.md.css" rel="stylesheet">
+    <meta charset="UTF-8">
+    <title>Rollout!</title>
+    <script>
+        function init() {
+            //get that status bar changed ASAP!
+            //maybe should just make this change in the delegate
+            document.addEventListener("deviceready", StatusBar.styleLightContent, false)
+        }
+        window.onerror = function(errorMsg, url, lineNumber) {
+            //uncomment for debugging launch issues
+            //alert('Error: ' + errorMsg + ' Script: ' + url + ' Line: ' + lineNumber);
+        }
+    </script>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="msapplication-tap-highlight" content="no">
+    <!--<meta http-equiv="Content-Security-Policy" content="default-src https://codepush.azurewebsites.net 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *" />-->
+    <link ios-href="build/css/app.ios.css" rel="stylesheet">
+    <link md-href="build/css/app.md.css" rel="stylesheet">
 </head>
 <body style="background-color:#5bbb88">
 
