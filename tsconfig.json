@@ -1,23 +1,22 @@
 {
   "compilerOptions": {
-    "target": "es5",
-    "module": "commonjs",
-    "noEmitOnError": false,
-    "rootDir": ".",
+    "allowSyntheticDefaultImports": true,
+    "declaration": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "sourceMap": true,
-    "sourceRoot": ".",
-    "inlineSourceMap": false,
-    "inlineSources": false
+    "lib": [
+      "dom",
+      "es2015"
+    ],
+    "module": "es2015",
+    "moduleResolution": "node",
+    "target": "es5"
   },
-  "files": [
-    "typings/index.d.ts",
-    "app/app.ts",
-    "typings/**"
-  ],
   "exclude": [
     "node_modules"
   ],
-  "compileOnSave": false
+  "compileOnSave": false,
+  "atom": {
+    "rewriteTsconfig": false
+  }
 }

@@ -1,7 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Http, URLSearchParams, RequestOptions} from '@angular/http';
-import * as moment from 'moment';
-import * as _ from 'lodash';
+import moment from 'moment';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/toPromise';
 
@@ -10,7 +9,8 @@ interface PosCoords {coords: {latitude:number,longitude:number}};
 interface PosArcGis {x:number,y:number, spatialReference: any};
 type Position = PosXY | PosCoords;
 
-let locale = window.navigator.userLanguage || window.navigator.language;
+const navigator:any = window.navigator;
+let locale = navigator.userLanguage || window.navigator.language;
 moment.locale(locale);
 
 /**
@@ -54,6 +54,7 @@ export class Scheduler {
     let params = {
       latitude: this.pos.y,
       longitude: this.pos.x,
+      days: this.numberOfDays
     };
     const searchParams = new URLSearchParams();
     //bs we have to deal with until someone does this https://github.com/angular/angular/issues/7370

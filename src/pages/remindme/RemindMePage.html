@@ -1,7 +1,7 @@
 <ion-header>
-    <ion-navbar primary>
+    <ion-navbar color="primary">
         <ion-title>
-            <img src="img/rollout_logo.png" style="margin-top:5px;" height="30" width="143">
+            <img src="assets/img/rollout_logo.png" style="margin-top:5px;" height="30" width="143">
         </ion-title>
     </ion-navbar>
 </ion-header>
@@ -19,12 +19,12 @@
         <h2><u (tap)="openWhat()">{{whatDescription}}</u></h2>
 
     </div>
-    <ion-fixed class="bottom-actions">
+    <div ion-fixed class="bottom-actions">
         <div *ngIf="notifications" class="button-assertive buttons-assertive" (click)="cancelReminders()">
             Cancel Notifications
         </div>
-        <button class="buttons" (click)="setupReminders()">
+        <button ion-button class="buttons" (click)="setupReminders()">
             Let's Roll!
         </button>
-    </ion-fixed>
+    </div>
 </ion-content>

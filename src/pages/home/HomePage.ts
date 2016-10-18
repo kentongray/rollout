@@ -1,35 +1,31 @@
-import {Platform, NavController, Loading, LoadingController} from "ionic-angular";
+import {Platform, NavController, Loading, LoadingController, Content} from "ionic-angular";
 import {AddressLookup} from "../../common/AddressLookup";
 import {Scheduler, PickupDay} from "../../common/Scheduler";
 import {Geolocation} from "ionic-native";
-import * as moment from "moment";
-import {DayOfWeekPipe, RelativeDatePipe} from "../../common/Pipes";
+import moment from "moment";
 import {RemindMePage} from "../remindme/RemindMePage";
-import Focuser from "../../common/Focuser";
-import {Component} from "@angular/core";
+import {Component, ViewChild} from "@angular/core";
+import {rejectFirst, HandledPromiseError} from "../../common/PromiseExceptionHandler";
 
 @Component({
-  providers: [Scheduler, AddressLookup],
-  directives: [Focuser],
-  pipes: [DayOfWeekPipe, RelativeDatePipe],
-  templateUrl: 'build/pages/home/HomePage.html'
+  templateUrl: 'HomePage.html'
 })
 export default class HomePage {
+  public static readonly ERROR_LOADING = 'We Had a Problem Loading Your Schedule. \nThe City of Houston may be having issues';
+  @ViewChild(Content) content: Content;
   private addresses;
-  private searchQuery = "";
   private searching:Boolean;
 
   events = [];
   private coords;
-  private geolocation:Geolocation;
+  private geolocation:any;
   private pickupDays:PickupDay;
-  private moment;
+  moment;
   private addressLookup;
-  private loadingMessage:String;
-  private errorMessage:String;
-  private loadingContent:Loading;
-  private loading:boolean;
-  private currentSearch:String;
+  errorMessage?:string;
+  loadingContent:Loading;
+  loading:boolean;
+  currentSearch:string;
 
   constructor(private loadingController:LoadingController, private platform:Platform, private nav:NavController, private SchedulerService:Scheduler, addressLookup:AddressLookup) {
     this.moment = moment;
@@ -39,6 +35,7 @@ export default class HomePage {
   }
 
   showFilterBar() {
+    this.content.scrollToTop();
     this.searching = true;
   }
 
@@ -56,13 +53,14 @@ export default class HomePage {
       .then(r => {
         this.showLoader('Looking up Schedule');
         return this.loadEventsForPosition(r);
-      })
+      }, e => this.showError("Unable to Locate You"))
       .then(r => {
         this.hideLoader();
         return r;
-      })
+      }, e => this.showError("Error Loading Events"))
       .catch(e => {
-        this.showError("Error Looking Up Address");
+        this.hideLoader();
+        throw "Error Loading Events";
       });
   }
 
@@ -127,90 +125,34 @@ export default class HomePage {
     }
   }
 
-  codePushStatusUpdate(completeCallback, errorCallback) {
-
-    let syncStatusCallback = (syncStatus) => {
-      switch (syncStatus) {
-        // Result (final) statuses
-        case SyncStatus.UPDATE_INSTALLED:
-
-          alertFn('The update was installed successfully.', null, 'Success!');
-
-          // force clean slate after codepush update
-          // completelyDestroyEverything();
-
-          break;
-        case SyncStatus.UP_TO_DATE:
-
-          // alertFn('The application is up to date.');
-          break;
-        case SyncStatus.UPDATE_IGNORED:
-
-          // alertFn('The user decided not to install the optional update.');
-          break;
-        case SyncStatus.ERROR:
-          $ionicLoading.hide();
-          alertFn('An error occured while checking for updates', null, 'Error');
-          break;
-
-        // Intermediate (non final) statuses
-        case SyncStatus.CHECKING_FOR_UPDATE:
-          console.log('Checking for update.');
-          break;
-        case SyncStatus.AWAITING_USER_ACTION:
-          console.log('Alerting user.');
-          break;
-        case SyncStatus.DOWNLOADING_PACKAGE:
-
-          $ionicLoading.show({
-            template: `Downloading...<br />
-              <progress id="update-app-progress" max="1" value="0"></progress>`
-          });
-          console.log('Downloading package.');
-          break;
-        case SyncStatus.INSTALLING_UPDATE:
-          $ionicLoading.hide();
-          $ionicLoading.show({
-            template: `Installing...`
-          });
-          console.log('Installing update');
-          break;
-      }
-    };
-  }
-
   loadEvents() {
     this.showLoader('Starting Up!');
-    this.platform.ready().then(() => {
-
-      let updatePromise;
-      if (window.codePush) {
-        this.showLoader('Checking For Updates');
-        //updatePromise = window.codePush.sync(null, {updateDialog: true});
-        updatePromise = Promise.resolve();
-        console.log('code push complete');
-      } else {
-        updatePromise = Promise.resolve();
-      }
-      return updatePromise
-        .then(() => this.showLoader('Finding Your Location'))
-        .then(() => this.geolocation.getCurrentPosition())
+    return this.platform.ready().then(() => {
+      this.showLoader('Finding Your Location');
+      return this.geolocation.getCurrentPosition()
         .then(pos => {
           this.showLoader('Looking Up Your Schedule!');
           return pos;
-        }, this.errorFindingPosition.bind(this))
-        .catch(err => {
-          console.error(err);
-          this.hideLoader();
-          this.showError('Whoops! We couldn\'t look up your location.');
         })
+        .catch(rejectFirst('We couldn\'t look up your location.\n Check Your Location Permissions'))
         .then(this.loadEventsForPosition.bind(this))
-        .catch(pos => {
-          this.hideLoader();
-          this.showError('Ak! We Had a Problem Loading Your Schedule. \nThe City of Houston servers may be down :(');
-        });
-    }).then(this.hideLoader.bind(this), this.hideLoader.bind(this));
+        .catch(rejectFirst(HomePage.ERROR_LOADING));
+    }).then(this.hideLoader.bind(this), this.promiseCatcher);
   }
+
+  // meant to be used in conjunction with promise utils to display the error of the first promise
+  // written in this way to bind(this)
+  promiseCatcher = (error:any):void => {
+      console.log('error happened?', error);
+      if (error instanceof HandledPromiseError) {
+        this.showError(error.message)
+      }
+      else {
+        this.showError('Something Went Wrong...');
+      }
+      this.hideLoader.bind(this)
+  };
+
 
   errorFindingPosition(err) {
     this.showError('Error Finding Position');
@@ -218,23 +160,33 @@ export default class HomePage {
   }
 
   showError(errorMessage) {
+    console.error(errorMessage, this.errorFindingPosition.bind(this));
     this.hideLoader();
     this.errorMessage = errorMessage;
   }
 
   clearError():void {
     this.hideLoader();
-    delete this.errorMessage;
+    this.errorMessage = null;
   }
 
   retry():Promise<Array<any>> {
     this.showLoader('Trying again');
     this.clearError();
-    console.log('reloading');
-    return this.loadEventsForPosition({coords: this.coords}).then(r => {
-      this.hideLoader();
-      return r
-    });
+    console.log('reloading', this.coords);
+    if(!this.coords) {
+      //if no coords try to geolocate again
+      return this.loadEvents();
+    }
+    else {
+      //they might have put in a custom address so try to look up the same ones
+      return this.loadEventsForPosition({coords: this.coords})
+        .catch(rejectFirst(HomePage.ERROR_LOADING))
+        .then(r => {
+          this.hideLoader();
+          return r
+        }, this.promiseCatcher);
+    }
   }
 
   loadEventsForPosition(pos):Promise<Array<any>> {
@@ -252,8 +204,8 @@ export default class HomePage {
     return this.SchedulerService.whenLoaded.then(() => {
       this.events = this.SchedulerService.events;
       this.pickupDays = this.SchedulerService.pickupDays;
-      return this.events;
       this.hideLoader();
+      return this.events;
     });
   }
 }

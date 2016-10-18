@@ -1,5 +1,5 @@
 import {Pipe, PipeTransform} from '@angular/core';
-import * as moment from 'moment';
+import moment from 'moment';
 
 /**
  * Switches a moment compatible date object into a relative date (like Tomorrow)

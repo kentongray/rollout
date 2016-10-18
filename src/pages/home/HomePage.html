@@ -1,12 +1,12 @@
 <ion-header>
-    <ion-navbar primary>
-        <ion-searchbar *ngIf="searching" [(ngModel)]="searchQuery" (keyup)="searchAddress($event.target.value)"
+    <ion-navbar color="primary">
+        <ion-searchbar *ngIf="searching" autofocus (keyup)="searchAddress($event.target.value)"
                        placeholder="Enter Your Address" (cancel)="searching = false"></ion-searchbar>
         <ion-title *ngIf="!searching">
-            <img src="img/rollout_logo.png" style="margin-top:5px;" height="30" width="143">
+            <img src="assets/img/rollout_logo.png" style="margin-top:5px;" height="30" width="143">
         </ion-title>
         <ion-buttons end *ngIf="!searching">
-            <button side="secondary" (click)="showFilterBar()">
+            <button ion-button side="secondary" (click)="showFilterBar()">
                 <ion-icon white name="pin"></ion-icon>
             </button>
         </ion-buttons>
@@ -30,16 +30,19 @@
         </ion-list>
     </div>
     <div class="error-message" *ngIf="errorMessage">
+
         {{errorMessage}}
+        <br>
         <br>
         <a white (click)="retry()">Try Again?
             <ion-icon name="refresh"></ion-icon>
         </a>
         <br>
+        <br>
         <a href="mailto:info@rollouthouston.com">Need Help?</a>
         <br>
     </div>
-    <div class="no-schedule" *ngIf="!loading && events.length == 0">
+    <div class="no-schedule" *ngIf="!loading && events.length == 0 && !errorMessage">
         <h1>No Schedule Found</h1>
         Rollout! is only available for the City of Houston.
         <br>
@@ -54,14 +57,13 @@
             <ion-icon name="pin"></ion-icon>
             to change your
             location</a>
-
         <br>
         <br>
         <a white (click)="retry()">Or try again?
         <ion-icon name="refresh"></ion-icon>
     </a>
     </div>
-    <div class="schedule">
+    <div class="schedule" *ngIf="!errorMessage">
         <div *ngFor="let event of events" class="upcoming-event">
             <h2>{{event.day | relativeDate}}</h2>
             <div *ngIf="event.possibleHoliday" class="possible-holiday">
@@ -83,7 +85,7 @@
                     </div>
                     <div *ngIf="category == 'junk'">
                         <img class="icon icons8-Weight"
-                             src="img/Weight-100.png"
+                             src="assets/img/Weight-100.png"
                              width="75" height="75">
                         <label>Junk</label>
                         <div class="when">{{moment().date(pickupDays.junkWeekOfMonth).format("Do")}}
@@ -102,10 +104,10 @@
             </ul>
         </div>
     </div>
-    <ion-fixed class="bottom-actions" *ngIf="!(loading || errorMessage || events.length == 0)">
-        <button (click)="goToRemindMe()">
+    <div ion-fixed class="bottom-actions" *ngIf="!(loading || errorMessage || events.length == 0)">
+        <button ion-button (click)="goToRemindMe()">
             <ion-icon name="notifications"></ion-icon>
             Remind Me
         </button>
-    </ion-fixed>
+    </div>
 </ion-content>

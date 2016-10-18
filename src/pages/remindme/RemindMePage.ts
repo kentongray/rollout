@@ -1,11 +1,15 @@
 import {NavParams, NavController, Alert, Loading, AlertController, LoadingController} from "ionic-angular";
 import {Scheduler} from "../../common/Scheduler";
-import * as _ from "lodash";
+import _ from "lodash";
 import {Component} from "@angular/core";
+
+interface Window {
+  cordova: any;
+}
 
 
 @Component({
-  templateUrl: 'build/pages/remindme/RemindMePage.html',
+  templateUrl: 'RemindMePage.html',
   providers: [Scheduler],
 })
 export class RemindMePage {
@@ -14,9 +18,6 @@ export class RemindMePage {
   private timeOfDay = 'morning';
   private wasteTypes = ['recycling', 'waste', 'tree', 'junk'];
   private selectedWasteTypes = ['recycling', 'waste'];
-  private recycling = true;
-  private waste = true;
-  private junk = false;
   private hour = 6;
   private pos:any;
   private whatDescription:String;
@@ -97,6 +98,7 @@ export class RemindMePage {
     alert.addButton({
       text: 'Ok',
       handler: data => {
+        console.log('selected waste types', this.selectedWasteTypes);
         this.selectedWasteTypes = data;
         this.whatDescription = this.makeDescriptionText(data);
       }
@@ -105,15 +107,17 @@ export class RemindMePage {
   }
 
   setupReminders() {
+    var notificationPlugin:any = null;
     if(!window.cordova) {
-      console.log('cordova is not found, maybe you are running in browser?. Going back.')
-      this.nav.pop();
-
-      return;
+      console.log('cordova is not found, maybe you are running in browser?. Building a shim.');
+      const noopCallback = (r) => r instanceof Function ? r() : true;
+      notificationPlugin = { clearAll: noopCallback, schedule: noopCallback};
+    } else {
+      const plugins:any = cordova.plugins;
+      notificationPlugin = plugins.notification.local;
     }
     this.loadingContent = this.loadingController.create({content: "Creating Reminders"});
     this.loadingContent.present();
-    const notificationPlugin:any = cordova.plugins.notification.local;
     notificationPlugin.clearAll(() => {
       console.log('all notifications cleared');
       //clear all notifications then start again
