@@ -1,0 +1,32 @@
+<ion-header>
+    <ion-navbar color="primary">
+        <ion-title>
+            <img src="assets/img/rollout_logo.png" style="margin-top:5px;" height="30" width="143">
+        </ion-title>
+    </ion-navbar>
+</ion-header>
+<ion-content class="padding remind-me">
+
+    <div class="remind-me-holder">
+
+        <h1>Remind me at <u (tap)="openHours()">{{hour}}</u></h1>
+
+        <h1><u (tap)="openTimeOfDay()">{{timeOfDay == 'morning' ? 'in the morning' : 'at night'}}</u></h1>
+
+
+        <h2>to <em>roll out</em> my</h2>
+
+        <h2><u (tap)="openWhat()">{{whatDescription}}</u></h2>
+
+    </div>
+    <div ion-fixed class="bottom-actions">
+        <!--
+        <div *ngIf="notifications" class="button-assertive buttons-assertive" (click)="cancelReminders()">
+            Cancel Notifications
+        </div>
+        -->
+        <button ion-button class="buttons" (click)="setupReminders()">
+            Let's Roll!
+        </button>
+    </div>
+</ion-content>

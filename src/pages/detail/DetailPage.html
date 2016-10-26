@@ -1,0 +1,103 @@
+<ion-header>
+    <ion-navbar color="primary">
+        <ion-title>
+            <img src="assets/img/rollout_logo.png" style="margin-top:5px;" height="30" width="143">
+        </ion-title>
+    </ion-navbar>
+</ion-header>
+<ion-content class="padding detail">
+
+    <div class="category" *ngIf="!category || category == 'waste'">
+        <h2>Trash</h2>
+        <ul>
+            <li>
+                <h3>What Time?</h3>
+                Household garbage must be put inside
+                the city-provided container which
+                should be placed at the curb between
+                6 p.m. the day before and 7 a.m. on the
+                scheduled collection day.
+            </li>
+            <li>
+                <h3>Where to Put Your Bin</h3>
+                The container
+                must be accessible to the automated
+                collection truck and not blocked by obstacles,
+                including parked cars. Drivers
+                will not move improperly placed containers.
+            </li>
+        </ul>
+
+    </div>
+    <div class="category" *ngIf="!category || category == 'waste'">
+
+        <h2>Yard Waste</h2>
+        <ul>
+            <li>
+                <h3>About Yard Waste</h3>
+                Yard Trimmings, grass clippings, small branches and leaves
+                must not be placed in the automated garbage cans. They
+                must be in <a (click)="openUrl('https://www.amazon.com/EcoSafe-GKL042657-1-33-Gallon-Houston-Biodegradable/dp/B004BKIOLW')">city-approved compostable bags</a> not weighing
+                more than 50 pounds, and placed at the curb 3 feet away
+                from the automated container for separate yard trimmings
+                collection.
+            </li>
+            <li>
+                <h3>Branches</h3>
+                Small branches
+                may be put in bundles
+                as long as each bundle is
+                less than 4 feet in length
+                and 18 inches in diameter
+                and weighing less than
+                50 pounds.
+            </li>
+            <li>
+                <h3>Don't Mix!</h3>
+                Yard Trimmings
+                mixed with paper,
+                plastic, or any other type
+                of waste will not be collected.
+            </li>
+            <li>
+                <h3>Contractors</h3>
+                Work performed
+                by a contractor must be
+                removed by the contractor.
+            </li>
+        </ul>
+    </div>
+
+    <div class="category" *ngIf="!category || category == 'recycling'">
+
+        <h2>Recycling</h2>
+        <ul>
+            <li>
+                <h3>What Can I Recycle?</h3>
+                Newspapers, magazines, and other paper items.
+                Most plastics <a (click)="openUrl('https://www.qualitylogoproducts.com/lib/different-types-of-plastic.htm')">(#1 - 5 and 7)</a>, aluminum and tin cans.
+                <br>
+                Keep your recyclables clean for easy processing!
+
+            </li>
+            <li>
+                <h3>What About Glass?</h3>
+                Sorry, glass is currently not allowed in the bins. You can use <a (click)="openUrl('https://www.google.com/maps/d/u/0/viewer?ll=29.767954%2C-95.453339&spn=0.532854%2C0.753937&hl=en&msa=0&z=10&source=embed&ie=UTF8&mid=1vNyDxfTwSzxz_Z7gx7590VgW3-U')">Drop Off Locations</a>.
+                <br><br>
+                Another option is <a target="_blank" (click)="openUrl('http://www.irecycle.glass/?ref=rollout')">iRecycle Glass</a> a paid service for glass pickup!
+            </li>
+            <li>
+                <h3>Where Can I Drop Off?</h3>
+                Here is a helpful map of recycling <a (click)="openUrl('https://www.google.com/maps/d/u/0/viewer?ll=29.767954%2C-95.453339&spn=0.532854%2C0.753937&hl=en&msa=0&z=10&source=embed&ie=UTF8&mid=1vNyDxfTwSzxz_Z7gx7590VgW3-U')">drop off locations</a>
+            </li>
+        </ul>
+    </div>
+    <div class="category" *ngIf="!category || category == 'junk'">
+
+    </div>
+    <div class="category" *ngIf="!category || category == 'tree'">
+        <h3>What's Tree Waste?</h3>
+        “Tree
+        waste”, which consists of tree limbs, branches or stumps. Lumber, furniture and treated wood will not be accepted.
+    </div>
+</ion-content>

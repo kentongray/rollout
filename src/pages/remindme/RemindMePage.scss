@@ -1,0 +1,55 @@
+
+.alert-ios .alert-checkbox-icon {
+	background-color: white !important;
+}
+
+.remind-me {
+	background-color: map-get($colors, primary);
+	font-family: aleoregular;
+	text-align: center;
+	h2, h1, h3 {
+	}
+
+	em {
+		font-family: aleoitalic;
+	}
+	u {
+		color: map-get($colors, primary);
+	}
+
+	.remind-me-holder {
+		padding: 5%;
+		margin: 20% 10%;
+		background-color: rgba(255,255,255,.9);
+		box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+		border-radius: 2px;
+		backdrop-filter: blur(10px);
+		animation-name: slideDown;
+
+		animation-duration: .5s;
+
+		animation-timing-function: ease;
+
+		visibility: visible !important;
+	}
+
+	@keyframes slideDown {
+		0% {
+			background-color: rgba(255,255,255,.1);
+			transform: translateY(-80%);
+		}
+		50%{
+			background-color: rgba(255,255,255,.8);
+			transform: translateY(15%);
+		}
+		90%{
+			background-color: rgba(255,255,255,.9);
+			transform: translateY(-2%);
+		}
+		100% {
+			transform: translateY(0%);
+		}
+	}
+
+
+}
