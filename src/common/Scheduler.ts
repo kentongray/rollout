@@ -4,10 +4,10 @@ import moment from 'moment';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/toPromise';
 
-interface PosXY {x:number,y:number};
-interface PosCoords {coords: {latitude:number,longitude:number}};
-interface PosArcGis {x:number,y:number, spatialReference: any};
-type Position = PosXY | PosCoords;
+export interface PosXY {x:number,y:number};
+export interface PosCoords {coords: {latitude:number,longitude:number}};
+export interface PosArcGis {x:number,y:number, spatialReference: any};
+export type Position = PosXY | PosCoords;
 
 const navigator:any = window.navigator;
 let locale = navigator.userLanguage || window.navigator.language;

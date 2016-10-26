@@ -9,7 +9,7 @@ import moment from 'moment';
 })
 export class RelativeDatePipe implements PipeTransform {
 
-  transform(value:any, args:any[]):any {
+  transform(value:any, args?:any[]):any {
     if (moment().isSame(value, 'day')) {
       return 'Today ' + value.format('MMM Do');
     } else if (moment().add(1, 'days').isSame(value, 'day')) {
@@ -24,7 +24,7 @@ export class RelativeDatePipe implements PipeTransform {
   name: 'dayOfWeek'
 })
 export class DayOfWeekPipe implements PipeTransform {
-  transform(value:any, args:any[]):any {
+  transform(value:any, args?:any[]):any {
     return moment().day(value).format("dddd");
   }
 }

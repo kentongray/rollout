@@ -4,7 +4,7 @@ import _ from "lodash";
 import {Component} from "@angular/core";
 
 interface Window {
-  cordova: any;
+  cordova:any;
 }
 
 
@@ -13,16 +13,19 @@ interface Window {
   providers: [Scheduler],
 })
 export class RemindMePage {
-  public notificationsEnabled:boolean = false;
-  public notificationsData:any = false;
-  private timeOfDay = 'morning';
+  notificationsEnabled:boolean = false;
+  notificationsData:any = false;
+  timeOfDay = 'morning';
+  hour = 6;
+  whatDescription:String;
+  loadingContent:Loading;
+
   private wasteTypes = ['recycling', 'waste', 'tree', 'junk'];
   private selectedWasteTypes = ['recycling', 'waste'];
-  private hour = 6;
+
   private pos:any;
-  private whatDescription:String;
-  private loadingContent:Loading;
   private pickupDays;
+  private block = false;
 
   constructor(private loadingController:LoadingController, private alertController:AlertController, private nav:NavController, private navParams:NavParams, private schedulerService:Scheduler) {
     this.notificationsEnabled = window.localStorage.getItem('notificationsEnabled') == 'true';
@@ -32,7 +35,14 @@ export class RemindMePage {
 
   }
 
+  unblock():void {
+    //there is an ionic2 bug with the modals receiving click events... this is a hack to fix this
+    this.block = true;
+    setTimeout(()=>this.block = false, 300);
+  }
   openTimeOfDay() {
+    if(this.block) return;
+    this.block = true;
     let confirm = this.alertController.create({
       title: 'When?',
       message: 'When Should Rollout! Alert You?',
@@ -40,7 +50,7 @@ export class RemindMePage {
         {
           text: 'In the Morning (AM)',
           handler: () => {
-            this.timeOfDay = 'morning'
+            this.timeOfDay = 'morning';
           }
         },
         {
@@ -51,10 +61,13 @@ export class RemindMePage {
         }
       ]
     });
+    confirm.onDidDismiss(() => this.unblock());
     confirm.present();
   }
 
   openHours() {
+    if(this.block) return;
+    this.block = true;
     let alert:Alert = this.alertController.create({
       title: 'What Time?'
     });
@@ -67,51 +80,57 @@ export class RemindMePage {
         value: num.toString()
       });
     });
-    alert.addButton('Cancel');
+    alert.addButton({text: 'Cancel', handler: () => this.unblock()});
     alert.addButton({
       text: 'Ok',
       handler: data => {
         console.log('selected hour', data);
         this.hour = parseInt(data);
+
       }
     });
     alert.present();
+    alert.onDidDismiss(() => this.unblock());
   }
 
   openWhat() {
+    if(this.block) return;
+    this.block = true;
     let alert = this.alertController.create({
       title: 'What Types?'
     });
 
-    var active = this.selectedWasteTypes;
     this.wasteTypes.map(c => c == 'waste' ? 'Trash & Yard' : c)
       .map(c => c.charAt(0).toUpperCase() + c.slice(1)) //cap first letter
       .forEach((type, i) => {
+        console.log('type', this.selectedWasteTypes.indexOf(this.wasteTypes[i]), this.selectedWasteTypes);
         alert.addInput({
           type: 'checkbox',
           label: type,
           value: this.wasteTypes[i],
-          checked: active.indexOf(this.wasteTypes[i]) >= 0
+          checked: this.selectedWasteTypes.indexOf(this.wasteTypes[i]) >= 0
         });
       });
-    alert.addButton('Cancel');
+    alert.addButton({text: 'Cancel', handler: () => this.unblock()});
     alert.addButton({
       text: 'Ok',
       handler: data => {
         console.log('selected waste types', this.selectedWasteTypes);
         this.selectedWasteTypes = data;
         this.whatDescription = this.makeDescriptionText(data);
+
       }
     });
+    alert.onDidDismiss(() => this.unblock());
     alert.present();
   }
 
   setupReminders() {
     var notificationPlugin:any = null;
-    if(!window.cordova) {
+    if (!window.cordova) {
       console.log('cordova is not found, maybe you are running in browser?. Building a shim.');
       const noopCallback = (r) => r instanceof Function ? r() : true;
-      notificationPlugin = { clearAll: noopCallback, schedule: noopCallback};
+      notificationPlugin = {clearAll: noopCallback, schedule: noopCallback};
     } else {
       const plugins:any = cordova.plugins;
       notificationPlugin = plugins.notification.local;
@@ -134,7 +153,8 @@ export class RemindMePage {
         };
         window.localStorage.setItem('notificationsData', JSON.stringify(this.notificationsData));
 
-        var notifications = _(this.schedulerService.events).map((event) => {
+        var notifications = [];
+          /*_(this.schedulerService.events).map((event) => {
           console.log(event);
           var isNight = this.timeOfDay == 'night';
           var date = event.day.clone()
@@ -154,14 +174,21 @@ export class RemindMePage {
             };
           }
         }).compact().value();
+*/
+        notifications.push({
+          id: 0,
+          text: 'You enabled reminders for Rollout!',
+          at: new Date(new Date().getTime() + 5000)
+        });
         console.log('creating notifications', notifications);
+
         notificationPlugin.schedule(notifications);
 
         this.pickupDays = this.schedulerService.pickupDays;
         this.loadingContent.dismiss().then(() => {
           this.nav.pop();
         });
-      }).catch(function() {
+      }).catch(function () {
         alert('Sorry there was a problem setting up your reminders');
         console.log(arguments);
       });
@@ -180,4 +207,5 @@ export class RemindMePage {
       description = categories.splice(0, categories.length - 1).join(', ') + ' and ' + categories[categories.length - 1];
     return description;
   }
+
 }

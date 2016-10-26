@@ -2,7 +2,7 @@ import {Directive, Renderer, ElementRef} from '@angular/core';
 @Directive({
   selector : '[focuser]'
 })
-export default class Focuser {
+export class Focuser {
   constructor(public renderer: Renderer, public elementRef: ElementRef) {}
 
   ngOnInit() {

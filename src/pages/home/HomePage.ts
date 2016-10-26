@@ -1,4 +1,4 @@
-import {Platform, NavController, Loading, LoadingController, Content} from "ionic-angular";
+import {Platform, NavController, Loading, LoadingController, Content, ToastController} from "ionic-angular";
 import {AddressLookup} from "../../common/AddressLookup";
 import {Scheduler, PickupDay} from "../../common/Scheduler";
 import {Geolocation} from "ionic-native";
@@ -6,33 +6,50 @@ import moment from "moment";
 import {RemindMePage} from "../remindme/RemindMePage";
 import {Component, ViewChild} from "@angular/core";
 import {rejectFirst, HandledPromiseError} from "../../common/PromiseExceptionHandler";
+import {DetailPage} from "../detail/DetailPage";
+import {UrlUtil} from "../../common/UrlUtil";
 
 @Component({
   templateUrl: 'HomePage.html'
 })
-export default class HomePage {
+export class HomePage {
   public static readonly ERROR_LOADING = 'We Had a Problem Loading Your Schedule. \nThe City of Houston may be having issues';
   @ViewChild(Content) content: Content;
-  private addresses;
-  private searching:Boolean;
-
-  events = [];
   private coords;
   private geolocation:any;
   private pickupDays:PickupDay;
-  moment;
   private addressLookup;
+
+  moment;
+  addresses;
+  searching:Boolean;
+  events = [];
   errorMessage?:string;
   loadingContent:Loading;
   loading:boolean;
   currentSearch:string;
 
-  constructor(private loadingController:LoadingController, private platform:Platform, private nav:NavController, private SchedulerService:Scheduler, addressLookup:AddressLookup) {
+  constructor(public toastCtrl: ToastController, private loadingController:LoadingController, private platform:Platform, private nav:NavController, private SchedulerService:Scheduler, addressLookup:AddressLookup) {
     this.moment = moment;
     this.geolocation = Geolocation;
     this.addressLookup = addressLookup;
+    this.announceUpdates();
     this.loadEvents();
   }
+
+  announceUpdates() {
+    if(!window.localStorage.getItem('announcedTapTypes')) {
+      window.localStorage.setItem('announcedTapTypes', true.toString());
+      let toast = this.toastCtrl.create({
+        message: 'You can now tap the types of trash to learn more!',
+        showCloseButton: true,
+        duration: 20000,
+      });
+      toast.present();
+    }
+  }
+
+  openUrl = UrlUtil.openUrl;
 
   showFilterBar() {
     this.content.scrollToTop();
@@ -80,6 +97,13 @@ export default class HomePage {
       else {
         console.log('ignoring slow result', str, this.currentSearch);
       }
+    });
+  }
+
+  goToDetails(category) {
+    console.log(category, 'category go!');
+    this.nav.push(DetailPage, {
+      category: category
     });
   }
 

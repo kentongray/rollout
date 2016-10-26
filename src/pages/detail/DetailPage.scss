@@ -1,15 +1,24 @@
-
-.alert-ios .alert-checkbox-icon {
-	background-color: white !important;
-}
-
-.remind-me {
-	background-color: map-get($colors, primary);
-	font-family: aleoregular;
-	text-align: center;
-	h2, h1, h3 {
+.detail {
+	a, a:link, a:visited, a:active {
+		color: black;
+	}
+	h2, h1 {
+		font-family: aleoregular;
+		text-align: center;
+	}
+	h3 {
+		font-family: aleoitalic;
+		font-size: large;
 	}
 
+	ul, li {
+		padding: 2px;
+		margin: 0;
+		list-style: none;
+	}
+	li {
+		margin-bottom: 20px;
+	}
 	em {
 		font-family: aleoitalic;
 	}
@@ -17,16 +26,16 @@
 		color: map-get($colors, primary);
 	}
 
-	.remind-me-holder {
+	.category {
 		padding: 5%;
-		margin: 20% 10%;
+		margin: 5%;
 		background-color: rgba(255,255,255,.9);
 		box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
 		border-radius: 2px;
 		backdrop-filter: blur(10px);
 		animation-name: slideDown;
 
-		animation-duration: .5s;
+		animation-duration: 1s;
 
 		animation-timing-function: ease;
 
@@ -44,7 +53,7 @@
 		}
 		90%{
 			background-color: rgba(255,255,255,.9);
-			transform: translateY(-2%);
+			transform: translateY(-3%);
 		}
 		100% {
 			transform: translateY(0%);
