@@ -7,8 +7,6 @@
 	background-color: map-get($colors, primary);
 	font-family: aleoregular;
 	text-align: center;
-	h2, h1, h3 {
-	}
 
 	em {
 		font-family: aleoitalic;
@@ -25,11 +23,8 @@
 		border-radius: 2px;
 		backdrop-filter: blur(10px);
 		animation-name: slideDown;
-
 		animation-duration: .5s;
-
 		animation-timing-function: ease;
-
 		visibility: visible !important;
 	}
 

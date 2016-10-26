@@ -106,9 +106,11 @@
             </ul>
         </div>
     </div>
+    <!-- spacer for the button :( -->
+    <div style="height:60px"></div>
     <div ion-fixed class="bottom-actions" *ngIf="!(loading || errorMessage || events.length == 0)">
         <button ion-button (click)="goToRemindMe()">
-            <ion-icon name="notifications"></ion-icon>
+            <ion-icon name="notifications"></ion-icon> &nbsp;
             Remind Me
         </button>
     </div>

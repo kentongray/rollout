@@ -2,6 +2,19 @@ html, body {
 	background-color: map-get($colors, primary);
 }
 
+
+.bottom-actions {
+	bottom:0;
+	left: 0;
+	right: 0;
+	background-color: map-get($colors, primary);
+	border-top: solid 1px #43a06f;
+	button {
+		width: 100%;
+
+	}
+}
+
 @font-face {
 	font-family: 'aleoregular';
 	src: url('../assets/fonts/aleo-regular-webfont.eot');
@@ -56,19 +69,6 @@ html, body {
 
 a, a:link, a:visited {
 	color: white;
-}
-
-
-.bottom-actions {
-	bottom:0;
-	left: 0;
-	right: 0;
-	background-color: map-get($colors, primary);
-	border-top: solid 1px #43a06f;
-	button {
-		width: 100%;
-
-	}
 }
 
 .home {

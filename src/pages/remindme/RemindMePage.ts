@@ -153,8 +153,7 @@ export class RemindMePage {
         };
         window.localStorage.setItem('notificationsData', JSON.stringify(this.notificationsData));
 
-        var notifications = [];
-          /*_(this.schedulerService.events).map((event) => {
+        var notifications = _(this.schedulerService.events).map((event) => {
           console.log(event);
           var isNight = this.timeOfDay == 'night';
           var date = event.day.clone()
@@ -174,7 +173,6 @@ export class RemindMePage {
             };
           }
         }).compact().value();
-*/
         notifications.push({
           id: 0,
           text: 'You enabled reminders for Rollout!',

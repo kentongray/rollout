@@ -1,11 +1,16 @@
 .detail {
+	font-size: 1.2em;
 	a, a:link, a:visited, a:active {
-		color: black;
+		color: darken(map-get($colors, primary), 20%);
+	}
+	h2 {
+		color: map-get($colors, primary);
 	}
 	h2, h1 {
 		font-family: aleoregular;
 		text-align: center;
 	}
+
 	h3 {
 		font-family: aleoitalic;
 		font-size: large;
