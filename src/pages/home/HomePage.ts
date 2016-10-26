@@ -49,8 +49,9 @@ export class HomePage {
     }
   }
 
-  openUrl = UrlUtil.openUrl;
-
+  openHolidaySchedule() {
+    UrlUtil.openUrl('http://www.houstontx.gov/solidwaste/holiday.html');
+  }
   showFilterBar() {
     this.content.scrollToTop();
     this.searching = true;
