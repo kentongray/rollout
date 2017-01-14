@@ -8,6 +8,7 @@ import {Component, ViewChild} from "@angular/core";
 import {rejectFirst, HandledPromiseError} from "../../common/PromiseExceptionHandler";
 import {DetailPage} from "../detail/DetailPage";
 import {UrlUtil} from "../../common/UrlUtil";
+import {TranslateService} from "ng2-translate";
 
 @Component({
   templateUrl: 'HomePage.html'
@@ -29,12 +30,22 @@ export class HomePage {
   loading:boolean;
   currentSearch:string;
 
-  constructor(public toastCtrl: ToastController, private loadingController:LoadingController, private platform:Platform, private nav:NavController, private SchedulerService:Scheduler, addressLookup:AddressLookup) {
+  constructor(
+      public toastCtrl: ToastController,
+      private loadingController:LoadingController,
+      private platform:Platform,
+      private nav:NavController,
+      private SchedulerService:Scheduler,
+      addressLookup:AddressLookup,
+      translate: TranslateService
+  ) {
     this.moment = moment;
     this.geolocation = Geolocation;
     this.addressLookup = addressLookup;
     this.announceUpdates();
     this.loadEvents();
+    translate.setDefaultLang('en');
+    translate.use('en');
   }
 
   announceUpdates() {

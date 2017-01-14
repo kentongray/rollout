@@ -111,7 +111,7 @@
     <div ion-fixed class="bottom-actions" *ngIf="!(loading || errorMessage || events.length == 0)">
         <button ion-button (click)="goToRemindMe()">
             <ion-icon name="notifications"></ion-icon> &nbsp;
-            Remind Me
+            {{ 'Remind_Me' | translate }}
         </button>
     </div>
 </ion-content>
