@@ -1,4 +1,4 @@
-# [Rollout!](www.rollouthouston.com)
+# [Rollout!](http://www.rollouthouston.com)
 
 
 Download the app for [iPhone/iPad](https://itunes.apple.com/us/app/rollout!-houston/id1011036124?mt=8) and [Android](https://play.google.com/store/apps/details?id=com.kentonue.rollout)
