@@ -48,7 +48,8 @@
     "ionic-plugin-keyboard",
     "cordova-plugin-inappbrowser",
     "cordova-plugin-geolocation",
-    "cordova-plugin-statusbar"
+    "cordova-plugin-statusbar",
+    "https://github.com/katzer/cordova-plugin-local-notifications"
   ],
   "cordovaPlatforms": [
     "ios"
