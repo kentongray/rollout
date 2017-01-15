@@ -61,5 +61,17 @@
   "How_Much_Can_I_Put_Out": "¿Cuánto puedo sacar?",
   "How_Much_Can_I_Put_Out": "No m\u00e1s de ocho yardas c\u00fabicas por residencia ser\u00e1n recolectadas en el dia de colecci\u00f3n de residuos de \u00e1rboles. De esta cantidad, s\u00f3lo un m\u00e1ximo de cuatro metros c\u00fabicos de material de construcci\u00f3n como tejas, ladrillos, yeso o concreto generados por el residente en relaci\u00f3n con el mantenimiento de la propiedad residencial puede ser recolectado por el personal del departamento.",
   "Whats_Tree_Waste": "¿Que son Residuos de \u00c1rboles?",
-  "Whats_Tree_Waste_Details": "\"Residuos de \u00c1rboles\", consiste de troncos de \u00e1rbol, ramas o tocones. La madera, los muebles y la madera tratada no seran aceptados."
+  "Whats_Tree_Waste_Details": "\"Residuos de \u00c1rboles\", consiste de troncos de \u00e1rbol, ramas o tocones. La madera, los muebles y la madera tratada no seran aceptados.",
+  "Lets_Roll": "¡A Rodar!",
+  "Remind_Me_At": "Recuerdame a las",
+  "When": "¿Cuando?",
+  "When_Should_Rollout_Alert_You": "¿Cuando deberia Rollout! avisarte?",
+  "In_The_Morning_AM": "En la Ma\u00f1ana (AM)",
+  "At_Night_PM": "Por la Noche (PM)",
+  "What_Time": "¿Qu\u00e9 hora?",
+  "Cancel": "Cancelar",
+  "What_Types": "¿Qu\u00e9 tipos?",
+  "Creating_Reminders": "Creando Recordatorios",
+  "You_Enabled_Reminders_For_Rollout": "Has Activado Recordatorios de Rollout!",
+  "Sorry_There_Was_A_Problem_Setting_Up_Your_Reminders": "Lo sentimos! Hubo un problema creando sus recordatorios"
 }

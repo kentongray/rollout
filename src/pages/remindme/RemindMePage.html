@@ -9,7 +9,7 @@
 
     <div class="remind-me-holder">
 
-        <h1>Remind me at <u (tap)="openHours()">{{hour}}</u></h1>
+        <h1>{{'Remind_Me_At' | translate}} <u (tap)="openHours()">{{hour}}</u></h1>
 
         <h1><u (tap)="openTimeOfDay()">{{timeOfDay == 'morning' ? 'in the morning' : 'at night'}}</u></h1>
 
@@ -26,7 +26,7 @@
         </div>
         -->
         <button ion-button class="buttons" (click)="setupReminders()">
-            Let's Roll!
+            {{'Lets_Roll' | translate}}
         </button>
     </div>
 </ion-content>
