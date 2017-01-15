@@ -8,130 +8,101 @@
 <ion-content class="padding detail">
 
     <div class="category" *ngIf="!category || category == 'waste'">
-        <h2>Trash</h2>
+        <h2>{{'Trash' | translate}}</h2>
         <ul>
             <li>
-                <h3>What Time?</h3>
-                Household garbage must be put inside
-                the city-provided container which
-                should be placed at the curb between
-                6 p.m. the day before and 7 a.m. on the
-                scheduled collection day.
+                <h3>{{'What_Time' | translate}}</h3>
+                {{'Household_Garbage_Collection_Time' | translate}}
             </li>
             <li>
-                <h3>Where to Put Your Bin</h3>
-                The container
-                must be accessible to the automated
-                collection truck and not blocked by obstacles,
-                including parked cars. Drivers
-                will not move improperly placed containers.
+                <h3>{{'Where_To_Put_Your_Bin' | translate}}</h3>
+                {{'Bin_Location_Details' | translate}}
             </li>
         </ul>
 
     </div>
     <div class="category" *ngIf="!category || category == 'waste'">
 
-        <h2>Yard Waste</h2>
+        <h2>{{'Yard_Waste' | translate}}</h2>
         <ul>
             <li>
-                <h3>About Yard Waste</h3>
-                Yard Trimmings, grass clippings, small branches and leaves
-                must not be placed in the automated garbage cans. They
-                must be in <a (click)="openUrl('https://www.amazon.com/EcoSafe-GKL042657-1-33-Gallon-Houston-Biodegradable/dp/B004BKIOLW')">city-approved
-                compostable bags</a> not weighing
-                more than 50 pounds, and placed at the curb 3 feet away
-                from the automated container for separate yard trimmings
-                collection.
+                <h3>{{'About_Yard_Waste' | translate}}</h3>
+                {{'Yard_Waste_Details_One' | translate}}
+                <a (click)="openUrl('https://www.amazon.com/EcoSafe-GKL042657-1-33-Gallon-Houston-Biodegradable/dp/B004BKIOLW')">
+                    {{'Yard_Waste_Details_Two' | translate}}
+                </a>
+                {{'Yard_Waste_Details_Three' | translate}}
             </li>
             <li>
-                <h3>Branches</h3>
-                Small branches
-                may be put in bundles
-                as long as each bundle is
-                less than 4 feet in length
-                and 18 inches in diameter
-                and weighing less than
-                50 pounds.
+                <h3>{{'Branches' | translate}}</h3>
+                {{'Branches_Details' | translate}}
             </li>
             <li>
-                <h3>Don't Mix!</h3>
-                Yard Trimmings
-                mixed with paper,
-                plastic, or any other type
-                of waste will not be collected.
+                <h3>{{'Dont_Mix' | translate}}</h3>
+                {{'Dont_Mix_Details' | translate}}
             </li>
             <li>
-                <h3>Contractors</h3>
-                Work performed
-                by a contractor must be
-                removed by the contractor.
+                <h3>{{'Contractors' | translate}}</h3>
+                {{'Contractors_Details' | translate}}
             </li>
         </ul>
     </div>
 
     <div class="category" *ngIf="!category || category == 'recycling'">
 
-        <h2>Recycling</h2>
+        <h2>{{'Recycling' | translate}}</h2>
         <ul>
             <li>
-                <h3>What Can I Recycle?</h3>
-                Newspapers, magazines, and other paper items.
-                Most plastics <a href="#"
-                                 (click)="openUrl('https://www.qualitylogoproducts.com/lib/different-types-of-plastic.htm')">(#1
-                - 5 and 7)</a>, aluminum and tin cans.
+                <h3>{{'What_Can_I_Recycle' | translate}}</h3>
+                {{'What_Can_I_Recycle_Details_One' | translate}}
+                 <a href="#" (click)="openUrl('https://www.qualitylogoproducts.com/lib/different-types-of-plastic.htm')">{{'What_Can_I_Recycle_Details_Two' | translate}}</a>
+                {{'What_Can_I_Recycle_Details_Three' | translate}}
                 <br>
-                Keep your recyclables clean for easy processing!
-
+                {{'What_Can_I_Recycle_Details_Four' | translate}}
             </li>
             <li>
-                <h3>What About Glass?</h3>
-                Sorry, glass is currently not allowed in the bins. You can use <a
-                    (click)="openUrl('https://www.google.com/maps/d/u/0/viewer?ll=29.767954%2C-95.453339&spn=0.532854%2C0.753937&hl=en&msa=0&z=10&source=embed&ie=UTF8&mid=1vNyDxfTwSzxz_Z7gx7590VgW3-U')">Drop
-                Off Locations</a>.
+                <h3>{{'What_About_Glass' | translate}}</h3>
+                {{'What_About_Glass_Details_One' | translate}} <a
+                    (click)="openUrl('https://www.google.com/maps/d/u/0/viewer?ll=29.767954%2C-95.453339&spn=0.532854%2C0.753937&hl=en&msa=0&z=10&source=embed&ie=UTF8&mid=1vNyDxfTwSzxz_Z7gx7590VgW3-U')">{{'What_About_Glass_Details_Two' | translate}}</a>.
                 <br><br>
-                Another option is <a target="_blank" href="#"
-                                     (click)="openUrl('http://www.irecycle.glass/?ref=rollout')">iRecycle Glass</a> a
-                paid service for glass pickup!
+                {{'What_About_Glass_Details_Three' | translate}}
+                <a target="_blank" href="#" (click)="openUrl('http://www.irecycle.glass/?ref=rollout')">iRecycle Glass</a>
+                {{'What_About_Glass_Details_Four' | translate}}
             </li>
             <li>
-                <h3>Where Can I Drop Off?</h3>
-                Here is a helpful map of recycling <a href="#"
-                                                      (click)="openUrl('https://www.google.com/maps/d/u/0/viewer?ll=29.767954%2C-95.453339&spn=0.532854%2C0.753937&hl=en&msa=0&z=10&source=embed&ie=UTF8&mid=1vNyDxfTwSzxz_Z7gx7590VgW3-U')">drop
-                off locations</a>
+                <h3>{{'Where_Can_I_Drop_Off' | translate}}</h3>
+                {{'Where_Can_I_Drop_Off_Details_One' | translate}}
+                <a href="#" (click)="openUrl('https://www.google.com/maps/d/u/0/viewer?ll=29.767954%2C-95.453339&spn=0.532854%2C0.753937&hl=en&msa=0&z=10&source=embed&ie=UTF8&mid=1vNyDxfTwSzxz_Z7gx7590VgW3-U')">
+                    {{'Where_Can_I_Drop_Off_Details_Two' | translate}}
+                </a>
             </li>
         </ul>
     </div>
     <div class="category" *ngIf="!category || category == 'junk'">
-        <h2>Heavy Trash/Junk Waste</h2>
+        <h2>{{'Heavy_Trash_Junk_Waste' | translate}}</h2>
         <ul>
             <li>
-                <h3>What's Junk Waste?</h3>
-                “Junk waste” is used to describe items such as furniture, appliances and other bulky materials. These items should be placed adjacent to the front curb in a location eas- ily accessible to the collection vehicle between the hours of 6:00 p.m. the Friday before, and 7:00 a.m. on the scheduled col- lection day.
-
+                <h3>{{'Whats_Junk_Waste' | translate}}</h3>
+                {{'Whats_Junk_Waste_Details' | translate}}
             </li>
             <li>
-                <h3>How Much Can I Put Out?</h3>
-                No more than eight cubic yards per residence will be collected on the scheduled tree waste/junk waste collection
-                day. Of this amount, only a maximum of four cubic yards of building
-                shingles, brick, plaster or con- crete) generated by the resident in connection with the mainte- nance of the
-                residential property may be collected by department personnel.
+                <h3>{{'How_Much_Can_I_Put_Out' | translate}}</h3>
+                {{'How_Much_Can_I_Put_Out_Details' | translate}}
             </li>
         </ul>
 
 
     </div>
     <div class="category" *ngIf="!category || category == 'tree'">
-        <h2>Tree Waste</h2>
-        <h3>What's Tree Waste?</h3>
-        “Tree
-        waste”, which consists of tree limbs, branches or stumps. Lumber, furniture and treated wood will not be
-        accepted.
+        <h2>{{'Tree_Waste' | translate}}</h2>
+        <h3>{{'Whats_Tree_Waste' | translate}}</h3>
+        {{'Whats_Tree_Waste_Details' | translate}}
     </div>
     <!-- spacer for the button :( -->
     <div style="height:60px"></div>
     <div *ngIf="category" ion-fixed class="bottom-actions">
         <button ion-button (click)="category = null">
-            Show Me More!
+            {{'Show_Me_More' | translate}}
         </button>
     </div>
 </ion-content>

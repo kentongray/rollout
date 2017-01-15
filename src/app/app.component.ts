@@ -2,6 +2,7 @@ import {Component} from "@angular/core";
 import {Platform} from "ionic-angular";
 import {StatusBar} from "ionic-native";
 import {HomePage} from "../pages/home/HomePage";
+import {TranslateService} from "ng2-translate";
 
 @Component({
   template: `<ion-nav [root]="rootPage"></ion-nav>`
@@ -9,7 +10,7 @@ import {HomePage} from "../pages/home/HomePage";
 export class RolloutApp {
   rootPage = HomePage;
 
-  constructor(platform:Platform) {
+  constructor(platform:Platform, translate: TranslateService) {
     platform.ready().then(() => {
       const splashscreenPlugin = (<any>navigator).splashscreen;
       if (splashscreenPlugin) {
@@ -19,5 +20,8 @@ export class RolloutApp {
       // Here you can do any higher level native things you might need.
       StatusBar.styleLightContent();
     });
+
+    translate.setDefaultLang('en');
+    translate.use('es');
   }
 }
