@@ -73,5 +73,20 @@
   "What_Types": "¿Qu\u00e9 tipos?",
   "Creating_Reminders": "Creando Recordatorios",
   "You_Enabled_Reminders_For_Rollout": "Has Activado Recordatorios de Rollout!",
-  "Sorry_There_Was_A_Problem_Setting_Up_Your_Reminders": "Lo sentimos! Hubo un problema creando sus recordatorios"
+  "Sorry_There_Was_A_Problem_Setting_Up_Your_Reminders": "Lo sentimos! Hubo un problema creando sus recordatorios",
+  "We_Had_A_Problem_Loading_Your_Schedule_The_City_Of_Houston_May_Be_Having_Issues": "Tuvimos un problema al descargar su horario. \nLa Ciudad de Houston puede estar teniendo problemas",
+  "You_Can_Now_Tap_The_Types_Of_Trash_To_Learn_More": "¡Ahora puede tocar los tipos de basura para obtener m\u00e1s informaci\u00f3n!",
+  "Looking_Up_Coordinates": "Buscando Coordenadas",
+  "Unable_To_Locate_You": "No pudimos localizarte",
+  "Looking_Up_Your_Schedule": "Buscando el Horario",
+  "Error_Loading_Events": "Error al cargar eventos",
+  "Starting_Up": "¡Empezando!",
+  "Finding_Your_Location": "Buscando su Ubicaci\u00f3n",
+  "We_Couldnt_Look_Up_Your_Location_Check_Your_Location_Permissions": "No pudimos buscar su ubicaci\u00f3n. Compruebe sus permisos de ubicaci\u00f3n",
+  "Something_Went_Wrong": "Algo sali\u00f3 mal...",
+  "Error_Finding_Position": "Error al encontrar la posici\u00f3n",
+  "Try_Again": "Int\u00e9ntalo de nuevo",
+  "One_Sec": "¡Un Segundo!",
+  "Today": "Hoy",
+  "Tomorrow": "Ma\u00f1ana"
 }

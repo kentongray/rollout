@@ -73,5 +73,20 @@
   "What_Types": "What Types?",
   "Creating_Reminders": "Creating Reminders",
   "You_Enabled_Reminders_For_Rollout": "You enabled reminders for Rollout!",
-  "Sorry_There_Was_A_Problem_Setting_Up_Your_Reminders": "Sorry there was a problem setting up your reminders"
+  "Sorry_There_Was_A_Problem_Setting_Up_Your_Reminders": "Sorry there was a problem setting up your reminders",
+  "We_Had_A_Problem_Loading_Your_Schedule_The_City_Of_Houston_May_Be_Having_Issues": "We Had a Problem Loading Your Schedule. \nThe City of Houston may be having issues",
+  "You_Can_Now_Tap_The_Types_Of_Trash_To_Learn_More": "You can now tap the types of trash to learn more!",
+  "Looking_Up_Coordinates": "Looking up Coordinates",
+  "Unable_To_Locate_You": "Unable to Locate You",
+  "Looking_Up_Your_Schedule": "Looking up Schedule",
+  "Error_Loading_Events": "Error Loading Events",
+  "Starting_Up": "Starting Up!",
+  "Finding_Your_Location": "Finding Your Location",
+  "We_Couldnt_Look_Up_Your_Location_Check_Your_Location_Permissions": "We couldn't look up your location.\n Check Your Location Permissions",
+  "Something_Went_Wrong": "Something Went Wrong...",
+  "Error_Finding_Position": "Error Finding Position",
+  "Try_Again": "Trying again",
+  "One_Sec": "One Sec!",
+  "Today": "Today",
+  "Tomorrow": "Tomorrow"
 }
