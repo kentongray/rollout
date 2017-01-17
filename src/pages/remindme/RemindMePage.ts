@@ -60,6 +60,7 @@ export class RemindMePage {
       'tree',
       'junk',
       'and',
+      'Trash_And_Yard',
     ]).subscribe(res => {
       this.localizedText['when'] = res.When;
       this.localizedText['whenShouldRolloutAlertYou'] = res['When_Should_Rollout_Alert_You'];
@@ -79,6 +80,7 @@ export class RemindMePage {
       this.localizedText['tree'] = res['tree'];
       this.localizedText['junk'] = res['junk'];
       this.localizedText['and'] = res['and'];
+      this.localizedText['trashAndYard'] = res['Trash_And_Yard'];
     });
   }
 
@@ -151,8 +153,8 @@ export class RemindMePage {
       title: this.localizedText['whatTypes']
     });
 
-    this.wasteTypes.map(c => c == 'waste' ? 'Trash & Yard' : c)
-      .map(c => c.charAt(0).toUpperCase() + c.slice(1)) //cap first letter
+    this.wasteTypes.map(c => c == 'waste' ? 'trashAndYard' : c)
+      .map(c => this.localizedText[c].charAt(0).toUpperCase() + this.localizedText[c].slice(1)) //cap first letter
       .forEach((type, i) => {
         console.log('type', this.selectedWasteTypes.indexOf(this.wasteTypes[i]), this.selectedWasteTypes);
         alert.addInput({
