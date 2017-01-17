@@ -20,7 +20,7 @@
   "Every": "Cada",
   "Recycling": "Reciclaje",
   "Every_Other": "Cada otro",
-  "Junk": "Chatarra",
+  "Junk": "Desechos",
   "Tree_Waste": "Residuos de \u00c1rboles",
   "Even_Months": "Meses Par",
   "Odd_Months": "Meses Impar",
@@ -88,5 +88,16 @@
   "Try_Again": "Int\u00e9ntalo de nuevo",
   "One_Sec": "¡Un Segundo!",
   "Today": "Hoy",
-  "Tomorrow": "Ma\u00f1ana"
+  "Tomorrow": "Ma\u00f1ana",
+  "In_The_Morning": "de la ma\u00f1ana",
+  "At_Night": "de la noche",
+  "To_Roll_Out_My_One": "que tengo que",
+  "To_Roll_Out_My_Two": "rodar",
+  "To_Roll_Out_My_Three": "mi",
+  "Nothing": "nada",
+  "recycling": "reciclaje",
+  "trash": "basura",
+  "tree": "\u00e1rboles",
+  "junk": "desechos",
+  "and": "y"
 }

@@ -40,7 +40,6 @@ export class RemindMePage {
     this.notificationsEnabled = window.localStorage.getItem('notificationsEnabled') == 'true';
     this.notificationsData = JSON.parse(window.localStorage.getItem('notificationsData') || "{}");
     this.pos = {x: navParams.get('longitude'), y: navParams.get('latitude')};
-    this.whatDescription = this.makeDescriptionText(this.selectedWasteTypes);
 
     translate.get([
       'When',
@@ -53,6 +52,14 @@ export class RemindMePage {
       'Creating_Reminders',
       'You_Enabled_Reminders_For_Rollout',
       'Sorry_There_Was_A_Problem_Setting_Up_Your_Reminders',
+      'In_The_Morning',
+      'At_Night',
+      'Nothing',
+      'recycling',
+      'trash',
+      'tree',
+      'junk',
+      'and',
     ]).subscribe(res => {
       this.localizedText['when'] = res.When;
       this.localizedText['whenShouldRolloutAlertYou'] = res['When_Should_Rollout_Alert_You'];
@@ -64,7 +71,19 @@ export class RemindMePage {
       this.localizedText['creatingReminders'] = res['Creating_Reminders'];
       this.localizedText['youEnabledRemindersForRollout'] = res['You_Enabled_Reminders_For_Rollout'];
       this.localizedText['sorryThereWasAProblemSettingUpYourReminders'] = res['Sorry_There_Was_A_Problem_Setting_Up_Your_Reminders'];
+      this.localizedText['inTheMorning'] = res['In_The_Morning'];
+      this.localizedText['atNight'] = res['At_Night'];
+      this.localizedText['nothing'] = res['Nothing'];
+      this.localizedText['recycling'] = res['recycling'];
+      this.localizedText['trash'] = res['trash'];
+      this.localizedText['tree'] = res['tree'];
+      this.localizedText['junk'] = res['junk'];
+      this.localizedText['and'] = res['and'];
     });
+  }
+
+  ionViewDidLoad() {
+    this.whatDescription = this.makeDescriptionText(this.selectedWasteTypes);
   }
 
   unblock():void {
@@ -228,14 +247,19 @@ export class RemindMePage {
   makeDescriptionText(categories) {
     //FIXME: lazy hack because i want it to say trash instead of waste on the reminder but don't want to rewrite all the reminder code
     categories = categories.map(c => c == 'waste' ? 'trash' : c);
-    var description = "nothing";
+    var description = this.localizedText['nothing'];
     if (categories.length == 1)
-      description = categories[0];
+      description = this.localizedText[categories[0]];
     else if (categories.length == 2)
-      description = categories[0] + ' and ' + categories[1];
-    else if (categories.length >= 3)
-      description = categories.splice(0, categories.length - 1).join(', ') + ' and ' + categories[categories.length - 1];
+      description = `${this.localizedText[categories[0]]}, ${this.localizedText['and']} ${this.localizedText[categories[1]]}`;
+    else if (categories.length == 3)
+      description = `${this.localizedText[categories[0]]}, ${this.localizedText[categories[1]]}, ${this.localizedText['and']} ${this.localizedText[categories[2]]}`;
+    else if (categories.length == 4)
+      description = `${this.localizedText[categories[0]]}, ${this.localizedText[categories[1]]}, ${this.localizedText[categories[2]]}, ${this.localizedText['and']} ${this.localizedText[categories[3]]}`;
     return description;
   }
 
+  morningNightText() {
+    return this.timeOfDay === 'morning' ? this.localizedText['inTheMorning'] : this.localizedText['atNight'];
+  }
 }

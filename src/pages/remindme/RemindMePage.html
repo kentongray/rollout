@@ -11,10 +11,10 @@
 
         <h1>{{'Remind_Me_At' | translate}} <u (tap)="openHours()">{{hour}}</u></h1>
 
-        <h1><u (tap)="openTimeOfDay()">{{timeOfDay == 'morning' ? 'in the morning' : 'at night'}}</u></h1>
+        <h1><u (tap)="openTimeOfDay()">{{morningNightText()}}</u></h1>
 
 
-        <h2>to <em>roll out</em> my</h2>
+        <h2>{{'To_Roll_Out_My_One' | translate}} <em>{{'To_Roll_Out_My_Two' | translate}}</em> {{'To_Roll_Out_My_Three' | translate}}</h2>
 
         <h2><u (tap)="openWhat()">{{whatDescription}}</u></h2>
 
