@@ -20,14 +20,25 @@ Desktop support still in the works for the new version
 
 Hit me up with questions and! Would love to have some volunteers.
 
+
+##Desktop
+Desktop version is totally broken right now. Probably will be creating a seperate repo for that soon
+
+##Server
+[Rollout Server](https://github.com/kentongray/rollout-server) handles the scheduling portion. 
+
+
+##Props
+*Victor Ramos @victorcoding* provided localization for Spanish and general updates 🎉
+
+##Ideas/Projects
+* ~more info on each "category" IE if you hit tree waste give a good explanation as to what that is~
+* Interested in adding more data if anyone has any good data sources.
+* #crazyidea nation-wide database of pickup regions with tooling to allow cities and citizens to manage it
+* ~Drop off locations~
+
+
 Random Links: 
 * [Challenge Post](http://challengepost.com/software/rollout-instant-trash-pickup-schedule-recycling-app)
 * [Houston Chronicle](http://www.houstonchronicle.com/news/houston-texas/article/City-hackathon-yields-app-for-trash-recycling-6360757.php?t=4e8c4c11c5c0059fa0&cmpid=twitter-premium#photo-4655597)
 * [Swamplot](http://swamplot.com/new-iphone-app-bugs-you-when-its-time-to-take-out-the-trash-but-refuses-to-do-it-for-you/2015-07-06/)
-
-Ideas/Projects
-* more info on each "category" IE if you hit tree waste give a good explanation as to what that is
-* node server to handle push notifications because local push notifications seem to be a total mess on cordova and have too many limitions (http://stackoverflow.com/questions/17877528/how-to-schedule-more-local-notifications-in-ios-when-notification-crosses-limit)
-* Interested in adding more data if anyone has any good data sources.
-* #crazyidea nation-wide database of pickup regions with tooling to allow cities and citizens to manage it
-* Drop off locations
