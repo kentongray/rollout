@@ -29,7 +29,7 @@ Desktop version is totally broken right now. Probably will be creating a seperat
 
 
 ##Props
-*Victor Ramos @victorcoding* provided localization for Spanish and general updates 🎉
+**Victor Ramos [@victorcoding](https://github.com/victorcoding)** provided localization for Spanish and general updates 🎉
 
 ##Ideas/Projects
 * ~more info on each "category" IE if you hit tree waste give a good explanation as to what that is~
