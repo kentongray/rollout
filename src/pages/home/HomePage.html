@@ -1,7 +1,7 @@
 <ion-header>
     <ion-navbar color="primary">
         <ion-searchbar *ngIf="searching" autofocus (keyup)="searchAddress($event.target.value)"
-                       placeholder="Enter Your Address" (cancel)="searching = false"></ion-searchbar>
+                       placeholder="{{'Enter_Your_Address' | translate}}" (cancel)="searching = false"></ion-searchbar>
         <ion-title *ngIf="!searching">
             <img src="assets/img/rollout_logo.png" style="margin-top:5px;" height="30" width="143">
         </ion-title>
@@ -17,11 +17,11 @@
         <ion-list>
             <ion-item (click)="lookupCurrentLocation()">
                 <ion-icon black name="pin"></ion-icon>
-                Use Current Location
+                {{'Use_Current_Location' | translate}}
             </ion-item>
             <div *ngIf="addresses">
                 <ion-item *ngIf="!addresses.length">
-                    Address Not Found :(
+                    {{'Address_Not_Found' | translate}} :(
                 </ion-item>
                 <ion-item *ngFor="let address of addresses" (click)="selectAddress(address)">
                     {{address.text}}
@@ -34,32 +34,33 @@
         {{errorMessage}}
         <br>
         <br>
-        <a white (click)="retry()">Try Again?
+        <a white (click)="retry()">{{'Try_Again' | translate}}
             <ion-icon name="refresh"></ion-icon>
         </a>
         <br>
         <br>
-        <a href="mailto:info@rollouthouston.com">Need Help?</a>
+        <a href="mailto:info@rollouthouston.com">{{'Need_Help' | translate}}</a>
         <br>
     </div>
     <div class="no-schedule" *ngIf="!loading && events.length == 0 && !errorMessage">
-        <h1>No Schedule Found</h1>
-        Rollout! is only available for the City of Houston.
+        <h1>{{'No_Schedule_Found' | translate}}</h1>
+        {{'Rollout_Is_Only_Available_For_The_City_Of_Houston' | translate}}
         <br>
-        Try again when you are in the city or in an area with trash pickup!
+        {{'Try_Again_When_You_Are_In_The_City_Or_In_An_Area_With_Trash_Pickup' | translate}}
         <br>
         <br>
-        Think this is a mistake? <a href="mailto:info@rollouthouston.com">Let us know</a>
+        {{'Think_This_Is_A_Mistake' | translate}} <a href="mailto:info@rollouthouston.com">{{'Let_Us_Know' | translate}}</a>
         <br>
         <br>
         <!-- because we care -->
-        <a white (click)="showFilterBar()">Click the
+        <a white (click)="showFilterBar()">
+            {{'Click_The' | translate}}
             <ion-icon name="pin"></ion-icon>
-            to change your
-            location</a>
+            {{'To_Change_Your_Location' | translate}}
+        </a>
         <br>
         <br>
-        <a white (click)="retry()">Or try again?
+        <a white (click)="retry()">{{'Or_Try_Again' | translate}}
             <ion-icon name="refresh"></ion-icon>
         </a>
     </div>
@@ -68,37 +69,37 @@
             <h2>{{event.day | relativeDate}}</h2>
             <div *ngIf="event.possibleHoliday" class="possible-holiday">
                 <i class="ion-android-warning"></i>
-                Hey! This might be a holiday. <br>
-                Check the <a (click)="openHolidaySchedule()" href="#">holiday schedule</a> to make sure.
+                {{'Hey_This_Might_Be_A_Holiday' | translate}} <br>
+                {{'Check_The' | translate}} <a (click)="openHolidaySchedule()" href="#">{{'Holiday_Schedule' | translate}}</a> {{'To_Make_Sure' | translate}}
             </div>
             <ul class="waste-types">
                 <li *ngFor="let category of event.categories" class="waste-type">
                     <div (click)="goToDetails(category)" tappable>
                         <div *ngIf="category == 'waste'">
                             <ion-icon name="trash"></ion-icon>
-                            <label>Trash & Lawn</label>
-                            <div class="when">Every {{pickupDays.wasteDay | dayOfWeek}}</div>
+                            <label>{{'Trash_And_Lawn' | translate}}</label>
+                            <div class="when">{{'Every' | translate}} {{pickupDays.wasteDay | dayOfWeek}}</div>
                         </div>
                         <div *ngIf="category == 'recycling'">
                             <i class="fa fa-recycle"></i>
-                            <label>Recycling</label>
-                            <div class="when">Every Other {{pickupDays.recyclingDay | dayOfWeek}}</div>
+                            <label>{{'Recycling' | translate}}</label>
+                            <div class="when">{{'Every_Other' | translate}} {{pickupDays.recyclingDay | dayOfWeek}}</div>
                         </div>
                         <div *ngIf="category == 'junk'">
                             <img class="icon icons8-Weight"
                                  src="assets/img/Weight-100.png"
                                  width="75" height="75">
-                            <label>Junk</label>
+                            <label>{{'Junk' | translate}}</label>
                             <div class="when">{{moment().date(pickupDays.junkWeekOfMonth).format("Do")}}
-                                {{pickupDays.junkDay | dayOfWeek}} (Even Months)
+                                {{pickupDays.junkDay | dayOfWeek}} ({{'Even_Months' | translate}})
                             </div>
                         </div>
 
                         <div *ngIf="category == 'tree'">
                             <i class="fa fa-tree"></i>
-                            <label>Tree Waste</label>
+                            <label>{{'Tree_Waste' | translate}}</label>
                             <div class="when">{{moment().date(pickupDays.junkWeekOfMonth).format("Do")}}
-                                {{pickupDays.junkDay | dayOfWeek}} (Odd Months)
+                                {{pickupDays.junkDay | dayOfWeek}} ({{'Odd_Months' | translate}})
                             </div>
                         </div>
                     </div>
@@ -111,7 +112,7 @@
     <div ion-fixed class="bottom-actions" *ngIf="!(loading || errorMessage || events.length == 0)">
         <button ion-button (click)="goToRemindMe()">
             <ion-icon name="notifications"></ion-icon> &nbsp;
-            Remind Me
+            {{ 'Remind_Me' | translate }}
         </button>
     </div>
 </ion-content>

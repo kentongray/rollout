@@ -1,5 +1,6 @@
 import {Pipe, PipeTransform} from '@angular/core';
 import moment from 'moment';
+import {TranslateService} from 'ng2-translate';
 
 /**
  * Switches a moment compatible date object into a relative date (like Tomorrow)
@@ -8,12 +9,21 @@ import moment from 'moment';
   name: 'relativeDate'
 })
 export class RelativeDatePipe implements PipeTransform {
+  today;
+  tomorrow;
+
+  constructor(translate:TranslateService) {
+    translate.get(['Today', 'Tomorrow']).subscribe(res => {
+      this.today = res['Today'];
+      this.tomorrow = res['Tomorrow'];
+    })
+  }
 
   transform(value:any, args?:any[]):any {
     if (moment().isSame(value, 'day')) {
-      return 'Today ' + value.format('MMM Do');
+      return `${this.today} ${value.format('MMM Do')}`;
     } else if (moment().add(1, 'days').isSame(value, 'day')) {
-      return 'Tomorrow ' + value.format('MMM Do');
+      return `${this.tomorrow} ${value.format('MMM Do')}`;
     } else {
       return value.format('dddd MMM Do');
     }

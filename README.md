@@ -1,4 +1,4 @@
-# [Rollout!](www.rollouthouston.com)
+# [Rollout!](http://www.rollouthouston.com)
 
 
 Download the app for [iPhone/iPad](https://itunes.apple.com/us/app/rollout!-houston/id1011036124?mt=8) and [Android](https://play.google.com/store/apps/details?id=com.kentonue.rollout)
@@ -7,8 +7,9 @@ A mobile (ionic/cordova) and web (angular-material) app built using for tracking
 
 Winner of the [Houston Hackathon](http://houstonhackathon.com). Rep Houston tech scene and participate next year!
 ##Getting Started
-Make sure you have ionic installed globally (`npm install ionic@beta -g`)
-`npm install`
+1. Run `npm install`.
+2. Run `npm install -g ionic`. If you had installed ionic previously uninstall it first(`npm uninstall -g ionic`).
+3. If running on device you will want to install the cordova plugins, `ionic state restore`.
 
 Normal ionic commands apply (e.g. `ionic serve` `ionic run ios`)
 
