@@ -11,7 +11,7 @@ export class HandledPromiseError extends Error {
 export function rejectFirst(message:string) {
   return function(causedBy) {
     if (causedBy instanceof HandledPromiseError) {
-      console.error('Caught first Rejection', message);
+      console.error('Caught first Rejection', message, causedBy);
       return Promise.reject(causedBy)
     }
     return Promise.reject(new HandledPromiseError(message, causedBy))

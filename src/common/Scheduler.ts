@@ -3,6 +3,7 @@ import {Http, URLSearchParams, RequestOptions} from '@angular/http';
 import moment from 'moment';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/toPromise';
+import 'moment/locale/es';
 
 export interface PosXY {x:number,y:number};
 export interface PosCoords {coords: {latitude:number,longitude:number}};
@@ -11,7 +12,8 @@ export type Position = PosXY | PosCoords;
 
 const navigator:any = window.navigator;
 let locale = navigator.userLanguage || window.navigator.language;
-moment.locale(locale);
+//moment is freaking out unless i only supply country code :(
+moment.locale(locale.split('-')[0]);
 
 /**
  *

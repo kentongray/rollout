@@ -9,42 +9,36 @@ import {rejectFirst, HandledPromiseError} from "../../common/PromiseExceptionHan
 import {DetailPage} from "../detail/DetailPage";
 import {UrlUtil} from "../../common/UrlUtil";
 import {TranslateService} from "ng2-translate";
-
+import {toCamelCase} from "../../common/SnakeToCamel";
 @Component({
   templateUrl: 'HomePage.html'
 })
 export class HomePage {
   @ViewChild(Content) content: Content;
   private coords;
-  private geolocation:any;
-  private pickupDays:PickupDay;
+  private pickupDays: PickupDay;
   private addressLookup;
 
   moment;
   addresses;
-  searching:Boolean;
+  searching: Boolean;
   events = [];
-  errorMessage?:string;
-  loadingContent:Loading;
-  loading:boolean;
-  currentSearch:string;
+  errorMessage?: string;
+  loadingContent: Loading;
+  loading: boolean;
+  currentSearch: string;
   translatedText = {};
 
-  constructor(
-      public toastCtrl: ToastController,
-      private loadingController:LoadingController,
-      private platform:Platform,
-      private nav:NavController,
-      private SchedulerService:Scheduler,
-      addressLookup:AddressLookup,
-      translate:TranslateService
-  ) {
+  constructor(public toastCtrl: ToastController,
+              private loadingController: LoadingController,
+              private platform: Platform,
+              private nav: NavController,
+              private SchedulerService: Scheduler,
+              addressLookup: AddressLookup,
+              translate: TranslateService) {
     this.moment = moment;
-    this.geolocation = Geolocation;
     this.addressLookup = addressLookup;
-    this.announceUpdates();
-    this.loadEvents();
-    translate.get([
+    const keys = [
       'We_Had_A_Problem_Loading_Your_Schedule_The_City_Of_Houston_May_Be_Having_Issues',
       'You_Can_Now_Tap_The_Types_Of_Trash_To_Learn_More',
       'Looking_Up_Coordinates',
@@ -58,25 +52,19 @@ export class HomePage {
       'Error_Finding_Position',
       'Try_Again',
       'One_Sec',
-    ]).subscribe(res => {
-      this.translatedText['errorLoading'] = res['We_Had_A_Problem_Loading_Your_Schedule_The_City_Of_Houston_May_Be_Having_Issues'];
-      this.translatedText['youCanNowTapTheTypesOfTrashToLearnMore'] = res['You_Can_Now_Tap_The_Types_Of_Trash_To_Learn_More'];
-      this.translatedText['lookingUpCoordinates'] = res['Looking_Up_Coordinates'];
-      this.translatedText['unableToLocateYou'] = res['Unable_To_Locate_You'];
-      this.translatedText['lookingUpYourSchedule'] = res['Looking_Up_Your_Schedule'];
-      this.translatedText['errorLoadingEvents'] = res['Error_Loading_Events'];
-      this.translatedText['startingUp'] = res['Starting_Up'];
-      this.translatedText['findingYourLocation'] = res['Finding_Your_Location'];
-      this.translatedText['weCouldntLookUpYourLocationCheckYourLocationPermissions'] = res['We_Couldnt_Look_Up_Your_Location_Check_Your_Location_Permissions'];
-      this.translatedText['somethingWentWrong'] = res['Something_Went_Wrong'];
-      this.translatedText['errorFindingPosition'] = res['Error_Finding_Position'];
-      this.translatedText['tryAgain'] = res['Try_Again'];
-      this.translatedText['oneSec'] = res['One_Sec'];
+    ];
+    translate.get(keys).subscribe(res => {
+      keys.forEach(k => {
+        this.translatedText[toCamelCase(k)] = res[k];
+      })
+    }, console.error, () => {
+      this.announceUpdates();
+      this.loadEvents();
     });
   }
 
   announceUpdates() {
-    if(!window.localStorage.getItem('announcedTapTypes')) {
+    if (!window.localStorage.getItem('announcedTapTypes')) {
       window.localStorage.setItem('announcedTapTypes', true.toString());
       let toast = this.toastCtrl.create({
         message: this.translatedText['youCanNowTapTheTypesOfTrashToLearnMore'],
@@ -90,6 +78,7 @@ export class HomePage {
   openHolidaySchedule() {
     UrlUtil.openUrl('http://www.houstontx.gov/solidwaste/holiday.html');
   }
+
   showFilterBar() {
     this.content.scrollToTop();
     this.searching = true;
@@ -181,29 +170,30 @@ export class HomePage {
   loadEvents() {
     this.showLoader(this.translatedText['startingUp']);
     return this.platform.ready().then(() => {
-      this.showLoader(this.translatedText['findingYourLocation']);
-      return this.geolocation.getCurrentPosition()
-        .then(pos => {
-          this.showLoader(this.translatedText['lookingUpSchedule']);
-          return pos;
-        })
-        .catch(rejectFirst(this.translatedText['weCouldntLookUpYourLocationCheckYourLocationPermissions']))
-        .then(this.loadEventsForPosition.bind(this))
-        .catch(rejectFirst(this.translatedText['errorLoading']));
-    }).then(this.hideLoader.bind(this), this.promiseCatcher);
+        this.showLoader(this.translatedText['findingYourLocation']);
+        Geolocation.getCurrentPosition({maximumAge: 3000, timeout: 30000, enableHighAccuracy: true})
+          .then(pos => {
+            this.showLoader(this.translatedText['lookingUpYourSchedule']);
+            return pos;
+          })
+          .catch(rejectFirst(this.translatedText['weCouldntLookUpYourLocationCheckYourLocationPermissions']))
+          .then(this.loadEventsForPosition.bind(this))
+          .catch(rejectFirst(this.translatedText['errorLoading']));
+      }
+    ).then(this.hideLoader.bind(this), this.promiseCatcher);
   }
 
-  // meant to be used in conjunction with promise utils to display the error of the first promise
-  // written in this way to bind(this)
-  promiseCatcher = (error:any):void => {
-      console.log('error happened?', error);
-      if (error instanceof HandledPromiseError) {
-        this.showError(error.message)
-      }
-      else {
-        this.showError(this.translatedText['somethingWentWrong']);
-      }
-      this.hideLoader.bind(this)
+// meant to be used in conjunction with promise utils to display the error of the first promise
+// written in this way to bind(this)
+  promiseCatcher = (error: any): void => {
+    console.log('error happened?', error);
+    if (error instanceof HandledPromiseError) {
+      this.showError(error.message)
+    }
+    else {
+      this.showError(this.translatedText['somethingWentWrong']);
+    }
+    this.hideLoader.bind(this)
   };
 
 
@@ -213,21 +203,21 @@ export class HomePage {
   }
 
   showError(errorMessage) {
-    console.error(errorMessage, this.errorFindingPosition.bind(this));
+    console.error(errorMessage);
     this.hideLoader();
     this.errorMessage = errorMessage;
   }
 
-  clearError():void {
+  clearError(): void {
     this.hideLoader();
     this.errorMessage = null;
   }
 
-  retry():Promise<Array<any>> {
+  retry(): Promise < Array < any >> {
     this.showLoader(this.translatedText['tryAgain']);
     this.clearError();
     console.log('reloading', this.coords);
-    if(!this.coords) {
+    if (!this.coords) {
       //if no coords try to geolocate again
       return this.loadEvents();
     }
@@ -242,7 +232,7 @@ export class HomePage {
     }
   }
 
-  loadEventsForPosition(pos):Promise<Array<any>> {
+  loadEventsForPosition(pos): Promise < Array < any >> {
     //data format from arcgis is all over the place, need to standardize this to prevent headaches :-/
     if (pos.x && !pos.coords) {
       pos.coords = {

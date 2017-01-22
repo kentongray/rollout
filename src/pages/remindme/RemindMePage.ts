@@ -241,7 +241,6 @@ export class RemindMePage {
         });
       }).catch(() => {
         this.loadingController.create({ content: this.localizedText['sorryThereWasAProblemSettingUpYourReminders'] });
-        console.log(arguments);
       });
     })
   }
