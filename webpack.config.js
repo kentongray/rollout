@@ -42,7 +42,8 @@ module.exports = {
       'app'
     ],
     alias: {
-      'angular2': path.resolve('node_modules/angular2')
+      'angular2': path.resolve('node_modules/angular2'),
+      'moment': path.resolve('node_modules/moment/src/locale')
     },
     extensions: ["", ".js", ".ts"]
   }

@@ -11,6 +11,7 @@ import {DetailPage} from "../pages/detail/DetailPage";
 import {HttpModule, Http} from "@angular/http";
 import {TranslateModule, TranslateLoader} from "ng2-translate";
 import {createTranslateLoader} from "../common/CreateTranslateLoader";
+import { BrowserModule } from '@angular/platform-browser';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import {createTranslateLoader} from "../common/CreateTranslateLoader";
     DayOfWeekPipe,
   ],
   imports: [
+    BrowserModule,
     IonicModule.forRoot(RolloutApp),
     HttpModule,
     TranslateModule.forRoot({

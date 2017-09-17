@@ -167,7 +167,7 @@ export class HomePage {
     }
   }
 
-  loadEvents() {
+  loadEvents():Promise<any> {
     this.showLoader(this.translatedText['startingUp']);
     return this.platform.ready().then(() => {
         this.showLoader(this.translatedText['findingYourLocation']);
