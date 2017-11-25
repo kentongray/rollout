@@ -1,6 +1,6 @@
 {
   "name": "Rollout",
   "app_id": "com.kentonue.rollout",
-  "v2": true,
-  "typescript": true
+  "integrations": {},
+  "type": "ionic-angular"
 }

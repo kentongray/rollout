@@ -1,4 +1,5 @@
 export class HandledPromiseError extends Error {
+  handledPromiseError = true;
   constructor(public message:string, public causedBy?:any) {
     super(message);
   }
@@ -10,10 +11,12 @@ export class HandledPromiseError extends Error {
  */
 export function rejectFirst(message:string) {
   return function(causedBy) {
-    if (causedBy instanceof HandledPromiseError) {
-      console.error('Caught first Rejection', message, causedBy);
+    console.log(new HandledPromiseError(message, causedBy) instanceof HandledPromiseError, 'testing assumptions');
+    if (causedBy.handledPromiseError) {
+      console.error('Ignoring future failures');
       return Promise.reject(causedBy)
     }
+    console.error('Caught first Rejection', message, causedBy);
     return Promise.reject(new HandledPromiseError(message, causedBy))
   }
 

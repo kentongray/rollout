@@ -21,11 +21,11 @@ export class RelativeDatePipe implements PipeTransform {
 
   transform(value:any, args?:any[]):any {
     if (moment().isSame(value, 'day')) {
-      return `${this.today} ${value.format('MMM Do')}`;
+      return `${this.today} ${value.format('MMMM, Do')}`;
     } else if (moment().add(1, 'days').isSame(value, 'day')) {
-      return `${this.tomorrow} ${value.format('MMM Do')}`;
+      return `${this.tomorrow} ${value.format('MMMM, Do')}`;
     } else {
-      return value.format('dddd MMM Do');
+      return value.format('dddd, MMMM Do');
     }
   }
 }

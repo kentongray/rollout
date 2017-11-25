@@ -12,7 +12,7 @@ import {HttpModule, Http} from "@angular/http";
 import {TranslateModule, TranslateLoader} from "ng2-translate";
 import {createTranslateLoader} from "../common/CreateTranslateLoader";
 import { BrowserModule } from '@angular/platform-browser';
-
+import { Event } from '../common/components/Event'
 @NgModule({
   declarations: [
     RolloutApp,
@@ -22,6 +22,7 @@ import { BrowserModule } from '@angular/platform-browser';
     RemindMePage,
     RelativeDatePipe,
     DayOfWeekPipe,
+    Event,
   ],
   imports: [
     BrowserModule,

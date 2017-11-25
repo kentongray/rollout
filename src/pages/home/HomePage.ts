@@ -1,15 +1,16 @@
-import {Platform, NavController, Loading, LoadingController, Content, ToastController} from "ionic-angular";
+import {Content, Loading, LoadingController, NavController, Platform, ToastController} from "ionic-angular";
 import {AddressLookup} from "../../common/AddressLookup";
-import {Scheduler, PickupDay} from "../../common/Scheduler";
+import {Notification, PickupDay, Scheduler} from "../../common/Scheduler";
 import {Geolocation} from "ionic-native";
 import moment from "moment";
 import {RemindMePage} from "../remindme/RemindMePage";
 import {Component, ViewChild} from "@angular/core";
-import {rejectFirst, HandledPromiseError} from "../../common/PromiseExceptionHandler";
+import {HandledPromiseError, rejectFirst} from "../../common/PromiseExceptionHandler";
 import {DetailPage} from "../detail/DetailPage";
 import {UrlUtil} from "../../common/UrlUtil";
 import {TranslateService} from "ng2-translate";
 import {toCamelCase} from "../../common/SnakeToCamel";
+
 @Component({
   templateUrl: 'HomePage.html'
 })
@@ -22,10 +23,11 @@ export class HomePage {
   moment;
   addresses;
   searching: Boolean;
-  events = [];
+  events: any[] = [];
+  notifications: Notification[];
   errorMessage?: string;
   loadingContent: Loading;
-  loading: boolean;
+  loading: boolean = false;
   currentSearch: string;
   translatedText = {};
 
@@ -35,9 +37,12 @@ export class HomePage {
               private nav: NavController,
               private SchedulerService: Scheduler,
               addressLookup: AddressLookup,
-              translate: TranslateService) {
+              private translate: TranslateService) {
     this.moment = moment;
     this.addressLookup = addressLookup;
+  }
+
+  ngOnInit() {
     const keys = [
       'We_Had_A_Problem_Loading_Your_Schedule_The_City_Of_Houston_May_Be_Having_Issues',
       'You_Can_Now_Tap_The_Types_Of_Trash_To_Learn_More',
@@ -53,11 +58,12 @@ export class HomePage {
       'Try_Again',
       'One_Sec',
     ];
-    translate.get(keys).subscribe(res => {
+    this.translate.get(keys).subscribe(res => {
       keys.forEach(k => {
         this.translatedText[toCamelCase(k)] = res[k];
       })
     }, console.error, () => {
+      console.log('done with translations');
       this.announceUpdates();
       this.loadEvents();
     });
@@ -79,6 +85,10 @@ export class HomePage {
     UrlUtil.openUrl('http://www.houstontx.gov/solidwaste/holiday.html');
   }
 
+  tapNotification(notification:Notification) {
+    UrlUtil.openUrl(notification.link);
+  }
+
   showFilterBar() {
     this.content.scrollToTop();
     this.searching = true;
@@ -91,6 +101,7 @@ export class HomePage {
   }
 
   selectAddress(suggestion) {
+    this.clearError();
     this.searching = false;
     this.addresses = null;
     this.showLoader(this.translatedText['lookingUpCoordinates']);
@@ -102,7 +113,7 @@ export class HomePage {
       .then(r => {
         this.hideLoader();
         return r;
-      }, e => this.showError(this.translatedText['errorLoadingEvents']))
+      }, e => this.showError(this.translatedText['errorLoadingEvents'], e))
       .catch(e => {
         this.hideLoader();
         throw "Error Loading Events";
@@ -160,6 +171,7 @@ export class HomePage {
   }
 
   hideLoader() {
+    console.log('hiding loader', new Error().stack);
     this.loading = false;
     if (this.loadingContent) {
       this.loadingContent.dismiss();
@@ -167,33 +179,38 @@ export class HomePage {
     }
   }
 
-  loadEvents():Promise<any> {
+  loadEvents(): Promise<any> {
+    console.log('loading events');
     this.showLoader(this.translatedText['startingUp']);
     return this.platform.ready().then(() => {
+        console.log('ready');
         this.showLoader(this.translatedText['findingYourLocation']);
-        Geolocation.getCurrentPosition({maximumAge: 3000, timeout: 30000, enableHighAccuracy: true})
+        return Geolocation.getCurrentPosition({maximumAge: 3000, timeout: 30000, enableHighAccuracy: true})
           .then(pos => {
+            console.log('got the geo');
             this.showLoader(this.translatedText['lookingUpYourSchedule']);
             return pos;
-          })
-          .catch(rejectFirst(this.translatedText['weCouldntLookUpYourLocationCheckYourLocationPermissions']))
-          .then(this.loadEventsForPosition.bind(this))
-          .catch(rejectFirst(this.translatedText['errorLoading']));
+          }, rejectFirst(this.translatedText['weCouldntLookUpYourLocationCheckYourLocationPermissions']))
+          .then(this.loadEventsForPosition.bind(this), rejectFirst(this.translatedText['errorLoading']))
       }
-    ).then(this.hideLoader.bind(this), this.promiseCatcher);
+    )
+      .catch(this.promiseCatcher)
+      .then(this.hideLoader.bind(this));
   }
 
-// meant to be used in conjunction with promise utils to display the error of the first promise
-// written in this way to bind(this)
+  // meant to be used in conjunction with promise utils to display the error of the first promise
+  // written in this way to bind(this)
   promiseCatcher = (error: any): void => {
-    console.log('error happened?', error);
-    if (error instanceof HandledPromiseError) {
+    console.log('error happened?', error, error instanceof HandledPromiseError, error.causedBy);
+    if (error.handledPromiseError) {
       this.showError(error.message)
     }
     else {
+      console.warn('showing a generic error, we can do better right', error);
+      window['blah'] = error;
       this.showError(this.translatedText['somethingWentWrong']);
     }
-    this.hideLoader.bind(this)
+    return this.hideLoader();
   };
 
 
@@ -202,20 +219,21 @@ export class HomePage {
     console.error('Error Finding Position', err);
   }
 
-  showError(errorMessage) {
-    console.error(errorMessage);
+  showError(errorMessage, e: Error = null) {
+    console.error(errorMessage, e);
     this.hideLoader();
     this.errorMessage = errorMessage;
   }
 
   clearError(): void {
+    console.log('clearing loader');
     this.hideLoader();
     this.errorMessage = null;
   }
 
-  retry(): Promise < Array < any >> {
-    this.showLoader(this.translatedText['tryAgain']);
+  retry(): Promise<any> {
     this.clearError();
+    this.showLoader(this.translatedText['tryAgain']);
     console.log('reloading', this.coords);
     if (!this.coords) {
       //if no coords try to geolocate again
@@ -226,13 +244,15 @@ export class HomePage {
       return this.loadEventsForPosition({coords: this.coords})
         .catch(rejectFirst(this.translatedText['errorLoading']))
         .then(r => {
+          console.log('hiding that loader');
           this.hideLoader();
           return r
         }, this.promiseCatcher);
     }
   }
 
-  loadEventsForPosition(pos): Promise < Array < any >> {
+  loadEventsForPosition(pos): Promise<Array<any>> {
+    console.log('im not here right');
     //data format from arcgis is all over the place, need to standardize this to prevent headaches :-/
     if (pos.x && !pos.coords) {
       pos.coords = {
@@ -246,9 +266,17 @@ export class HomePage {
 
     return this.SchedulerService.whenLoaded.then(() => {
       this.events = this.SchedulerService.events;
+      this.sendNotifications(this.SchedulerService.notifications);
       this.pickupDays = this.SchedulerService.pickupDays;
+      console.log('all done');
       this.hideLoader();
       return this.events;
     });
+  }
+
+  private sendNotifications(notifications: Notification[]) {
+    console.log("notifications", notifications);
+    // filter out old events and show the current ones
+    this.notifications = notifications.filter(n => n.expiresOn.isAfter(moment()))
   }
 }
