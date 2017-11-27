@@ -2,7 +2,7 @@ import {Component} from "@angular/core";
 import {Platform, Config} from "ionic-angular";
 import {StatusBar} from "ionic-native";
 import {HomePage} from "../pages/home/HomePage";
-import {TranslateService} from "ng2-translate";
+import {TranslateService} from "@ngx-translate/core";
 
 @Component({
   template: `<ion-nav [root]="rootPage"></ion-nav>`

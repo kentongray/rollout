@@ -1,6 +1,6 @@
 import {Pipe, PipeTransform} from '@angular/core';
 import moment from 'moment';
-import {TranslateService} from 'ng2-translate';
+import {TranslateService} from '@ngx-translate/core';
 
 /**
  * Switches a moment compatible date object into a relative date (like Tomorrow)

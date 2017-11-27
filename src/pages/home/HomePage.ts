@@ -8,7 +8,7 @@ import {Component, ViewChild} from "@angular/core";
 import {HandledPromiseError, rejectFirst} from "../../common/PromiseExceptionHandler";
 import {DetailPage} from "../detail/DetailPage";
 import {UrlUtil} from "../../common/UrlUtil";
-import {TranslateService} from "ng2-translate";
+import {TranslateService} from "@ngx-translate/core";
 import {toCamelCase} from "../../common/SnakeToCamel";
 
 @Component({
@@ -60,6 +60,7 @@ export class HomePage {
     ];
     this.translate.get(keys).subscribe(res => {
       keys.forEach(k => {
+        console.log('translated', k, res[k]);
         this.translatedText[toCamelCase(k)] = res[k];
       })
     }, console.error, () => {

@@ -9,10 +9,18 @@ import {Focuser} from "../common/Focuser";
 import {DayOfWeekPipe, RelativeDatePipe} from "../common/Pipes";
 import {DetailPage} from "../pages/detail/DetailPage";
 import {HttpModule, Http} from "@angular/http";
-import {TranslateModule, TranslateLoader} from "ng2-translate";
-import {createTranslateLoader} from "../common/CreateTranslateLoader";
+import {TranslateModule, TranslateLoader} from "@ngx-translate/core";
 import { BrowserModule } from '@angular/platform-browser';
 import { Event } from '../common/components/Event'
+import {TranslateHttpLoader} from "@ngx-translate/http-loader";
+import {HttpClient, HttpClientModule} from "@angular/common/http";
+
+// AoT requires an exported function for factories
+export function HttpLoaderFactory(http: HttpClient) {
+  return new TranslateHttpLoader(http, 'assets/i18n/', '.json');
+}
+
+
 @NgModule({
   declarations: [
     RolloutApp,
@@ -28,10 +36,13 @@ import { Event } from '../common/components/Event'
     BrowserModule,
     IonicModule.forRoot(RolloutApp),
     HttpModule,
+    HttpClientModule,
     TranslateModule.forRoot({
-      provide: TranslateLoader,
-      useFactory: (createTranslateLoader),
-      deps: [Http]
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient]
+      }
     }),
   ],
   bootstrap: [IonicApp],

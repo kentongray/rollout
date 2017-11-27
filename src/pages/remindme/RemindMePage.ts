@@ -2,7 +2,7 @@ import {NavParams, NavController, Alert, Loading, AlertController, LoadingContro
 import {Scheduler} from "../../common/Scheduler";
 import _ from "lodash";
 import {Component} from "@angular/core";
-import {TranslateService} from "ng2-translate";
+import {TranslateService} from "@ngx-translate/core";
 
 interface Window {
   cordova:any;
