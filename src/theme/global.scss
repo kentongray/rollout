@@ -55,22 +55,14 @@
 
 }
 
+ion-header {
+	backdrop-filter: blur(8px);
+}
+
 a, a:link, a:visited {
 	color: white;
 }
 
-
-.bottom-actions {
-	bottom:0;
-	left: 0;
-	right: 0;
-	background-color: map-get($colors, primary);
-	border-top: solid 1px #43a06f;
-	button {
-		width: 100%;
-
-	}
-}
 
 .alert-ios [aria-checked=true] .alert-checkbox-icon {
 	background-color: white !important;

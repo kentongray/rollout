@@ -43,6 +43,9 @@ export class HomePage {
   }
 
   ngOnInit() {
+    const splashscreen = (<any> navigator).splashscreen;
+    if(splashscreen)
+      splashscreen.hide();
     const keys = [
       'We_Had_A_Problem_Loading_Your_Schedule_The_City_Of_Houston_May_Be_Having_Issues',
       'You_Can_Now_Tap_The_Types_Of_Trash_To_Learn_More',
@@ -60,7 +63,6 @@ export class HomePage {
     ];
     this.translate.get(keys).subscribe(res => {
       keys.forEach(k => {
-        console.log('translated', k, res[k]);
         this.translatedText[toCamelCase(k)] = res[k];
       })
     }, console.error, () => {

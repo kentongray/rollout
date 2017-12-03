@@ -1,9 +1,9 @@
 <ion-header>
-    <ion-navbar color="primary">
+    <ion-navbar>
         <ion-searchbar *ngIf="searching" autofocus (keyup)="searchAddress($event.target.value)"
                        placeholder="{{'Enter_Your_Address' | translate}}" (cancel)="searching = false"></ion-searchbar>
         <ion-title *ngIf="!searching">
-            <img src="assets/img/rollout_logo.png" style="margin-top:5px;" height="30" width="143">
+            <img src="assets/img/rollout_logo_green.png" style="margin-top:5px;" height="30" width="143">
         </ion-title>
         <ion-buttons end *ngIf="!searching">
             <button ion-button side="secondary" (click)="showFilterBar()">
@@ -12,7 +12,7 @@
         </ion-buttons>
     </ion-navbar>
 </ion-header>
-<ion-content class="home">
+<ion-content class="home" fullscreen>
     <div *ngIf="searching" class="address-search-results">
         <ion-list>
             <ion-item (click)="lookupCurrentLocation()">
@@ -72,12 +72,10 @@
             </div>
         </div>
         <div *ngFor="let event of events">
-            <event [data]="event" [pickupDays]="pickupDays" (onTapCategory)="goToDetails(event)"></event>
+            <event [data]="event" [pickupDays]="pickupDays" (onTapHoliday)="openHolidaySchedule()" (onTapCategory)="goToDetails($event)"></event>
         </div>
     </div>
-    <!-- spacer for the button :( -->
-    <div style="height:60px"></div>
-    <div ion-fixed class="bottom-actions" *ngIf="!(loading || errorMessage || events.length == 0)">
+    <div class="bottom-actions" ion-fixed *ngIf="!(loading || errorMessage || events.length == 0)">
         <button ion-button (click)="goToRemindMe()">
             <ion-icon name="notifications"></ion-icon> &nbsp;
             {{ 'Remind_Me' | translate }}

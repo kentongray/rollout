@@ -5,15 +5,15 @@ import moment from "moment";
   template: `<ion-card class="upcoming-event">
             <ion-card-header class="date-header">{{data.day | relativeDate}}</ion-card-header>
             <div *ngIf="data.possibleHoliday" class="possible-holiday">
-                <i class="ion-android-warning"></i>
+                <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
                 {{'Hey_This_Might_Be_A_Holiday' | translate}} <br>
-                {{'Check_The' | translate}} <a (click)="onTapHoliday.emit(category)" href="#">{{'Holiday_Schedule' | translate}}</a> {{'To_Make_Sure' | translate}}
+                {{'Check_The' | translate}} <a (click)="onTapHoliday.emit()" href="#">{{'Holiday_Schedule' | translate}}</a> {{'To_Make_Sure' | translate}}
             </div>
             <ul class="waste-types">
                 <li *ngFor="let category of data.categories" class="waste-type">
                     <div (click)="onTapCategory.emit(category)" tappable>
                         <div *ngIf="category == 'waste'">
-                            <ion-icon name="trash"></ion-icon>
+                            <i class="fa fa-trash"></i>
                             <label>{{'Trash_And_Lawn' | translate}}</label>
                             <div class="when">{{'Every' | translate}} {{pickupDays.wasteDay | dayOfWeek}}</div>
                         </div>
