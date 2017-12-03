@@ -11,6 +11,10 @@ html, body {
 	right: 0;
 	text-align: center;
 	button {
+		ion-icon {
+			font-size: 25px;
+			margin-right: 5px;
+		}
 		border-radius: 50px;
 		box-shadow: 0 7px 28px rgba(0,0,0,0.25), 0 5px 10px rgba(0,0,0,0.22);
 	}
@@ -138,7 +142,7 @@ a, a:link, a:visited {
 	top: 5px;
 	left: 10px;
 	right: 10px;
-	backdrop-filter: blur(10px);
+	-webkit-backdrop-filter: blur(10px);
 	background-color: rgba(255, 255, 255, .8);
 	.item {
 		background-color: transparent;
@@ -162,12 +166,10 @@ a, a:link, a:visited {
 }
 
 .notifications {
-	border-bottom: solid 1px lighten(map-get($colors, primary), 40%);
 	padding: 10px;
 	font-family: sans-serif;
 	color: #333;
 	.notification {
-
 		.title {
 			font-size: 10px;
 			font-weight: bold;

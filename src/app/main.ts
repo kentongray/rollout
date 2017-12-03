@@ -6,5 +6,5 @@ platformBrowserDynamic().bootstrapModule(AppModule);
 document.addEventListener("deviceready", onDeviceReady, false);
 
 function onDeviceReady() {
- // (<any> window).codePush.sync();
+  (<any> window).codePush.sync();
 }

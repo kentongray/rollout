@@ -14,10 +14,23 @@ import { BrowserModule } from '@angular/platform-browser';
 import { Event } from '../common/components/Event'
 import {TranslateHttpLoader} from "@ngx-translate/http-loader";
 import {HttpClient, HttpClientModule} from "@angular/common/http";
+import {Observable} from "rxjs/Observable";
+import spanish from "../i18n/es";
+import english from "../i18n/en";
+import {of} from "rxjs/observable/of";
 
 // AoT requires an exported function for factories
-export function HttpLoaderFactory(http: HttpClient) {
-  return new TranslateHttpLoader(http, 'assets/i18n/', '.json');
+export function HttpLoaderFactory() {
+  return new SimpleTranslateLoader();
+}
+
+class SimpleTranslateLoader extends TranslateLoader {
+  getTranslation(lang: string): Observable<any> {
+    if(lang == 'es')
+      return of(spanish);
+    else return of(english)
+  }
+
 }
 
 

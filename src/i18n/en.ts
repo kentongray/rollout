@@ -1,4 +1,4 @@
-{
+export default {
   "Remind_Me": "Remind Me",
   "Use_Current_Location": "Use Current Location",
   "Address_Not_Found": "Address Not Found",
@@ -68,7 +68,6 @@
   "When_Should_Rollout_Alert_You": "When Should Rollout! Alert You?",
   "In_The_Morning_AM": "In the Morning (AM)",
   "At_Night_PM": "At Night (PM)",
-  "What_Time": "What Time?",
   "Cancel": "Cancel",
   "What_Types": "What Types?",
   "Creating_Reminders": "Creating Reminders",
@@ -85,7 +84,6 @@
   "We_Couldnt_Look_Up_Your_Location_Check_Your_Location_Permissions": "We couldn't look up your location.\n Check your location permissions or manually enter your location.",
   "Something_Went_Wrong": "Something Went Wrong...",
   "Error_Finding_Position": "Error Finding Position",
-  "Try_Again": "Try Again?",
   "One_Sec": "One Sec!",
   "Today": "Today",
   "Tomorrow": "Tomorrow",

@@ -1,4 +1,4 @@
-{
+export default {
   "Remind_Me": "Recuerdame",
   "Use_Current_Location": "Usar Ubicaci\u00f3n Actual",
   "Address_Not_Found": "Direcci\u00f3n No Encontrada",
@@ -59,7 +59,6 @@
   "Whats_Junk_Waste": "¿Que Son Desechos de Basura?",
   "Whats_Junk_Waste_Details": "\"Desechos de Basura\" se utiliza para describir art\u00edculos tales como muebles, electrodom\u00e9sticos y otros materiales voluminosos. Estos elementos deben colocarse a la orilla de la banqueta en un lugar f\u00e1cilmente accesible al camion de basura entre las 6:00 p.m. el viernes anterior y las 7:00 a.m. en el d\u00eda de recolecci\u00f3n programada.",
   "How_Much_Can_I_Put_Out": "¿Cuánto puedo sacar?",
-  "How_Much_Can_I_Put_Out": "No m\u00e1s de ocho yardas c\u00fabicas por residencia ser\u00e1n recolectadas en el dia de colecci\u00f3n de residuos de \u00e1rboles. De esta cantidad, s\u00f3lo un m\u00e1ximo de cuatro metros c\u00fabicos de material de construcci\u00f3n como tejas, ladrillos, yeso o concreto generados por el residente en relaci\u00f3n con el mantenimiento de la propiedad residencial puede ser recolectado por el personal del departamento.",
   "Whats_Tree_Waste": "¿Que son Residuos de \u00c1rboles?",
   "Whats_Tree_Waste_Details": "\"Residuos de \u00c1rboles\", consiste de troncos de \u00e1rbol, ramas o tocones. La madera, los muebles y la madera tratada no seran aceptados.",
   "Lets_Roll": "¡A Rodar!",
@@ -68,7 +67,6 @@
   "When_Should_Rollout_Alert_You": "¿Cuando deberia Rollout! avisarte?",
   "In_The_Morning_AM": "En la Ma\u00f1ana (AM)",
   "At_Night_PM": "Por la Noche (PM)",
-  "What_Time": "¿Qu\u00e9 hora?",
   "Cancel": "Cancelar",
   "What_Types": "¿Qu\u00e9 tipos?",
   "Creating_Reminders": "Creando Recordatorios",
@@ -85,7 +83,6 @@
   "We_Couldnt_Look_Up_Your_Location_Check_Your_Location_Permissions": "No pudimos buscar su ubicaci\u00f3n. Compruebe sus permisos de ubicaci\u00f3n",
   "Something_Went_Wrong": "Algo sali\u00f3 mal...",
   "Error_Finding_Position": "Error al encontrar la posici\u00f3n",
-  "Try_Again": "Int\u00e9ntalo de nuevo",
   "One_Sec": "¡Un Segundo!",
   "Today": "Hoy",
   "Tomorrow": "Ma\u00f1ana",
