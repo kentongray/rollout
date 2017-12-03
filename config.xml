@@ -99,8 +99,7 @@
         <variable name="GEOLOCATION_USAGE_DESCRIPTION" value=" " />
     </plugin>
     <plugin name="de.appplant.cordova.plugin.local-notification" spec="https://github.com/katzer/cordova-plugin-local-notifications" />
-    <plugin name="cordova-plugin-statusbar" spec="^2.3.0" />
     <plugin name="cordova-plugin-splashscreen" spec="^4.1.0" />
     <plugin name="cordova-plugin-code-push" spec="^1.10.0-beta" />
-    <plugin name="cordova-plugin-wkwebview-file-xhr" spec="^2.0.0" />
+    <plugin name="cordova-plugin-statusbar" spec="^2.3.0" />
 </widget>
