@@ -8,11 +8,10 @@ import {Scheduler} from "../common/Scheduler";
 import {Focuser} from "../common/Focuser";
 import {DayOfWeekPipe, RelativeDatePipe} from "../common/Pipes";
 import {DetailPage} from "../pages/detail/DetailPage";
-import {HttpModule, Http} from "@angular/http";
+import {HttpModule} from "@angular/http";
 import {TranslateModule, TranslateLoader} from "@ngx-translate/core";
 import { BrowserModule } from '@angular/platform-browser';
 import { Event } from '../common/components/Event'
-import {TranslateHttpLoader} from "@ngx-translate/http-loader";
 import {HttpClient, HttpClientModule} from "@angular/common/http";
 import {Observable} from "rxjs/Observable";
 import spanish from "../i18n/es";

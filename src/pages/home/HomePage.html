@@ -3,7 +3,7 @@
         <ion-searchbar *ngIf="searching" autofocus (keyup)="searchAddress($event.target.value)"
                        placeholder="{{'Enter_Your_Address' | translate}}" (cancel)="searching = false"></ion-searchbar>
         <ion-title *ngIf="!searching">
-            <img src="assets/img/rollout_logo_green.png" style="margin-top:5px;" height="30" width="143">
+            <img src="assets/img/rollout_logo_green.png" height="30" width="143">
         </ion-title>
         <ion-buttons end *ngIf="!searching">
             <button ion-button side="secondary" (click)="showFilterBar()">

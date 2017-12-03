@@ -34,3 +34,26 @@
 .searchbar-input,  .searchbar-input::-webkit-input-placeholder{
 	color: white;
 }
+
+
+@media only screen
+and (device-width : 375px)
+and (device-height : 812px)
+and (-webkit-device-pixel-ratio : 3)
+and (orientation : portrait) {
+	html {
+		height: 812px !important;
+		width: 375px !important;
+	}
+}
+
+@media only screen
+and (device-width : 375px)
+and (device-height : 812px)
+and (-webkit-device-pixel-ratio : 3)
+and (orientation : landscape) {
+	html {
+		width: 812px !important;
+		height: 375px !important;
+	}
+}

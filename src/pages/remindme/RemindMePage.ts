@@ -4,11 +4,6 @@ import _ from "lodash";
 import {Component} from "@angular/core";
 import {TranslateService} from "@ngx-translate/core";
 
-interface Window {
-  cordova:any;
-}
-
-
 @Component({
   templateUrl: 'RemindMePage.html',
   providers: [Scheduler],
@@ -33,9 +28,9 @@ export class RemindMePage {
       private loadingController:LoadingController,
       private alertController:AlertController,
       private nav:NavController,
-      private navParams:NavParams,
       private schedulerService:Scheduler,
-      private translate:TranslateService
+      translate:TranslateService,
+      navParams:NavParams
   ) {
     this.notificationsEnabled = window.localStorage.getItem('notificationsEnabled') == 'true';
     this.notificationsData = JSON.parse(window.localStorage.getItem('notificationsData') || "{}");

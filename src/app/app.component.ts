@@ -1,6 +1,5 @@
 import {Component} from "@angular/core";
 import {Platform, Config} from "ionic-angular";
-import {StatusBar} from "ionic-native";
 import {HomePage} from "../pages/home/HomePage";
 import {TranslateService} from "@ngx-translate/core";
 
@@ -20,9 +19,6 @@ export class RolloutApp {
       if (splashscreenPlugin) {
         splashscreenPlugin.hide();
       }
-      // Okay, so the platform is ready and our plugins are available.
-      // Here you can do any higher level native things you might need.
-      StatusBar.styleLightContent();
       translate.get('Back').subscribe(res => {
         config.set('backButtonText', res);
       })
