@@ -6,6 +6,7 @@ platforms/
 plugins/
 .idea/
 *.iml
+*.pem
 
 #android
 android
