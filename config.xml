@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget android-versionCode="300200" id="com.kentonue.rollout" version="4.0.0" xmlns="http://www.w3.org/ns/widgets">
+<widget android-versionCode="300200" id="com.kentonue.rollout" version="4.0.1" xmlns="http://www.w3.org/ns/widgets">
     <name>Rollout!</name>
     <description>
 		An app that helps you with your trash and recycling schedules

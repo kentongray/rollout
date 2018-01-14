@@ -1,0 +1,28 @@
+
+@keyframes slideDown {
+	0% {
+		opacity: .1;
+		transform: translateY(-30%);
+		box-shadow: 0 14px 28px rgba(0,0,0,0.1), 0 10px 10px rgba(0,0,0,0.1);
+	}
+	100% {
+		opacity: 1;
+		transform: translateY(0%);
+		box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+	}
+}
+
+
+.rollout ion-card {
+	animation: .3s ease-out 0s 1 slideDown;
+	color: #4e4e4e;
+	background: linear-gradient(white, #fcfcfc);
+	border-radius: 8px;
+	box-shadow: 0 7px 28px rgba(0,0,0,0.1), 0 5px 10px rgba(0,0,0,0.15);
+	margin-bottom: 30px;
+}
+
+.rollout ion-card ion-card-header {
+	font-family: aleoregular, Sans-serif;
+	color: map-get($colors, primary);
+}

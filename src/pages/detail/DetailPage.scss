@@ -1,28 +1,13 @@
-@keyframes slideDown {
-	0% {
-		background-color: rgba(255,255,255,.1);
-		transform: translateY(-100%);
-	}
-	100% {
-		transform: translateY(0%);
-	}
-}
+@import '../../theme/rollout-global';
+
 .detail {
-	font-size: 1.2em;
 	a, a:link, a:visited, a:active {
 		color: darken(map-get($colors, primary), 20%);
 	}
-	h2 {
-		color: map-get($colors, primary);
-	}
-	h2, h1 {
-		font-family: aleoregular;
-		text-align: center;
-	}
 
 	h3 {
-		font-family: aleoitalic;
-		font-size: large;
+		text-transform: uppercase;
+		font-weight: bold;
 	}
 
 	ul, li {
@@ -39,18 +24,4 @@
 	u {
 		color: map-get($colors, primary);
 	}
-
-
-	.category {
-		background-color: white;
-		padding: 5%;
-		margin: 5%;
-		box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
-		border-radius: 2px;
-		animation-name: slideDown;
-		animation-duration: .5s;
-	}
-
-
-
 }

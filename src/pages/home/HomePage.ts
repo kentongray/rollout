@@ -36,12 +36,14 @@ export class HomePage {
               private platform: Platform,
               private nav: NavController,
               private SchedulerService: Scheduler,
-              addressLookup: AddressLookup,
+              private addressLookup: AddressLookup,
               private translate: TranslateService) {
     this.moment = moment;
-    this.addressLookup = addressLookup;
   }
 
+  ionViewWillEnter() {
+    this.searching = false;
+  }
   ngOnInit() {
     const splashscreen = (<any> navigator).splashscreen;
     if(splashscreen)
@@ -174,7 +176,6 @@ export class HomePage {
   }
 
   hideLoader() {
-    console.log('hiding loader', new Error().stack);
     this.loading = false;
     if (this.loadingContent) {
       this.loadingContent.dismiss();

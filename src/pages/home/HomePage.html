@@ -1,13 +1,15 @@
 <ion-header>
     <ion-navbar>
-        <ion-searchbar *ngIf="searching" autofocus (keyup)="searchAddress($event.target.value)"
-                       placeholder="{{'Enter_Your_Address' | translate}}" (cancel)="searching = false"></ion-searchbar>
+        <ion-searchbar *ngIf="searching" focuser (keyup)="searchAddress($event.target.value)"
+                       placeholder="{{'Enter_Your_Address' | translate}}" (ionCancel)="searching = false" [showCancelButton]="true">
+
+        </ion-searchbar>
         <ion-title *ngIf="!searching">
             <img src="assets/img/rollout_logo_green.png" height="30" width="143">
         </ion-title>
         <ion-buttons end *ngIf="!searching">
             <button ion-button side="secondary" (click)="showFilterBar()">
-                <ion-icon white name="pin"></ion-icon>
+                <ion-icon name="ios-pin-outline"></ion-icon>
             </button>
         </ion-buttons>
     </ion-navbar>
@@ -16,8 +18,12 @@
     <div *ngIf="searching" class="address-search-results">
         <ion-list>
             <ion-item (click)="lookupCurrentLocation()">
-                <ion-icon black name="pin"></ion-icon>
+                <ion-icon black name="ios-pin-outline"></ion-icon>
                 {{'Use_Current_Location' | translate}}
+            </ion-item>
+            <ion-item (click)="lookupCurrentLocation()">
+                <ion-icon name="ios-map"></ion-icon>
+                <h2>Recent Locations</h2>
             </ion-item>
             <div *ngIf="addresses">
                 <ion-item *ngIf="!addresses.length">

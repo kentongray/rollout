@@ -27,23 +27,5 @@
 		visibility: visible !important;
 	}
 
-	@keyframes slideDown {
-		0% {
-			background-color: rgba(255,255,255,.1);
-			transform: translateY(-80%);
-		}
-		50%{
-			background-color: rgba(255,255,255,.8);
-			transform: translateY(15%);
-		}
-		90%{
-			background-color: rgba(255,255,255,.9);
-			transform: translateY(-2%);
-		}
-		100% {
-			transform: translateY(0%);
-		}
-	}
-
 
 }

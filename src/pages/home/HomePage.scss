@@ -1,3 +1,5 @@
+@import '../../theme/rollout-global';
+
 html, body {
 }
 
@@ -138,12 +140,10 @@ a, a:link, a:visited {
 	border-radius: 2px;
 	font-family: sans-serif;
 	z-index: 1;
-	position: absolute;
-	top: 5px;
-	left: 10px;
-	right: 10px;
+	width: 100vw;
+	position: fixed;
 	-webkit-backdrop-filter: blur(10px);
-	background-color: rgba(255, 255, 255, .8);
+	background-color: rgba(255, 255, 255, .9);
 	.item {
 		background-color: transparent;
 		color: #333333;

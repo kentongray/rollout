@@ -7,8 +7,8 @@
 </ion-header>
 <ion-content class="padding detail">
 
-    <div class="category" *ngIf="!category || category == 'waste'">
-        <h2>{{'Trash' | translate}}</h2>
+    <ion-card class="category" *ngIf="!category || category == 'waste'">
+        <ion-card-header>{{'Trash' | translate}}</ion-card-header>
         <ul>
             <li>
                 <h3>{{'What_Time' | translate}}</h3>
@@ -20,84 +20,96 @@
             </li>
         </ul>
 
-    </div>
-    <div class="category" *ngIf="!category || category == 'waste'">
+    </ion-card>
+    <ion-card class="category" *ngIf="!category || category == 'waste'">
+        <ion-card-header>{{'Yard_Waste' | translate}}</ion-card-header>
+        <ion-content>
+            <ul>
+                <li>
+                    <h3>{{'About_Yard_Waste' | translate}}</h3>
+                    {{'Yard_Waste_Details_One' | translate}}
+                    <a (click)="openUrl('https://www.amazon.com/EcoSafe-GKL042657-1-33-Gallon-Houston-Biodegradable/dp/B004BKIOLW')">
+                        {{'Yard_Waste_Details_Two' | translate}}
+                    </a>
+                    {{'Yard_Waste_Details_Three' | translate}}
+                </li>
+                <li>
+                    <h3>{{'Branches' | translate}}</h3>
+                    {{'Branches_Details' | translate}}
+                </li>
+                <li>
+                    <h3>{{'Dont_Mix' | translate}}</h3>
+                    {{'Dont_Mix_Details' | translate}}
+                </li>
+                <li>
+                    <h3>{{'Contractors' | translate}}</h3>
+                    {{'Contractors_Details' | translate}}
+                </li>
+            </ul>
+        </ion-content>
+    </ion-card>
 
-        <h2>{{'Yard_Waste' | translate}}</h2>
-        <ul>
-            <li>
-                <h3>{{'About_Yard_Waste' | translate}}</h3>
-                {{'Yard_Waste_Details_One' | translate}}
-                <a (click)="openUrl('https://www.amazon.com/EcoSafe-GKL042657-1-33-Gallon-Houston-Biodegradable/dp/B004BKIOLW')">
-                    {{'Yard_Waste_Details_Two' | translate}}
-                </a>
-                {{'Yard_Waste_Details_Three' | translate}}
-            </li>
-            <li>
-                <h3>{{'Branches' | translate}}</h3>
-                {{'Branches_Details' | translate}}
-            </li>
-            <li>
-                <h3>{{'Dont_Mix' | translate}}</h3>
-                {{'Dont_Mix_Details' | translate}}
-            </li>
-            <li>
-                <h3>{{'Contractors' | translate}}</h3>
-                {{'Contractors_Details' | translate}}
-            </li>
-        </ul>
-    </div>
+    <ion-card class="category" *ngIf="!category || category == 'recycling'">
 
-    <div class="category" *ngIf="!category || category == 'recycling'">
-
-        <h2>{{'Recycling' | translate}}</h2>
-        <ul>
-            <li>
-                <h3>{{'What_Can_I_Recycle' | translate}}</h3>
-                {{'What_Can_I_Recycle_Details_One' | translate}}
-                 <a href="#" (click)="openUrl('https://www.qualitylogoproducts.com/lib/different-types-of-plastic.htm')">{{'What_Can_I_Recycle_Details_Two' | translate}}</a>
-                {{'What_Can_I_Recycle_Details_Three' | translate}}
-                <br>
-                {{'What_Can_I_Recycle_Details_Four' | translate}}
-            </li>
-            <li>
-                <h3>{{'What_About_Glass' | translate}}</h3>
-                {{'What_About_Glass_Details_One' | translate}} <a
-                    (click)="openUrl('https://www.google.com/maps/d/u/0/viewer?ll=29.767954%2C-95.453339&spn=0.532854%2C0.753937&hl=en&msa=0&z=10&source=embed&ie=UTF8&mid=1vNyDxfTwSzxz_Z7gx7590VgW3-U')">{{'What_About_Glass_Details_Two' | translate}}</a>.
-                <br><br>
-                {{'What_About_Glass_Details_Three' | translate}}
-                <a target="_blank" href="#" (click)="openUrl('http://www.irecycle.glass/?ref=rollout')">iRecycle Glass</a>
-                {{'What_About_Glass_Details_Four' | translate}}
-            </li>
-            <li>
-                <h3>{{'Where_Can_I_Drop_Off' | translate}}</h3>
-                {{'Where_Can_I_Drop_Off_Details_One' | translate}}
-                <a href="#" (click)="openUrl('https://www.google.com/maps/d/u/0/viewer?ll=29.767954%2C-95.453339&spn=0.532854%2C0.753937&hl=en&msa=0&z=10&source=embed&ie=UTF8&mid=1vNyDxfTwSzxz_Z7gx7590VgW3-U')">
-                    {{'Where_Can_I_Drop_Off_Details_Two' | translate}}
-                </a>
-            </li>
-        </ul>
-    </div>
-    <div class="category" *ngIf="!category || category == 'junk'">
-        <h2>{{'Heavy_Trash_Junk_Waste' | translate}}</h2>
-        <ul>
-            <li>
-                <h3>{{'Whats_Junk_Waste' | translate}}</h3>
-                {{'Whats_Junk_Waste_Details' | translate}}
-            </li>
-            <li>
-                <h3>{{'How_Much_Can_I_Put_Out' | translate}}</h3>
-                {{'How_Much_Can_I_Put_Out_Details' | translate}}
-            </li>
-        </ul>
+        <ion-card-header>{{'Recycling' | translate}}</ion-card-header>
+        <ion-content>
+            <ul>
+                <li>
+                    <h3>{{'What_Can_I_Recycle' | translate}}</h3>
+                    {{'What_Can_I_Recycle_Details_One' | translate}}
+                    <a href="#"
+                       (click)="openUrl('https://www.qualitylogoproducts.com/lib/different-types-of-plastic.htm')">{{'What_Can_I_Recycle_Details_Two'
+                        | translate}}</a>
+                    {{'What_Can_I_Recycle_Details_Three' | translate}}
+                    <br>
+                    {{'What_Can_I_Recycle_Details_Four' | translate}}
+                </li>
+                <li>
+                    <h3>{{'What_About_Glass' | translate}}</h3>
+                    {{'What_About_Glass_Details_One' | translate}} <a
+                        (click)="openUrl('https://www.google.com/maps/d/u/0/viewer?ll=29.767954%2C-95.453339&spn=0.532854%2C0.753937&hl=en&msa=0&z=10&source=embed&ie=UTF8&mid=1vNyDxfTwSzxz_Z7gx7590VgW3-U')">{{'What_About_Glass_Details_Two'
+                    | translate}}</a>.
+                    <br><br>
+                    {{'What_About_Glass_Details_Three' | translate}}
+                    <a target="_blank" href="#" (click)="openUrl('http://www.irecycle.glass/?ref=rollout')">iRecycle
+                        Glass</a>
+                    {{'What_About_Glass_Details_Four' | translate}}
+                </li>
+                <li>
+                    <h3>{{'Where_Can_I_Drop_Off' | translate}}</h3>
+                    {{'Where_Can_I_Drop_Off_Details_One' | translate}}
+                    <a href="#"
+                       (click)="openUrl('https://www.google.com/maps/d/u/0/viewer?ll=29.767954%2C-95.453339&spn=0.532854%2C0.753937&hl=en&msa=0&z=10&source=embed&ie=UTF8&mid=1vNyDxfTwSzxz_Z7gx7590VgW3-U')">
+                        {{'Where_Can_I_Drop_Off_Details_Two' | translate}}
+                    </a>
+                </li>
+            </ul>
+        </ion-content>
+    </ion-card>
+    <ion-card class="category" *ngIf="!category || category == 'junk'">
+        <ion-card-header>{{'Heavy_Trash_Junk_Waste' | translate}}</ion-card-header>
+        <ion-content>
+            <ul>
+                <li>
+                    <h3>{{'Whats_Junk_Waste' | translate}}</h3>
+                    {{'Whats_Junk_Waste_Details' | translate}}
+                </li>
+                <li>
+                    <h3>{{'How_Much_Can_I_Put_Out' | translate}}</h3>
+                    {{'How_Much_Can_I_Put_Out_Details' | translate}}
+                </li>
+            </ul>
+        </ion-content>
 
 
-    </div>
-    <div class="category" *ngIf="!category || category == 'tree'">
-        <h2>{{'Tree_Waste' | translate}}</h2>
-        <h3>{{'Whats_Tree_Waste' | translate}}</h3>
-        {{'Whats_Tree_Waste_Details' | translate}}
-    </div>
+    </ion-card>
+    <ion-card class="category" *ngIf="!category || category == 'tree'">
+        <ion-card-header>{{'Tree_Waste' | translate}}</ion-card-header>
+        <ion-content>
+            <h3>{{'Whats_Tree_Waste' | translate}}</h3>
+            {{'Whats_Tree_Waste_Details' | translate}}
+        </ion-content>
+    </ion-card>
     <!-- spacer for the button :( -->
     <div style="height:60px"></div>
     <div *ngIf="category" ion-fixed class="bottom-actions">
