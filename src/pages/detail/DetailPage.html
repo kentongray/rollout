@@ -1,14 +1,12 @@
 <ion-header>
     <ion-navbar>
-        <ion-title *ngIf="!searching">
-            <img src="assets/img/rollout_logo_green.png" style="margin-top:5px;" height="30" width="143">
-        </ion-title>
+        <ion-title>More Information</ion-title>
     </ion-navbar>
 </ion-header>
 <ion-content class="padding detail">
 
     <ion-card class="category" *ngIf="!category || category == 'waste'">
-        <ion-card-header>{{'Trash' | translate}}</ion-card-header>
+        <ion-card-header><i class="fa fa-trash"></i> {{'Trash' | translate}}</ion-card-header>
         <ion-card-content>
         <ul>
             <li>
@@ -23,7 +21,7 @@
         </ion-card-content>
     </ion-card>
     <ion-card class="category" *ngIf="!category || category == 'waste'">
-        <ion-card-header>{{'Yard_Waste' | translate}}</ion-card-header>
+        <ion-card-header><i class="fa fa-trash"></i> {{'Yard_Waste' | translate}}</ion-card-header>
         <ion-card-content>
             <ul>
                 <li>
@@ -52,7 +50,7 @@
 
     <ion-card class="category" *ngIf="!category || category == 'recycling'">
 
-        <ion-card-header>{{'Recycling' | translate}}</ion-card-header>
+        <ion-card-header><i class="fa fa-recycle"></i> {{'Recycling' | translate}}</ion-card-header>
         <ion-card-content>
             <ul>
                 <li>
@@ -88,7 +86,7 @@
         </ion-card-content>
     </ion-card>
     <ion-card class="category" *ngIf="!category || category == 'junk'">
-        <ion-card-header>{{'Heavy_Trash_Junk_Waste' | translate}}</ion-card-header>
+        <ion-card-header><i class="fa fa-truck"></i> {{'Heavy_Trash_Junk_Waste' | translate}}</ion-card-header>
         <ion-card-content>
             <ul>
                 <li>
@@ -105,7 +103,7 @@
 
     </ion-card>
     <ion-card class="category" *ngIf="!category || category == 'tree'">
-        <ion-card-header>{{'Tree_Waste' | translate}}</ion-card-header>
+        <ion-card-header><i class="fa fa-tree"></i> {{'Tree_Waste' | translate}}</ion-card-header>
         <ion-card-content>
             <h3>{{'Whats_Tree_Waste' | translate}}</h3>
             {{'Whats_Tree_Waste_Details' | translate}}
