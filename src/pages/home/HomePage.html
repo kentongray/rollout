@@ -1,7 +1,8 @@
 <ion-header>
     <ion-navbar>
         <ion-searchbar *ngIf="searching" focuser (keyup)="searchAddress($event.target.value)"
-                       placeholder="{{'Enter_Your_Address' | translate}}" (ionCancel)="searching = false" [showCancelButton]="true">
+                       placeholder="{{'Enter_Your_Address' | translate}}" (ionCancel)="searching = false"
+                       [showCancelButton]="true">
 
         </ion-searchbar>
         <ion-title *ngIf="!searching">
@@ -35,41 +36,6 @@
             </div>
         </ion-list>
     </div>
-    <div class="error-message" class="card" *ngIf="errorMessage">
-
-        {{errorMessage}}
-        <br>
-        <br>
-        <a white (click)="retry()">{{'Try_Again' | translate}}
-            <ion-icon name="refresh"></ion-icon>
-        </a>
-        <br>
-        <br>
-        <a href="mailto:info@rollouthouston.com">{{'Need_Help' | translate}}</a>
-        <br>
-    </div>
-    <div class="no-schedule" *ngIf="!loading && events && events.length == 0 && !errorMessage">
-        <h1>{{'No_Schedule_Found' | translate}}</h1>
-        {{'Rollout_Is_Only_Available_For_The_City_Of_Houston' | translate}}
-        <br>
-        {{'Try_Again_When_You_Are_In_The_City_Or_In_An_Area_With_Trash_Pickup' | translate}}
-        <br>
-        <br>
-        {{'Think_This_Is_A_Mistake' | translate}} <a href="mailto:info@rollouthouston.com">{{'Let_Us_Know' | translate}}</a>
-        <br>
-        <br>
-        <!-- because we care -->
-        <a white (click)="showFilterBar()">
-            {{'Click_The' | translate}}
-            <ion-icon name="pin"></ion-icon>
-            {{'To_Change_Your_Location' | translate}}
-        </a>
-        <br>
-        <br>
-        <a white (click)="retry()">{{'Or_Try_Again' | translate}}
-            <ion-icon name="refresh"></ion-icon>
-        </a>
-    </div>
     <div class="schedule" *ngIf="!errorMessage">
         <div *ngIf="notifications" class="notifications">
             <div *ngFor="let notification of notifications" class="notification" (tap)="tapNotification(notification)">
@@ -78,9 +44,50 @@
             </div>
         </div>
         <div *ngFor="let event of events">
-            <event [data]="event" [pickupDays]="pickupDays" (onTapHoliday)="openHolidaySchedule()" (onTapCategory)="goToDetails($event)"></event>
+            <event [data]="event" [pickupDays]="pickupDays" (onTapHoliday)="openHolidaySchedule()"
+                   (onTapCategory)="goToDetails($event)"></event>
         </div>
     </div>
+    <ion-card class="error-message" class="card" *ngIf="errorMessage">
+        <ion-card-header>{{errorMessage}}</ion-card-header>
+        <br>
+        <br>
+        <ion-card-content>
+            <a white (click)="retry()">{{'Try_Again' | translate}}
+                <ion-icon name="refresh"></ion-icon>
+            </a>
+            <br>
+            <br>
+            <a href="mailto:info@rollouthouston.com">{{'Need_Help' | translate}}</a>
+            <br>
+        </ion-card-content>
+
+    </ion-card>
+    <ion-card class="no-schedule" *ngIf="!loading && events && events.length == 0 && !errorMessage">
+        <ion-card-header>{{'No_Schedule_Found' | translate}}</ion-card-header>
+        <ion-card-content>
+            {{'Rollout_Is_Only_Available_For_The_City_Of_Houston' | translate}}
+            <br>
+            {{'Try_Again_When_You_Are_In_The_City_Or_In_An_Area_With_Trash_Pickup' | translate}}
+            <br>
+            <br>
+            {{'Think_This_Is_A_Mistake' | translate}} <a href="mailto:info@rollouthouston.com">{{'Let_Us_Know' |
+            translate}}</a>
+            <br>
+            <br>
+            <!-- because we care -->
+            <a white (click)="showFilterBar()">
+                {{'Click_The' | translate}}
+                <ion-icon name="pin"></ion-icon>
+                {{'To_Change_Your_Location' | translate}}
+            </a>
+            <br>
+            <br>
+            <a white (click)="retry()">{{'Or_Try_Again' | translate}}
+                <ion-icon name="refresh"></ion-icon>
+            </a>
+        </ion-card-content>
+    </ion-card>
     <div class="bottom-actions" ion-fixed *ngIf="!(loading || errorMessage || events.length == 0)">
         <button ion-button (click)="goToRemindMe()">
             <ion-icon name="notifications"></ion-icon> &nbsp;
