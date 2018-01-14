@@ -9,6 +9,7 @@
 
     <ion-card class="category" *ngIf="!category || category == 'waste'">
         <ion-card-header>{{'Trash' | translate}}</ion-card-header>
+        <ion-card-content>
         <ul>
             <li>
                 <h3>{{'What_Time' | translate}}</h3>
@@ -19,11 +20,11 @@
                 {{'Bin_Location_Details' | translate}}
             </li>
         </ul>
-
+        </ion-card-content>
     </ion-card>
     <ion-card class="category" *ngIf="!category || category == 'waste'">
         <ion-card-header>{{'Yard_Waste' | translate}}</ion-card-header>
-        <ion-content>
+        <ion-card-content>
             <ul>
                 <li>
                     <h3>{{'About_Yard_Waste' | translate}}</h3>
@@ -46,13 +47,13 @@
                     {{'Contractors_Details' | translate}}
                 </li>
             </ul>
-        </ion-content>
+        </ion-card-content>
     </ion-card>
 
     <ion-card class="category" *ngIf="!category || category == 'recycling'">
 
         <ion-card-header>{{'Recycling' | translate}}</ion-card-header>
-        <ion-content>
+        <ion-card-content>
             <ul>
                 <li>
                     <h3>{{'What_Can_I_Recycle' | translate}}</h3>
@@ -84,11 +85,11 @@
                     </a>
                 </li>
             </ul>
-        </ion-content>
+        </ion-card-content>
     </ion-card>
     <ion-card class="category" *ngIf="!category || category == 'junk'">
         <ion-card-header>{{'Heavy_Trash_Junk_Waste' | translate}}</ion-card-header>
-        <ion-content>
+        <ion-card-content>
             <ul>
                 <li>
                     <h3>{{'Whats_Junk_Waste' | translate}}</h3>
@@ -99,16 +100,16 @@
                     {{'How_Much_Can_I_Put_Out_Details' | translate}}
                 </li>
             </ul>
-        </ion-content>
+        </ion-card-content>
 
 
     </ion-card>
     <ion-card class="category" *ngIf="!category || category == 'tree'">
         <ion-card-header>{{'Tree_Waste' | translate}}</ion-card-header>
-        <ion-content>
+        <ion-card-content>
             <h3>{{'Whats_Tree_Waste' | translate}}</h3>
             {{'Whats_Tree_Waste_Details' | translate}}
-        </ion-content>
+        </ion-card-content>
     </ion-card>
     <!-- spacer for the button :( -->
     <div style="height:60px"></div>

@@ -18,7 +18,6 @@ export class HomePage {
   @ViewChild(Content) content: Content;
   private coords;
   private pickupDays: PickupDay;
-  private addressLookup;
 
   moment;
   addresses;
