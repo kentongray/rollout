@@ -187,7 +187,7 @@ export class RemindMePage {
     this.loadingContent.present();
     notificationPlugin.clearAll(() => {
       console.log('all notifications cleared');
-      //clear all notifications then start again
+      // clear all notifications then start again
       console.log(this.pos, 'current pos');
       this.schedulerService.init(this.pos, 365);
       this.schedulerService.whenLoaded.then(() => {
@@ -216,6 +216,7 @@ export class RemindMePage {
           if (matches.length) {
             return {
               id: date.getTime(),
+              foreground: true,
               text: "Don't forget to rollout your " + this.makeDescriptionText(matches),
               at: date.getTime()
             };
@@ -223,6 +224,7 @@ export class RemindMePage {
         }).compact().value();
         notifications.push({
           id: 0,
+          foreground: true,
           text: this.localizedText['youEnabledRemindersForRollout'],
           at: new Date(new Date().getTime() + 5000)
         });

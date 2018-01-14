@@ -35,17 +35,18 @@ export class HomePage {
               private platform: Platform,
               private nav: NavController,
               private SchedulerService: Scheduler,
-              private addressLookup: AddressLookup,
+              public addressLookup: AddressLookup,
               private translate: TranslateService) {
     this.moment = moment;
   }
 
-  ionViewWillEnter() {
+  ionViewDidLeave() {
     this.searching = false;
   }
+
   ngOnInit() {
     const splashscreen = (<any> navigator).splashscreen;
-    if(splashscreen)
+    if (splashscreen)
       splashscreen.hide();
     const keys = [
       'We_Had_A_Problem_Loading_Your_Schedule_The_City_Of_Houston_May_Be_Having_Issues',
@@ -89,8 +90,18 @@ export class HomePage {
     UrlUtil.openUrl('http://www.houstontx.gov/solidwaste/holiday.html');
   }
 
-  tapNotification(notification:Notification) {
+  tapNotification(notification: Notification) {
     UrlUtil.openUrl(notification.link);
+  }
+
+  tapContact() {
+    window.location.href= 'mailto:info@rollouthouston.com';
+  }
+  selectPreviousLocation(location: FindAddressCandidatesResult) {
+    this.searching = false;
+    this.addresses = null;
+    this.addressLookup.moveLocationToFront(location);
+    this.loadEventsForPosition(location.location);
   }
 
   showFilterBar() {

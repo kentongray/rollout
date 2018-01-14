@@ -9,8 +9,8 @@
             <img src="assets/img/rollout_logo_green.png" height="30" width="143">
         </ion-title>
         <ion-buttons end *ngIf="!searching">
-            <button ion-button side="secondary" (click)="showFilterBar()">
-                <ion-icon name="ios-pin-outline"></ion-icon>
+            <button ion-button side="secondary" (click)="showFilterBar()" class="search-button">
+                <ion-icon name="ios-pin"></ion-icon>
             </button>
         </ion-buttons>
     </ion-navbar>
@@ -18,22 +18,28 @@
 <ion-content class="home" fullscreen>
     <div *ngIf="searching" class="address-search-results">
         <ion-list>
-            <ion-item (click)="lookupCurrentLocation()">
-                <ion-icon black name="ios-pin-outline"></ion-icon>
-                {{'Use_Current_Location' | translate}}
-            </ion-item>
-            <ion-item (click)="lookupCurrentLocation()">
-                <ion-icon name="ios-map"></ion-icon>
-                <h2>Recent Locations</h2>
-            </ion-item>
-            <div *ngIf="addresses">
-                <ion-item *ngIf="!addresses.length">
-                    {{'Address_Not_Found' | translate}} :(
+            <ng-container *ngIf="!addresses">
+                <h3>
+                    <ion-icon name="ios-map"></ion-icon>
+                    Recent Locations
+                </h3>
+                <ion-item (click)="lookupCurrentLocation()" tappable>
+                    <ion-icon black name="ios-pin-outline"></ion-icon>
+                    {{'Use_Current_Location' | translate}}
                 </ion-item>
-                <ion-item *ngFor="let address of addresses" (click)="selectAddress(address)">
+                <ion-item *ngFor="let location of addressLookup.previousLocations"
+                          (click)="selectPreviousLocation(location)" tappable>
+                    {{location.address}}
+                </ion-item>
+            </ng-container>
+            <ng-container *ngIf="addresses">
+                <ion-item *ngIf="!addresses.length">
+                   😩 &nbsp;&nbsp; {{'Address_Not_Found' | translate}}
+                </ion-item>
+                <ion-item *ngFor="let address of addresses" (click)="selectAddress(address)" tappable>
                     {{address.text}}
                 </ion-item>
-            </div>
+            </ng-container>
         </ion-list>
     </div>
     <div class="schedule" *ngIf="!errorMessage">
@@ -43,25 +49,33 @@
                 {{notification.text}}
             </div>
         </div>
-        <div *ngFor="let event of events">
-            <event [data]="event" [pickupDays]="pickupDays" (onTapHoliday)="openHolidaySchedule()"
-                   (onTapCategory)="goToDetails($event)"></event>
-        </div>
+        <ion-grid>
+            <ion-row>
+                <ion-col col-xl-4 *ngFor="let event of events; trackBy: e?.day ">
+                    <event [data]="event" [pickupDays]="pickupDays" (onTapHoliday)="openHolidaySchedule()"
+                           (onTapCategory)="goToDetails($event)"></event>
+                </ion-col>
+            </ion-row>
+
+        </ion-grid>
     </div>
     <ion-card class="error-message" class="card" *ngIf="errorMessage">
         <ion-card-header>😡</ion-card-header>
-        {{errorMessage}}
-        <br>
-        <br>
         <ion-card-content>
-            <a (click)="retry()">{{'Try_Again' | translate}}
-                <ion-icon name="refresh"></ion-icon>
-            </a>
+            {{errorMessage}}
+            <br>
+            <!-- because we care -->
             <button ion-button (click)="showFilterBar()" icon-start>
-                <ion-icon name="pin"></ion-icon> Change Location
+                <ion-icon name="pin"></ion-icon>
+                Change Location
             </button>
             <button ion-button (click)="retry()" icon-start>
-                <ion-icon name="refresh"></ion-icon>  Try Again
+                <ion-icon name="refresh"></ion-icon>
+                Try Again
+            </button>
+            <button ion-button (click)="tapContact()" icon-start>
+                <ion-icon name="mail"></ion-icon>
+                {{'Think_This_Is_A_Mistake' | translate}}
             </button>
         </ion-card-content>
 
@@ -76,16 +90,18 @@
             {{'Try_Again_When_You_Are_In_The_City_Or_In_An_Area_With_Trash_Pickup' | translate}}
             <br>
             <br>
-            {{'Think_This_Is_A_Mistake' | translate}} <a href="mailto:info@rollouthouston.com">{{'Let_Us_Know' |
-            translate}}</a>
-            <br>
-            <br>
             <!-- because we care -->
             <button ion-button (click)="showFilterBar()" icon-start>
-                 <ion-icon name="pin"></ion-icon> Change Location
+                <ion-icon name="pin"></ion-icon>
+                Change Location
             </button>
             <button ion-button (click)="retry()" icon-start>
-                <ion-icon name="refresh"></ion-icon>  Try Again
+                <ion-icon name="refresh"></ion-icon>
+                Try Again
+            </button>
+            <button ion-button (click)="tapContact()" icon-start>
+                <ion-icon name="mail"></ion-icon>
+                {{'Think_This_Is_A_Mistake' | translate}}
             </button>
         </ion-card-content>
     </ion-card>

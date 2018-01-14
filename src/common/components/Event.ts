@@ -1,8 +1,9 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {ChangeDetectionStrategy, Component, EventEmitter, Input, Output} from '@angular/core';
 import moment from "moment";
 import {categoryInfo} from "../CategoryInfo";
 
 @Component({
+  changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'event',
   template: `
       <ion-card class="upcoming-event">
@@ -54,6 +55,7 @@ import {categoryInfo} from "../CategoryInfo";
       </ion-card>`
 })
 export class Event {
+  categoryInfo = categoryInfo;
   moment: typeof moment;
   @Input() data: any;
   @Input() pickupDays: any;
@@ -62,7 +64,6 @@ export class Event {
 
 
   constructor() {
-    this.categoryInfo = categoryInfo;
     this.moment = moment;
   }
 }

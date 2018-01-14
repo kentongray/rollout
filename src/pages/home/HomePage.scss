@@ -18,7 +18,7 @@ html, body {
 			margin-right: 5px;
 		}
 		border-radius: 50px;
-		box-shadow: 0 7px 28px rgba(0,0,0,0.25), 0 5px 10px rgba(0,0,0,0.22);
+		box-shadow: 0 7px 28px rgba(0, 0, 0, 0.25), 0 5px 10px rgba(0, 0, 0, 0.22);
 	}
 }
 
@@ -119,32 +119,39 @@ a, a:link, a:visited {
 	}
 }
 
-/* The starting CSS styles for the enter animation */
+.platform-android .address-search-results {
+	background-color: #f2f2f2;
+}
+
 .address-search-results {
-	ion-list {
-		margin: 5px;
-	}
+	padding: 10px;
 	box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
-	border-radius: 2px;
 	font-family: sans-serif;
 	z-index: 1;
 	width: 100vw;
 	position: fixed;
 	-webkit-backdrop-filter: blur(10px);
-	background-color: rgba(255, 255, 255, .9);
+	background-color: rgba(255, 255, 255, .8);
 	.item {
 		background-color: transparent;
-		color: #333333;
 	}
-
+	h3 {
+		vertical-align: middle;
+		text-transform: uppercase;
+		color: #333;
+		font-size: 1em;
+		font-weight: bold;
+	}
 }
 
-
-.address-search-results.ng-enter {
-	height: 0;
-	overflow: hidden;
-	transition: 0.5s linear all;
-	opacity: 0;
+ion-header .search-button {
+	width: 26px;
+	height: 26px;
+	background-color: map-get($colors, primary);
+	border-radius: 13px;
+	ion-icon {
+		color: white;
+	}
 }
 
 .notifications {
@@ -162,19 +169,7 @@ a, a:link, a:visited {
 	}
 }
 
-/* The finishing CSS styles for the enter animation */
-.address-search-results.ng-enter.ng-enter-active {
-	height: auto;
-	overflow: visible;
-	opacity: 1;
-}
-
-.toolbar .toolbar-background {
+.platform-ios .toolbar .toolbar-background {
 	background-color: rgba(255, 255, 255, .4);
 	-webkit-backdrop-filter: blur(10px);
-}
-
-.platform-android .filter-bar .filter-bar-positive .item-input-wrapper {
-	background-color: transparent !important;
-	border-bottom-color: white !important;
 }
