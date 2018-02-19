@@ -95,8 +95,9 @@ export class HomePage {
   }
 
   tapContact() {
-    window.location.href= 'mailto:info@rollouthouston.com';
+    window.location.href = 'mailto:info@rollouthouston.com';
   }
+
   selectPreviousLocation(location: FindAddressCandidatesResult) {
     this.searching = false;
     this.addresses = null;
@@ -206,6 +207,7 @@ export class HomePage {
             return pos;
           }, rejectFirst(this.translatedText['weCouldntLookUpYourLocationCheckYourLocationPermissions']))
           .then(this.loadEventsForPosition.bind(this), rejectFirst(this.translatedText['errorLoading']))
+          .catch(this.promiseCatcher)
       }
     )
       .catch(this.promiseCatcher)

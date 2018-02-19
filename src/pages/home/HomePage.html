@@ -59,7 +59,7 @@
 
         </ion-grid>
     </div>
-    <ion-card class="error-message" class="card" *ngIf="errorMessage">
+    <ion-card class="error-message" class="card error-card" *ngIf="errorMessage">
         <ion-card-header>😡</ion-card-header>
         <ion-card-content>
             {{errorMessage}}
@@ -80,7 +80,7 @@
         </ion-card-content>
 
     </ion-card>
-    <ion-card class="no-schedule" *ngIf="!loading && events && events.length == 0 && !errorMessage">
+    <ion-card class="no-schedule error-card" *ngIf="!loading && events && events.length == 0 && !errorMessage">
         <ion-card-header>😕</ion-card-header>
         <ion-card-content>
             {{'No_Schedule_Found' | translate}}
