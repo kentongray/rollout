@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget android-versionCode="300200" id="com.kentonue.rollout" version="4.0.2" xmlns="http://www.w3.org/ns/widgets">
+<widget android-versionCode="300200" id="com.kentonue.rollout" version="4.0.3" xmlns="http://www.w3.org/ns/widgets">
     <name>Rollout!</name>
     <description>
 		An app that helps you with your trash and recycling schedules
@@ -92,7 +92,7 @@
         <param name="ios-package" onload="true" value="CDVStatusBar" />
     </feature>
     <edit-config file="*-Info.plist" mode="merge" target="NSLocationWhenInUseUsageDescription">
-        <string>We use this to lookup your schedule! We don't store this information.</string>
+        <string>We use this to lookup your trash and recycling schedule. We don't store this information.</string>
     </edit-config>
     <icon src="resources/android/icon/drawable-xhdpi-icon.png" />
     <preference name="SplashShowOnlyFirstTime" value="false" />
