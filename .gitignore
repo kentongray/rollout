@@ -3,10 +3,14 @@
 
 node_modules/
 platforms/
+platforms-bck/
 plugins/
 .idea/
 *.iml
 *.pem
+.tmp
+.vscode
+.gitwtf
 
 #android
 android
@@ -25,5 +29,4 @@ seed.txt
 map.txt
 
 #ignore output folder
-www/js
-www/lib
+www/

@@ -99,6 +99,7 @@ export class HomePage {
   }
 
   selectPreviousLocation(location: FindAddressCandidatesResult) {
+    this.clearError();
     this.searching = false;
     this.addresses = null;
     this.addressLookup.moveLocationToFront(location);
@@ -268,7 +269,6 @@ export class HomePage {
   }
 
   loadEventsForPosition(pos): Promise<Array<any>> {
-    console.log('im not here right');
     //data format from arcgis is all over the place, need to standardize this to prevent headaches :-/
     if (pos.x && !pos.coords) {
       pos.coords = {
@@ -284,7 +284,7 @@ export class HomePage {
       this.events = this.SchedulerService.events;
       this.sendNotifications(this.SchedulerService.notifications);
       this.pickupDays = this.SchedulerService.pickupDays;
-      console.log('all done');
+      console.log('all done', this.events);
       this.hideLoader();
       return this.events;
     });

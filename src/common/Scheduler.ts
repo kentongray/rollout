@@ -97,6 +97,7 @@ export class Scheduler {
     let schedulePromise = this.http.get('http://api.rollouthouston.com/upcoming',
       reqOptions).map(res => res.json()).toPromise();
     this.whenLoaded = schedulePromise.then((r) => {
+      console.log('got the events');
       //convet days to moment objects for great justice
       r.events.forEach(e => e.day = moment(e.day));
       this.events = r.events;
