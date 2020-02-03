@@ -48,7 +48,7 @@ export default {
   "What_Can_I_Recycle_Details_Three": ", aluminio y latas.",
   "What_Can_I_Recycle_Details_Four": "¡Mantenga sus materiales reciclables limpios para facilitar el procesamiento!",
   "What_About_Glass": "¿Qué tal el vidrio?",
-  "What_About_Glass_Details_One": "Lo sentimos, el vidrio no está permitido en los contenedores. Puede usar los",
+  "What_About_Glass_Details_One": "La ciudad acepta botellas y frascos de vidrio hechos de vidrio transparente, verde y marrón.",
   "What_About_Glass_Details_Two": "Lugares de Entrega",
   "What_About_Glass_Details_Three": "Otra opci\u00f3n es",
   "What_About_Glass_Details_Four": "un servicio de recogida de vidrio pagado!",

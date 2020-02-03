@@ -26,3 +26,9 @@
 
 
 }
+@media (prefers-color-scheme: dark) {
+	.remind-me-holder {
+		color: #b2b2b2;
+		background: linear-gradient(#141615, #0f1110);
+	}
+}

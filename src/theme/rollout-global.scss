@@ -18,8 +18,19 @@
 	margin-bottom: 30px;
 }
 
+
 .rollout ion-card ion-card-header {
 	font-family: aleoregular, Sans-serif;
 	font-size: 1.5em;
 	color: map-get($colors, primary);
+}
+
+@media (prefers-color-scheme: dark) {
+	.rollout ion-card {
+		color: #b2b2b2;
+		background: linear-gradient(#141615, #0f1110);
+	}
+	.rollout ion-card ion-card-header { 
+		color: #d5d5d5;
+	}
 }

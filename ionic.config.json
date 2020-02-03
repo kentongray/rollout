@@ -4,5 +4,6 @@
     "cordova": {}
   },
   "type": "ionic-angular",
-  "pro_id": "com.kentonue.rollout"
+  "pro_id": "com.kentonue.rollout",
+  "id": "com.kentonue.rollout"
 }

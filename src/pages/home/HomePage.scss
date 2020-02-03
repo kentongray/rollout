@@ -6,9 +6,16 @@ html, body {
 .content {
 	background-color: #efefef;
 }
-
+@media (prefers-color-scheme: dark) {
+	.content {
+		background-color: #101011;
+	}
+	.waste-type i {
+		color: darken(map-get($colors, primary), 20%);
+	}
+}
 .bottom-actions {
-	bottom: 20px;
+	bottom: 40px;
 	left: 0;
 	right: 0;
 	text-align: center;
@@ -180,3 +187,49 @@ ion-header .search-button {
 	background-color: rgba(255, 255, 255, .4);
 	-webkit-backdrop-filter: blur(10px);
 }
+
+.searchbar-ios .searchbar-ios-cancel {
+	display: block;
+}
+
+@media (prefers-color-scheme: dark) {
+
+
+	.toolbar .searchbar-ios .searchbar-input, .searchbar-ios .searchbar-input::-webkit-input-placeholder {
+		color: white;	
+	}
+
+	.toolbar .searchbar-ios .searchbar-input {
+		background: rgba(255, 255, 255, 0.08);
+	}
+	.platform-ios .toolbar .toolbar-title-ios {
+		color: #c4c4c4;
+	}
+
+	.platform-ios .toolbar .toolbar-background {
+		background-color: rgba(0, 0, 0, .4);
+		-webkit-backdrop-filter: blur(10px);
+	}	
+	.bottom-actions button, ion-header .search-button ion-icon {
+		color: black;
+
+	}
+	.address-search-results {
+		background-color: rgba(0,0,0, .8);
+		color:white;
+		h3 {
+
+			color:white;
+		}
+		.list-ios .item-block .item-inner {
+			border-bottom: 0.55px solid #1e1e20;
+		}
+		.item-ios {
+			color: white;
+		}
+	}
+	.notifications {
+		color: white;
+	}
+}
+

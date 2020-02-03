@@ -35,6 +35,12 @@
 	color: white;
 }
 
+@media (prefers-color-scheme: dark) {
+	.searchbar-ios .searchbar-input, .searchbar-ios .searchbar-input::-webkit-input-placeholder {
+		color: white;
+	}
+}
+
 
 @media only screen
 and (device-width : 375px)
