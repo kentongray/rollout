@@ -16,6 +16,7 @@ import {toCamelCase} from "../../common/SnakeToCamel";
 })
 export class HomePage {
   @ViewChild(Content) content: Content;
+  @ViewChild('search') search : any;
   private coords;
   private pickupDays: PickupDay;
 
@@ -108,6 +109,9 @@ export class HomePage {
 
   showFilterBar() {
     this.content.scrollToTop();
+    setTimeout(() => {
+      this.search.setFocus();
+    }, 100);
     this.searching = true;
   }
 

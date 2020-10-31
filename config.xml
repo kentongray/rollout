@@ -18,8 +18,8 @@
     <preference name="android-minSdkVersion" value="22" />
     <preference name="BackupWebStorage" value="none" />
     <preference name="SplashScreen" value="screen" />
-    <preference name="AutoHideSplashScreen" value="false" />
-    <preference name="SplashScreenDelay" value="3000" />
+    <preference name="AutoHideSplashScreen" value="true" />
+    <preference name="SplashScreenDelay" value="250" />
     <preference name="ShowSplashScreenSpinner" value="false" />
     <preference name="loadUrlTimeoutValue" value="700000" />
     <allow-intent href="http://*/*" />

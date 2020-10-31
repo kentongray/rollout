@@ -1,6 +1,6 @@
 <ion-header>
     <ion-navbar>
-        <ion-searchbar *ngIf="searching" (keyup)="searchAddress($event.target.value)"
+        <ion-searchbar #search *ngIf="searching" (keyup)="searchAddress($event.target.value)"
                        placeholder="{{'Enter_Your_Address' | translate}}" (ionCancel)="searching = false"
                        [showCancelButton]="true">
 
